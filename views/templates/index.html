@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#145b4b">
+  <title>Bairro que Cuida</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+  <style>
+    :root { color-scheme: light; --green:#145b4b; --ink:#17332d; --muted:#55706a; --paper:#f2f7f4; --line:#d8e5df; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:var(--paper); color:var(--ink); font:16px/1.45 system-ui,-apple-system,"Segoe UI",sans-serif; }
+    header { background:var(--green); color:white; padding:24px 18px 28px; }
+    .wrap { width:min(100% - 28px, 760px); margin:auto; }
+    header h1 { margin:0 0 6px; font-size:1.7rem; }
+    header p { margin:0; max-width:600px; color:#e1f2eb; }
+    main { padding:18px 0 40px; }
+    section, .notice { background:white; border:1px solid var(--line); border-radius:16px; padding:18px; margin-bottom:16px; box-shadow:0 4px 16px #17332d0a; }
+    h2 { font-size:1.15rem; margin:0 0 12px; }
+    label { display:block; font-weight:650; margin:14px 0 6px; }
+    input, select, textarea, button { font:inherit; }
+    input, select, textarea { width:100%; border:1px solid #a9beb5; border-radius:10px; padding:12px; background:white; color:var(--ink); }
+    textarea { min-height:76px; resize:vertical; }
+    .help { color:var(--muted); font-size:.9rem; margin:6px 0 0; }
+    button { border:0; border-radius:10px; background:var(--green); color:white; padding:12px 16px; font-weight:700; min-height:46px; cursor:pointer; }
+    button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible { outline:3px solid #efbd54; outline-offset:2px; }
+    .submit { width:100%; margin-top:16px; }
+    .row { display:flex; justify-content:space-between; align-items:center; gap:12px; }
+    .count { color:var(--muted); font-size:.9rem; }
+    .card { border-top:1px solid var(--line); padding:14px 0 2px; }
+    .card:first-of-type { border-top:0; }
+    .card h3 { margin:0; font-size:1.05rem; }
+    .score { font-size:.83rem; font-weight:750; color:#155c4c; white-space:nowrap; }
+    .card p { margin:6px 0; color:var(--muted); }
+    .action { color:var(--ink)!important; font-size:.94rem; }
+    .empty { color:var(--muted); padding:8px 0; }
+    #map { height:340px; width:100%; border-radius:12px; border:1px solid var(--line); z-index:1; }
+    .map-help { color:var(--muted); font-size:.9rem; margin:8px 0 0; }
+    .notice { font-size:.88rem; color:var(--muted); background:#f9fcfa; }
+    #status { min-height:1.3em; color:var(--green); font-weight:650; margin:8px 0 0; }
+    footer { text-align:center; color:var(--muted); font-size:.82rem; padding:4px 0 22px; }
+    @media (min-width:620px) { header { padding:34px 24px 38px; } main { padding-top:24px; } section { padding:22px; } }
+  </style>
+</head>
+<body>
+  <header><div class="wrap"><h1>Bairro que Cuida</h1><p>Ajude a identificar onde faltam sombra, espaços frescos e cuidado com as áreas verdes.</p></div></header>
+  <main class="wrap">
+    <section aria-labelledby="map-title">
+      <h2 id="map-title">Marque o local no mapa</h2>
+      <div id="map" aria-label="Mapa interativo do Recife"></div>
+      <p id="selected-coords" class="map-help">Toque no mapa para marcar aproximadamente o local da demanda.</p>
+      <p class="map-help">Os marcadores mostram relatos comunitários, não medições de temperatura ou risco oficial.</p>
+    </section>
+    <section aria-labelledby="form-title">
+      <h2 id="form-title">Conte sobre um lugar</h2>
+      <form id="report-form">
+        <input id="latitude" name="latitude" type="hidden">
+        <input id="longitude" name="longitude" type="hidden">
+        <label for="neighborhood">Bairro</label>
+        <select id="neighborhood" name="neighborhood" required>
+          <option value="">Selecione um bairro</option>
+          {% for rpa, names in neighborhoods.items() %}<optgroup label="RPA {{ rpa }}">{% for name in names %}<option value="{{ name }}">{{ name }}</option>{% endfor %}</optgroup>{% endfor %}
+        </select>
+        <label for="reference">Ponto de referência</label>
+        <input id="reference" name="reference" maxlength="80" placeholder="Ex.: praça, escola ou parada de ônibus" required>
+        <p class="help">Use uma referência pública, sem informar endereço residencial.</p>
+        <label for="kind">O que acontece nesse local?</label>
+        <select id="kind" name="kind" required>
+          <option value="quente_sem_sombra">É muito quente ou falta sombra</option>
+          <option value="precisa_sombra">Poderia receber uma ilha de sombra</option>
+          <option value="ponto_refresco">Poderia ser um ponto de refresco</option>
+          <option value="espaco_verde">Há uma área verde que precisa de cuidado</option>
+        </select>
+        <label for="note">Mais detalhes (opcional)</label>
+        <textarea id="note" name="note" maxlength="240" placeholder="O que ajudaria as pessoas nesse lugar?"></textarea>
+        <button class="submit" type="submit">Registrar este local</button>
+        <p id="status" role="status" aria-live="polite"></p>
+      </form>
+    </section>
+    <section aria-labelledby="list-title">
+      <div class="row"><h2 id="list-title">Locais para cuidar</h2><span id="total" class="count"></span></div>
+      <div id="locations"><p class="empty">Ainda não há relatos. Adicione o primeiro local.</p></div>
+    </section>
+    <div class="notice"><strong>Sobre esta demonstração:</strong> a prioridade é um sinal feito a partir dos relatos enviados aqui. Não é medição de temperatura, previsão de calor ou classificação oficial de risco. As ações sugeridas precisam ser conversadas com a comunidade e com os responsáveis pelo espaço.</div>
+  </main>
+  <footer class="wrap">Protótipo de teste · Não envie dados pessoais</footer>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <script>
+    const form = document.querySelector('#report-form');
+    const statusEl = document.querySelector('#status');
+    const latitudeInput = document.querySelector('#latitude');
+    const longitudeInput = document.querySelector('#longitude');
+    const selectedCoords = document.querySelector('#selected-coords');
+    const map = L.map('map').setView([-8.0476, -34.8770], 12);
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    }).addTo(map);
+    const reportMarkers = L.layerGroup().addTo(map);
+    let selectionMarker = null;
+    map.on('click', event => {
+      const {lat, lng} = event.latlng;
+      latitudeInput.value = lat.toFixed(6);
+      longitudeInput.value = lng.toFixed(6);
+      selectedCoords.textContent = `Ponto marcado: ${lat.toFixed(4)}, ${lng.toFixed(4)}. Ajuste tocando em outro lugar do mapa.`;
+      if (selectionMarker) selectionMarker.remove();
+      selectionMarker = L.circleMarker([lat, lng], {radius:9, color:'#ffffff', weight:3, fillColor:'#145b4b', fillOpacity:1}).addTo(map);
+      selectionMarker.bindPopup('Local selecionado para o novo relato.');
+    });
+    const kindLabels = {
+      quente_sem_sombra: 'Lugar muito quente ou sem sombra',
+      precisa_sombra: 'Espaço que poderia receber mais sombra',
+      ponto_refresco: 'Sugestão de local para ponto de refresco',
+      espaco_verde: 'Área verde que precisa de cuidado'
+    };
+    function escapeHtml(value) {
+      return String(value).replace(/[&<>"']/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
+    }
+    async function refresh() {
+      const response = await fetch('/api/summary');
+      const data = await response.json();
+      document.querySelector('#total').textContent = `${data.total_reports} relato${data.total_reports === 1 ? '' : 's'}`;
+      reportMarkers.clearLayers();
+      data.locations.forEach(item => {
+        if (item.latitude === null || item.longitude === null) return;
+        const color = item.priority >= 70 ? '#b54735' : item.priority >= 40 ? '#d58b21' : '#29785f';
+        const marker = L.circleMarker([item.latitude, item.longitude], {
+          radius: 8 + Math.min(item.count, 6), color:'#ffffff', weight:2,
+          fillColor:color, fillOpacity:.9
+        });
+        marker.bindPopup(`<strong>${escapeHtml(item.location)}</strong><br>${item.count} relato${item.count === 1 ? '' : 's'}<br>Sinal comunitário: ${item.priority}/100<br>${escapeHtml(item.main_issue)}`);
+        reportMarkers.addLayer(marker);
+      });
+      const container = document.querySelector('#locations');
+      if (!data.locations.length) {
+        container.innerHTML = '<p class="empty">Ainda não há relatos. Adicione o primeiro local.</p>';
+        return;
+      }
+      container.innerHTML = data.locations.map(item => `
+        <article class="card">
+          <div class="row"><h3>${escapeHtml(item.location)}</h3><span class="score">Sinal comunitário: ${item.priority}/100</span></div>
+          <p>${item.count} relato${item.count === 1 ? '' : 's'} · principal situação: ${escapeHtml(item.main_issue)}</p>
+          <p class="action"><strong>Próximo passo possível:</strong> ${escapeHtml(item.suggestion)}</p>
+        </article>`).join('');
+    }
+    form.addEventListener('submit', async event => {
+      event.preventDefault();
+      const payload = Object.fromEntries(new FormData(form).entries());
+      if (!payload.latitude || !payload.longitude) {
+        statusEl.textContent = 'Marque o local aproximado no mapa antes de registrar.';
+        return;
+      }
+      const button = form.querySelector('button');
+      button.disabled = true;
+      statusEl.textContent = 'Salvando relato…';
+      try {
+        const response = await fetch('/api/reports', {
+          method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify(payload)
+        });
+        const result = await response.json();
+        if (!response.ok) throw new Error(result.error || 'Não foi possível salvar.');
+        form.reset();
+        latitudeInput.value = '';
+        longitudeInput.value = '';
+        selectedCoords.textContent = 'Toque no mapa para marcar aproximadamente o local da demanda.';
+        if (selectionMarker) { selectionMarker.remove(); selectionMarker = null; }
+        statusEl.textContent = 'Relato adicionado. Obrigado por contribuir!';
+        await refresh();
+      } catch (error) {
+        statusEl.textContent = error.message;
+      } finally { button.disabled = false; }
+    });
+    refresh().catch(() => { statusEl.textContent = 'Não foi possível carregar os relatos.'; });
+  </script>
+</body>
+</html>

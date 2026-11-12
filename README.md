@@ -1,4 +1,4 @@
-# Bairro que Cuida — protótipo inicial
+# Bairro que Cuida — protótipo MVC
 
 Aplicação web móvel em Python para registrar locais com falta de sombra, visualizar as demandas num mapa, sugerir pontos de refresco e organizar ações de cuidado de áreas verdes. Pode funcionar localmente com arquivo JSON ou hospedada com PostgreSQL.
 
@@ -6,10 +6,20 @@ Aplicação web móvel em Python para registrar locais com falta de sombra, visu
 
 1. Instale Python 3.10 ou superior.
 2. Abra o PowerShell nesta pasta.
-3. Execute `python app.py`.
-4. Abra `http://localhost:8000` no navegador do computador.
+3. Instale as dependências com `pip install -r requirements.txt`.
+4. Execute `python app.py`.
+5. Abra `http://localhost:8000` no navegador do computador.
 
 O servidor imprimirá também um endereço de rede, por exemplo `http://192.168.1.25:8000`.
+
+## Organização MVC
+
+- `models/`: dados, validação, persistência e agregação dos relatos.
+- `controllers/`: rotas HTTP e coordenação entre o Model e a View.
+- `views/`: renderização HTML e template da interface.
+- `app.py`: configuração e inicialização da aplicação Flask.
+
+O Controller não contém regras de persistência nem HTML; solicita operações ao Model e chama a View para apresentar a página.
 
 ## Testar no celular
 
