@@ -61,3 +61,4 @@ O mapa usa Leaflet e tiles OpenStreetMap, carregados da internet, com os crédit
 - A lista de bairros é baseada no [Perfil dos Bairros da Prefeitura do Recife](https://www2.recife.pe.gov.br/servico/perfil-dos-bairros) e pode ser atualizada a partir dos [dados abertos municipais](https://dados.recife.pe.gov.br/dataset/area-urbana).
 - Recomendações de plantio, instalação de sombra ou ponto de refresco precisam de validação comunitária e dos responsáveis pelo espaço.
 - O protótipo não tem autenticação nem moderação de relatos; a versão pública é apenas para demonstração e não deve receber informações pessoais ou sensíveis.
+- não há alteração;
