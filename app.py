@@ -1,20 +1,26 @@
-"""Ponto de entrada da aplicação unificada Sombrinha ☂️ • Bairro que Cuida."""
+"""Application factory and local entry point for Sombrinha."""
 
 import os
 import socket
 
 from flask import Flask
 
+from controllers.adoption_controller import adoptions_blueprint
+from controllers.ai_controller import ai_blueprint
+from controllers.health_controller import health_blueprint
+from controllers.recycle_controller import recycle_blueprint
 from controllers.report_controller import reports_blueprint
-from controllers.sombrinha_controller import sombrinha_blueprint
+from controllers.shade_controller import shade_blueprint
 from models.adoption_model import AdoptionModel
 from models.report_model import ReportModel
+
 
 HOST = "0.0.0.0"
 PORT = int(os.environ.get("PORT", "8000"))
 
 
 def create_app() -> Flask:
+    """Create a configured application and initialize persistent storage."""
     app = Flask(
         __name__,
         template_folder="views/templates",
@@ -22,15 +28,21 @@ def create_app() -> Flask:
     )
     app.config["MAX_CONTENT_LENGTH"] = 50_000
 
-    @app.after_request
-    def add_cors_headers(response):
-        response.headers["Access-Control-Allow-Origin"] = "*"
-        response.headers["Access-Control-Allow-Headers"] = "Content-Type,Authorization"
-        response.headers["Access-Control-Allow-Methods"] = "GET,POST,OPTIONS"
-        return response
+    for blueprint in (
+        reports_blueprint,
+        adoptions_blueprint,
+        health_blueprint,
+        shade_blueprint,
+        recycle_blueprint,
+        ai_blueprint,
+    ):
+        app.register_blueprint(blueprint)
 
-    app.register_blueprint(reports_blueprint)
-    app.register_blueprint(sombrinha_blueprint)
+    # Initialization also runs when the app is loaded by Gunicorn on Render.
+    with app.app_context():
+        ReportModel.initialize_database()
+        AdoptionModel.initialize_database()
+
     return app
 
 
@@ -47,9 +59,7 @@ def local_ip() -> str:
 
 
 if __name__ == "__main__":
-    ReportModel.initialize_database()
-    AdoptionModel.initialize_database()
-    print(f"☂️ Sombrinha • Bairro que Cuida rodando com sucesso!")
+    print("Sombrinha iniciado.")
     print(f"Aplicação disponível neste computador: http://localhost:{PORT}")
     print(f"Para testar no celular na mesma rede Wi-Fi: http://{local_ip()}:{PORT}")
     print("Pare o servidor com Ctrl+C.")

@@ -1,70 +1,50 @@
-"""Serviço de Inteligência Artificial para roteamento térmico e assistência de voz."""
-
-import os
-from datetime import datetime
+"""Transparent, local keyword rules used by the assistant prototype."""
 
 
 class AIModel:
+    """Provide simple text classification, without claiming live AI or data."""
+
     @staticmethod
-    def analyze_voice_text(texto: str) -> dict:
-        if not texto or not isinstance(texto, str):
+    def analyze_voice_text(text: str) -> dict[str, str]:
+        if not isinstance(text, str) or not text.strip():
             raise ValueError("Texto para análise é obrigatório.")
 
-        t = texto.lower()
-
-        if any(w in t for w in ["sede", "água", "agua", "bebedouro", "beber"]):
-            categoria = "AGUA_POTAVEL"
-            resposta_voz = "Identifiquei que você precisa de água. Encontrei bebedouros públicos e pontos de hidratação próximos no mapa."
-            recomendacao = "Procure o bebedouro mais próximo e mantenha-se em local ventilado."
-        elif any(w in t for w in ["calor", "sol", "sombra", "queimando", "quente"]):
-            categoria = "CONFORTO_TERMICO"
-            resposta_voz = "O calor está muito forte. Tracei o Caminho Sombrinha com marquises e árvores para você andar protegido."
-            recomendacao = "Evite avenidas abertas sem cobertura. Use o trajeto Sombrinha até o abrigo mais próximo."
-        elif any(w in t for w in ["recicl", "garrafa", "pet", "latinha", "lixo"]):
-            categoria = "RECICLAGEM_SOLIDARIA"
-            resposta_voz = "Excelente! Cada garrafa PET ou latinha entregue evita o entupimento dos canais e gera água mineral gelada."
-            recomendacao = "Dirija-se ao Ecoponto Parceiro mais próximo para resgatar sua água ou protetor solar."
+        normalized = text.casefold()
+        if any(word in normalized for word in ("sede", "água", "agua", "bebedouro", "beber")):
+            category = "AGUA_POTAVEL"
+            response = "Entendi que você procura água. Este protótipo não confirma quais pontos estão abertos ou abastecidos."
+            recommendation = "Confirme a disponibilidade com o local antes de se deslocar."
+        elif any(word in normalized for word in ("calor", "sol", "sombra", "quente")):
+            category = "CONFORTO_TERMICO"
+            response = "Entendi que o calor ou a falta de sombra preocupa você. Consulte os relatos comunitários no mapa."
+            recommendation = "Os relatos não são medições de temperatura nem avaliação oficial de risco."
+        elif any(word in normalized for word in ("recicl", "garrafa", "pet", "latinha", "lixo")):
+            category = "RECICLAGEM_SOLIDARIA"
+            response = "Entendi que o assunto é reciclagem. O cadastro de trocas desta demonstração não confirma coleta ou recompensa real."
+            recommendation = "Verifique a existência e o funcionamento do ecoponto diretamente com o responsável."
         else:
-            categoria = "GERAL"
-            resposta_voz = "Entendi sua mensagem. Consulte o mapa para ver sombras, bebedouros e ecopontos em Recife."
-            recomendacao = "Beba bastante água e proteja-se do sol nas horas de pico."
+            category = "GERAL"
+            response = "Posso classificar palavras relacionadas a calor, água, sombra e reciclagem."
+            recommendation = "Use o mapa como referência comunitária e confirme informações antes de agir."
 
         return {
-            "texto_original": texto,
-            "categoria": categoria,
-            "resposta_voz": resposta_voz,
-            "recomendacao": recomendacao,
-            "modelo": "Motor Heurístico Térmico Local (Sombrinha RMR)",
+            "texto_original": text,
+            "categoria": category,
+            "resposta_voz": response,
+            "recomendacao": recommendation,
+            "modelo": "Regras locais por palavras-chave; sem modelo externo ou dados em tempo real",
         }
 
     @staticmethod
-    def suggest_shade_route(origem: str = "Derby", destino: str = "Marco Zero", hora: int = 14) -> dict:
-        eh_pico_sol = 10 <= hora <= 16
-        alivio = "Até 4°C a menos de sensação térmica" if eh_pico_sol else "Sensação agradável"
-
+    def suggest_shade_route(origin: str, destination: str) -> dict[str, object]:
+        """Return an explicit demo notice until a routing data source is integrated."""
         return {
-            "origem": origem,
-            "destino": destino,
-            "rota_sugerida": {
-                "tipo": "SOMBRINHA_ARBORIZADA",
-                "nome": "Caminho Sombrinha (Árvores & Marquises)",
-                "distancia_metros": 920,
-                "tempo_min": 12,
-                "indice_sombra": "85% coberto",
-                "alivio_termico": alivio,
-                "pontos_apoio": [
-                    "Praça arborizada com sombra contínua",
-                    "Marquise comercial com ventilação",
-                    "Ponto de hidratação com água mineral gelada",
-                ],
-                "explicacao_ia": "Esta rota prioriza calçadas arborizadas e fachadas com marquises contínuas no centro urbano, minimizando a exposição direta ao sol.",
-            },
-            "rota_alternativa": {
-                "tipo": "DIRETA_AO_SOL",
-                "nome": "Caminho Direto (Sem Sombra)",
-                "distancia_metros": 780,
-                "tempo_min": 9,
-                "indice_sombra": "15% coberto",
-                "alerta_sol": "Alta exposição a radiação UV e asfalto quente. Risco de insolação.",
-            },
+            "origem": origin,
+            "destino": destination,
+            "status": "demonstracao",
+            "rota_sugerida": None,
+            "aviso": (
+                "O Sombrinha ainda não calcula rotas nem mede cobertura de sombra. "
+                "Não use esta demonstração para escolher um trajeto."
+            ),
         }

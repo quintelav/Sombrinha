@@ -254,24 +254,23 @@
   </header>
 
   <main class="wrap">
-    <!-- Alerta Climático Oficial RMR -->
-    <div class="climate-alert" role="region" aria-label="Alerta de Calor">
+    <!-- Placeholder until an official climate data source is integrated -->
+    <div class="climate-alert" role="region" aria-label="Limites dos dados climáticos">
       <div>
-        <strong>🔥 ALERTA DE CALOR EXTREMO — RMR RECIFE</strong>
+        <strong>Dados climáticos em tempo real não integrados</strong>
         <div style="font-size: 0.95rem; margin-top: 4px;">
-          Temperatura: 33.4°C • Sensação Térmica: 38°C • Índice UV: 11 (Extremo)
+          Este protótipo não consulta temperatura, índice UV ou alertas oficiais.
         </div>
       </div>
       <div>
-        <span class="badge">💧 Hidratação: +500ml/hora</span>
-        <span class="badge">🌳 Ande pelas calçadas de sombra</span>
+        <span class="badge">Relatos do mapa são comunitários</span>
       </div>
     </div>
 
     <!-- 1. Assistente por Voz e Texto Acessível -->
     <section aria-labelledby="voice-title">
-      <h2 id="voice-title">🎙️ Assistente Sombrinha por Voz & Texto</h2>
-      <p class="help">Fale ou digite como você está se sentindo para a IA indicar a sombra ou água mais próxima.</p>
+      <h2 id="voice-title">🎙️ Assistente por voz e texto</h2>
+      <p class="help">Classificação demonstrativa por palavras-chave. Não usa modelo de IA nem consulta localização, disponibilidade de água ou dados em tempo real.</p>
       <div style="display: flex; gap: 8px; margin-top: 10px; flex-wrap: wrap;">
         <input id="voice-input" type="text" placeholder="Ex: 'Tô no Derby com muita sede e calor'" style="flex: 1; min-width: 220px;">
         <button type="button" onclick="ouvirVoz()" style="background: var(--blue);">🎤 Falar</button>
@@ -290,31 +289,20 @@
 
     <!-- 2. Rota Térmica Sombrinha -->
     <section aria-labelledby="route-title">
-      <h2 id="route-title">🧭 Rota Sombrinha (IA de Conforto Térmico)</h2>
-      <p class="help">Calcule o caminho arborizado e com marquises contínuas entre dois pontos da cidade.</p>
+      <h2 id="route-title">🧭 Sugestão de rota (recurso demonstrativo)</h2>
+      <p class="help">O protótipo ainda não calcula trajetos nem mede sombra. Informe os pontos para receber o aviso de disponibilidade do recurso.</p>
       <div style="display: flex; gap: 8px; margin-top: 10px; flex-wrap: wrap;">
         <input id="origem-input" type="text" value="Praça do Derby" placeholder="Origem" style="flex: 1;">
         <input id="destino-input" type="text" value="Marco Zero (Recife Antigo)" placeholder="Destino" style="flex: 1;">
-        <button type="button" onclick="calcularRota()" style="background: var(--green);">Traçar Rota na Sombra</button>
+        <button type="button" onclick="calcularRota()" style="background: var(--green);">Consultar recurso</button>
       </div>
-      <div id="route-result" class="route-grid" style="display: none;">
-        <div class="route-box route-shady">
-          <strong style="font-size: 1.05rem;">🌿 Rota Sombrinha (Recomendada)</strong>
-          <div style="font-size: 1.2rem; font-weight: 800; margin: 4px 0;">85% na Sombra</div>
-          <p style="font-size: 0.85rem; margin: 0;">✅ Até 4°C a menos de sensação térmica. Marquises na Conde da Boa Vista e árvores no Treze de Maio.</p>
-        </div>
-        <div class="route-box route-sunny">
-          <strong style="font-size: 1.05rem;">☀️ Caminho no Sol Direto</strong>
-          <div style="font-size: 1.2rem; font-weight: 800; margin: 4px 0;">15% na Sombra</div>
-          <p style="font-size: 0.85rem; margin: 0;">⚠️ Asfalto quente e alta exposição UV. Risco elevado de insolação.</p>
-        </div>
-      </div>
+      <p id="route-result" class="help" role="status" aria-live="polite"></p>
     </section>
 
     <!-- 3. Ecoponto Solidário & Proteção aos Mangues -->
     <section aria-labelledby="eco-title">
       <h2 id="eco-title">♻️ Ecoponto Solidário & Troca por Água e Protetor</h2>
-      <p class="help">Retire garrafas PET e latinhas da rua antes que cheguem aos canais e sufoquem o <strong>Rio Capibaribe</strong>.</p>
+      <p class="help">Demonstração de como poderia funcionar uma pontuação comunitária. Não há coleta ou resgate de recompensa integrado nesta versão.</p>
       <div class="eco-box">
         <div style="display: flex; gap: 10px; flex-wrap: wrap;">
           <select id="eco-item" style="flex: 1; min-width: 180px;">
@@ -322,21 +310,21 @@
             <option value="latinha">🥫 Latinha de Alumínio (6 pts cada)</option>
           </select>
           <input id="eco-qtd" type="number" value="6" min="1" max="50" style="width: 100px;">
-          <button type="button" onclick="registrarTroca()" style="background: var(--blue);">Confirmar Entrega</button>
+          <button type="button" onclick="registrarTroca()" style="background: var(--blue);">Simular pontuação</button>
         </div>
         <p id="eco-feedback" style="margin: 10px 0 0; font-weight: 700; color: #0369a1;"></p>
       </div>
     </section>
 
-    <!-- 4. Mapa Interativo (Relatos + Propostas + Pontos Verificados) -->
+    <!-- 4. Mapa interativo (relatos, propostas e referências demonstrativas) -->
     <section aria-labelledby="map-title">
-      <h2 id="map-title">📍 Mapa do Recife: Sombras, Água e Demandas</h2>
+      <h2 id="map-title">📍 Mapa do Recife: demandas e referências para validar</h2>
       <div id="map" aria-label="Mapa interativo do Recife"></div>
       <p id="selected-coords" class="map-help">Toque no mapa para marcar aproximadamente o local da demanda.</p>
       <div style="margin-top: 8px; display: flex; gap: 8px; flex-wrap: wrap; font-size: 0.82rem;">
-        <span style="color: #059669;">● <strong>Verde:</strong> Sombra / Árvore</span>
-        <span style="color: #0284c7;">● <strong>Azul:</strong> Bebedouro Oficial</span>
-        <span style="color: #d97706;">● <strong>Amarelo:</strong> Ecoponto Solidário</span>
+        <span style="color: #059669;">● <strong>Verde:</strong> Referência de sombra (validar)</span>
+        <span style="color: #0284c7;">● <strong>Azul:</strong> Referência de água (validar)</span>
+        <span style="color: #d97706;">● <strong>Amarelo:</strong> Referência de coleta (validar)</span>
         <span style="color: #dc2626;">● <strong>Vermelho:</strong> Relato Comunitário</span>
         <span>💧 🚌 🌿 <strong>Ícones:</strong> Propostas de Adoção</span>
       </div>
@@ -413,7 +401,7 @@
     </section>
 
     <div class="notice">
-      <strong>Sobre a Rede Solidária Sombrinha:</strong> A prioridade comunitária une a sabedoria dos moradores aos dados de calor. Os resíduos recolhidos nos ecopontos financiam a água gelada e o protetor para os trabalhadores e crianças no asfalto quente.
+      <strong>Sobre esta demonstração:</strong> relatos e pontos de referência ainda precisam de validação comunitária. Não há integração com dados de temperatura, serviço real de coleta, entrega de água ou resgate de recompensas.
     </div>
   </main>
 
@@ -425,7 +413,7 @@
         <button type="button" onclick="closeCitizenCard()" style="background: transparent; color: var(--ink); padding: 4px; font-size: 1.2rem;">✕</button>
       </div>
       <p style="font-size: 0.88rem; color: var(--muted); margin: 8px 0 0;">
-        Inclusão sem smartphone: catadores, ambulantes e crianças do <strong>Movimento Pró-Criança</strong> usam esse cartão físico impresso para resgatar água gelada.
+        Exemplo visual de uma possível identificação comunitária. Este protótipo não emite cartão físico nem oferece resgate de benefícios.
       </p>
       <div class="card-graphic">
         <span style="font-size: 0.75rem; letter-spacing: 1px;">SOMBRINHA • RMR RECIFE</span>
@@ -513,10 +501,10 @@
       return String(value).replace(/[&<>"']/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
     }
 
-    // Carregar Pontos Verificados Oficiais
-    async function carregarPontosVerificados() {
+    // Carregar referências demonstrativas para validação comunitária
+    async function carregarPontosDeReferencia() {
       try {
-        const res = await fetch('/api/verified-points');
+        const res = await fetch('/api/reference-points');
         const json = await res.json();
         if (json.dados) {
           json.dados.forEach(pt => {
@@ -525,12 +513,12 @@
             const m = L.circleMarker([pt.latitude, pt.longitude], {
               radius: 9, color: '#ffffff', weight: 2, fillColor: cor, fillOpacity: 0.95
             });
-            m.bindPopup(`<strong>${icone} ${escapeHtml(pt.nome)}</strong><br>${escapeHtml(pt.endereco)}<br><em>${escapeHtml(pt.descricao)}</em>`);
+            m.bindPopup(`<strong>${icone} ${escapeHtml(pt.nome)}</strong><br>${escapeHtml(pt.endereco)}<br><em>${escapeHtml(pt.descricao)}</em><br><strong>${escapeHtml(pt.status)}</strong>`);
             verifiedMarkers.addLayer(m);
           });
         }
       } catch (e) {
-        console.warn('Pontos verificados offline:', e);
+        console.warn('Referências demonstrativas indisponíveis:', e);
       }
     }
 
@@ -671,15 +659,16 @@
       const orig = document.getElementById('origem-input').value;
       const dest = document.getElementById('destino-input').value;
       try {
+        const output = document.getElementById('route-result');
+        output.textContent = 'Consultando…';
         const res = await fetch('/api/routes/shade', {
           method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify({origem: orig, destino: dest})
         });
         const json = await res.json();
-        if (json.dados) {
-          document.getElementById('route-result').style.display = 'grid';
-        }
+        if (!res.ok) throw new Error(json.erro || 'Não foi possível consultar o recurso.');
+        output.textContent = json.dados?.aviso || 'O recurso de rotas reais ainda não está disponível.';
       } catch (e) {
-        document.getElementById('route-result').style.display = 'grid';
+        document.getElementById('route-result').textContent = e.message || 'Não foi possível consultar o recurso.';
       }
     }
 
@@ -689,21 +678,23 @@
       try {
         const res = await fetch('/api/trades', {
           method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify({
-            item_tipo: item, quantidade: qtd, ecoponto: 'Ecoponto Central'
+            item_tipo: item, quantidade: qtd
           })
         });
         const json = await res.json();
-        if (json.dados) {
+        if (res.ok && json.dados) {
           const d = json.dados;
-          document.getElementById('eco-feedback').textContent = `🎉 +${d.pontos_ganhos} Pontos! Recompensa liberada: ${d.resgate_sugerido || 'Protetor Solar'}. (${d.impacto_ambiental})`;
+          document.getElementById('eco-feedback').textContent = `Simulação: ${d.pontos_simulados} pontos ilustrativos. ${d.status}.`;
+        } else {
+          document.getElementById('eco-feedback').textContent = json.erro || 'Não foi possível simular a pontuação.';
         }
       } catch (e) {
-        document.getElementById('eco-feedback').textContent = 'Entrega registrada com sucesso!';
+        document.getElementById('eco-feedback').textContent = 'Não foi possível simular a pontuação.';
       }
     }
 
     refresh().catch(() => { statusEl.textContent = 'Não foi possível carregar os relatos.'; });
-    carregarPontosVerificados();
+    carregarPontosDeReferencia();
   </script>
 </body>
 </html>

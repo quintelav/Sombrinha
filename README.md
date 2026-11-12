@@ -26,6 +26,7 @@ Preencher com os nomes e funções da equipe antes da entrega:
 - **Arquitetura:** MVC — Models, Controllers e Views separados
 - **Interface e mapa:** HTML, CSS, JavaScript, Leaflet e OpenStreetMap
 - **Persistência:** JSON local para demonstração ou PostgreSQL via `DATABASE_URL`
+- **Servidor de produção:** Gunicorn
 - **Deploy configurado:** Render (`render.yaml`)
 
 ## Funcionalidades do protótipo
@@ -36,10 +37,12 @@ Preencher com os nomes e funções da equipe antes da entrega:
 - Receber uma sugestão de próximo passo para discussão comunitária.
 - Cadastrar e visualizar propostas de adoção de pontos de ônibus, áreas verdes e pontos de apoio, com organização responsável, compromisso, horário e localização.
 - Guardar relatos e propostas em JSON local ou PostgreSQL quando `DATABASE_URL` estiver configurada.
+- Consultar referências de locais no mapa, ainda sem validação de funcionamento ou disponibilidade.
+- Demonstrar classificação de texto por regras simples e simular pontuação de reciclagem; não são serviços de IA, coleta ou recompensa ativos.
 
 ## Executar localmente
 
-Requisitos: Python 3.10 ou superior.
+Requisitos: Python 3.12 (ou superior) e `pip`.
 
 ```bash
 pip install -r requirements.txt
@@ -50,7 +53,7 @@ Abra `http://localhost:8000` no computador. Para testar pelo celular na mesma re
 
 ## Deploy público
 
-O arquivo `render.yaml` descreve o serviço web e o banco PostgreSQL para o Render:
+O arquivo `render.yaml` descreve o serviço web e o banco PostgreSQL para o Render. O serviço Flask é executado com Gunicorn em produção:
 
 1. Conecte o repositório Sombrinha ao Render e crie um Blueprint.
 2. Revise os recursos identificados no `render.yaml` e aplique o deploy.
@@ -78,6 +81,9 @@ A validação prevista para esta etapa é feita com a equipe e o(a) participante
 
 - O mapa usa Leaflet e tiles do OpenStreetMap e precisa de internet; mantenha os créditos visíveis na interface.
 - O sinal exibido é demonstrativo, não mede temperatura, não é previsão e não constitui avaliação oficial de risco.
+- Os marcadores de sombra, água e coleta são referências de demonstração; confirme existência, acesso e funcionamento antes de se deslocar.
+- O assistente classifica algumas palavras localmente. A rota não é calculada; pontos e recompensas da reciclagem são apenas simulações.
+- Não há CORS aberto: a interface deve consumir a API na mesma origem do site.
 - A versão pública compartilha os registros com quem acessa a URL. Não insira dados pessoais nem relatos sensíveis.
 - O protótipo não tem autenticação, moderação, confirmação de execução ou fluxo de validação institucional.
 - Intervenções de arborização, instalação de estruturas de sombra ou criação de pontos de apoio dependem de validação comunitária e autorização dos responsáveis pelo espaço.
