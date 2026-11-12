@@ -2,3 +2,4 @@ __pycache__/
 *.py[cod]
 .env
 data/relatos.json
+data/adocoes.json

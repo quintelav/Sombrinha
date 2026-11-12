@@ -1,1 +1,1 @@
-"""Modelos e regras de dados do Bairro que Cuida."""
+"""Modelos e regras de dados da aplicação Sombrinha."""

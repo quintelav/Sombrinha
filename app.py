@@ -1,4 +1,4 @@
-"""Ponto de entrada da aplicação Bairro que Cuida."""
+"""Ponto de entrada da aplicação Sombrinha."""
 
 import os
 import socket
@@ -7,6 +7,7 @@ from flask import Flask
 
 from controllers.report_controller import reports_blueprint
 from models.report_model import ReportModel
+from models.adoption_model import AdoptionModel
 
 
 HOST = "0.0.0.0"
@@ -38,6 +39,7 @@ def local_ip() -> str:
 
 if __name__ == "__main__":
     ReportModel.initialize_database()
+    AdoptionModel.initialize_database()
     print(f"Aplicação disponível neste computador: http://localhost:{PORT}")
     print(f"Para testar no celular na mesma rede Wi-Fi: http://{local_ip()}:{PORT}")
     print("Pare o servidor com Ctrl+C.")

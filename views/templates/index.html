@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#145b4b">
-  <title>Bairro que Cuida</title>
+  <title>Sombrinha</title>
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
   <style>
     :root { color-scheme: light; --green:#145b4b; --ink:#17332d; --muted:#55706a; --paper:#f2f7f4; --line:#d8e5df; }
@@ -37,13 +37,15 @@
     #map { height:340px; width:100%; border-radius:12px; border:1px solid var(--line); z-index:1; }
     .map-help { color:var(--muted); font-size:.9rem; margin:8px 0 0; }
     .notice { font-size:.88rem; color:var(--muted); background:#f9fcfa; }
+    .secondary { background:#e8f2ed; color:var(--green); border:1px solid #b8cec3; }
+    .adoption-marker { font-size:20px; text-align:center; line-height:28px; }
     #status { min-height:1.3em; color:var(--green); font-weight:650; margin:8px 0 0; }
     footer { text-align:center; color:var(--muted); font-size:.82rem; padding:4px 0 22px; }
     @media (min-width:620px) { header { padding:34px 24px 38px; } main { padding-top:24px; } section { padding:22px; } }
   </style>
 </head>
 <body>
-  <header><div class="wrap"><h1>Bairro que Cuida</h1><p>Ajude a identificar onde faltam sombra, espaços frescos e cuidado com as áreas verdes.</p></div></header>
+  <header><div class="wrap"><h1>Sombrinha</h1><p>Ajude a identificar onde faltam sombra, espaços frescos e cuidado com as áreas verdes.</p></div></header>
   <main class="wrap">
     <section aria-labelledby="map-title">
       <h2 id="map-title">Marque o local no mapa</h2>
@@ -81,6 +83,27 @@
       <div class="row"><h2 id="list-title">Locais para cuidar</h2><span id="total" class="count"></span></div>
       <div id="locations"><p class="empty">Ainda não há relatos. Adicione o primeiro local.</p></div>
     </section>
+    <section aria-labelledby="adoption-title">
+      <h2 id="adoption-title">Proponha uma adoção comunitária</h2>
+      <p class="help">Organizações podem propor água potável, cuidado de ponto de ônibus ou manutenção de área verde. A proposta fica identificada como recebida até validação e autorização dos responsáveis pelo espaço.</p>
+      <form id="adoption-form">
+        <input name="latitude" id="adoption-latitude" type="hidden"><input name="longitude" id="adoption-longitude" type="hidden">
+        <label for="adoption-kind">Tipo de local</label>
+        <select name="kind" id="adoption-kind" required><option value="refresco">Ponto de refresco</option><option value="onibus">Ponto de ônibus</option><option value="area_verde">Área verde</option></select>
+        <label for="adoption-name">Nome do local</label><input name="name" id="adoption-name" maxlength="80" placeholder="Ex.: Parada da Praça do Derby" required>
+        <label for="organization">Organização proponente</label><input name="organization" id="organization" maxlength="100" placeholder="Empresa, associação ou instituição" required>
+        <label for="adoption-reference">Referência pública</label><input name="reference" id="adoption-reference" maxlength="80" placeholder="Rua, praça ou equipamento próximo" required>
+        <label for="commitment">O que a organização propõe fazer?</label><textarea name="commitment" id="commitment" maxlength="300" placeholder="Ex.: oferecer água para encher garrafas e verificar o bebedouro diariamente" required></textarea>
+        <label for="hours">Dias e horários (opcional)</label><input name="hours" id="hours" maxlength="100" placeholder="Ex.: seg–sex, 8h–17h">
+        <button class="secondary" type="button" id="mark-adoption">Marcar esta proposta no mapa</button>
+        <p id="adoption-coords" class="map-help">Use o botão e toque no mapa para escolher a localização aproximada.</p>
+        <button class="submit" type="submit">Enviar proposta de adoção</button><p id="adoption-status" role="status" aria-live="polite"></p>
+      </form>
+    </section>
+    <section aria-labelledby="adoptions-list-title">
+      <div class="row"><h2 id="adoptions-list-title">Rede de cuidado proposta</h2><span id="adoption-total" class="count"></span></div>
+      <div id="adoptions"><p class="empty">Ainda não há propostas de adoção.</p></div>
+    </section>
     <div class="notice"><strong>Sobre esta demonstração:</strong> a prioridade é um sinal feito a partir dos relatos enviados aqui. Não é medição de temperatura, previsão de calor ou classificação oficial de risco. As ações sugeridas precisam ser conversadas com a comunidade e com os responsáveis pelo espaço.</div>
   </main>
   <footer class="wrap">Protótipo de teste · Não envie dados pessoais</footer>
@@ -90,6 +113,11 @@
     const statusEl = document.querySelector('#status');
     const latitudeInput = document.querySelector('#latitude');
     const longitudeInput = document.querySelector('#longitude');
+    const adoptionForm = document.querySelector('#adoption-form');
+    const adoptionLat = document.querySelector('#adoption-latitude');
+    const adoptionLon = document.querySelector('#adoption-longitude');
+    const adoptionCoords = document.querySelector('#adoption-coords');
+    let mapTarget = 'report';
     const selectedCoords = document.querySelector('#selected-coords');
     const map = L.map('map').setView([-8.0476, -34.8770], 12);
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -97,15 +125,26 @@
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     }).addTo(map);
     const reportMarkers = L.layerGroup().addTo(map);
+    const adoptionMarkers = L.layerGroup().addTo(map);
     let selectionMarker = null;
     map.on('click', event => {
       const {lat, lng} = event.latlng;
+      if (mapTarget === 'adoption') {
+        adoptionLat.value = lat.toFixed(6); adoptionLon.value = lng.toFixed(6);
+        adoptionCoords.textContent = `Local da proposta marcado: ${lat.toFixed(4)}, ${lng.toFixed(4)}.`;
+        L.circleMarker([lat, lng], {radius:8,color:'#fff',weight:2,fillColor:'#2876a3',fillOpacity:1}).addTo(adoptionMarkers).bindPopup('Local da proposta de adoção.');
+        mapTarget = 'report'; return;
+      }
       latitudeInput.value = lat.toFixed(6);
       longitudeInput.value = lng.toFixed(6);
       selectedCoords.textContent = `Ponto marcado: ${lat.toFixed(4)}, ${lng.toFixed(4)}. Ajuste tocando em outro lugar do mapa.`;
       if (selectionMarker) selectionMarker.remove();
       selectionMarker = L.circleMarker([lat, lng], {radius:9, color:'#ffffff', weight:3, fillColor:'#145b4b', fillOpacity:1}).addTo(map);
       selectionMarker.bindPopup('Local selecionado para o novo relato.');
+    });
+    document.querySelector('#mark-adoption').addEventListener('click', () => {
+      mapTarget = 'adoption'; adoptionCoords.textContent = 'Toque no mapa para marcar o local aproximado desta proposta.';
+      document.querySelector('#map').scrollIntoView({behavior:'smooth', block:'center'});
     });
     const kindLabels = {
       quente_sem_sombra: 'Lugar muito quente ou sem sombra',
@@ -131,6 +170,15 @@
         marker.bindPopup(`<strong>${escapeHtml(item.location)}</strong><br>${item.count} relato${item.count === 1 ? '' : 's'}<br>Sinal comunitário: ${item.priority}/100<br>${escapeHtml(item.main_issue)}`);
         reportMarkers.addLayer(marker);
       });
+      const adoptionResponse = await fetch('/api/adoptions');
+      const adoptionData = await adoptionResponse.json();
+      adoptionMarkers.clearLayers();
+      adoptionData.adoptions.forEach(item => {
+        const icon = L.divIcon({className:'adoption-marker', html:item.kind === 'refresco' ? '💧' : item.kind === 'onibus' ? '🚌' : '🌿', iconSize:[28,28], iconAnchor:[14,14]});
+        L.marker([item.latitude,item.longitude],{icon}).bindPopup(`<strong>${escapeHtml(item.name)}</strong><br>${escapeHtml(item.organization)}<br>${escapeHtml(item.commitment)}<br><em>${escapeHtml(item.status)}</em>`).addTo(adoptionMarkers);
+      });
+      document.querySelector('#adoption-total').textContent = `${adoptionData.adoptions.length} proposta${adoptionData.adoptions.length === 1 ? '' : 's'}`;
+      document.querySelector('#adoptions').innerHTML = adoptionData.adoptions.length ? adoptionData.adoptions.map(item => `<article class="card"><div class="row"><h3>${escapeHtml(item.name)}</h3><span class="score">${escapeHtml(item.status)}</span></div><p>${escapeHtml(item.kind === 'refresco' ? 'Ponto de refresco' : item.kind === 'onibus' ? 'Ponto de ônibus' : 'Área verde')} · ${escapeHtml(item.reference)}</p><p><strong>Proponente:</strong> ${escapeHtml(item.organization)}</p><p>${escapeHtml(item.commitment)}${item.hours ? ` · ${escapeHtml(item.hours)}` : ''}</p></article>`).join('') : '<p class="empty">Ainda não há propostas de adoção.</p>';
       const container = document.querySelector('#locations');
       if (!data.locations.length) {
         container.innerHTML = '<p class="empty">Ainda não há relatos. Adicione o primeiro local.</p>';
@@ -169,6 +217,18 @@
       } catch (error) {
         statusEl.textContent = error.message;
       } finally { button.disabled = false; }
+    });
+    adoptionForm.addEventListener('submit', async event => {
+      event.preventDefault();
+      const status = document.querySelector('#adoption-status');
+      if (!adoptionLat.value || !adoptionLon.value) { status.textContent = 'Marque a localização da proposta no mapa.'; return; }
+      const button = adoptionForm.querySelector('button[type="submit"]'); button.disabled = true; status.textContent = 'Enviando proposta…';
+      try {
+        const response = await fetch('/api/adoptions',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(Object.fromEntries(new FormData(adoptionForm).entries()))});
+        const result = await response.json(); if (!response.ok) throw new Error(result.error || 'Não foi possível enviar a proposta.');
+        adoptionForm.reset(); adoptionLat.value=''; adoptionLon.value=''; adoptionCoords.textContent='Use o botão e toque no mapa para escolher a localização aproximada.';
+        status.textContent='Proposta recebida. Ela aparece no mapa como aguardando validação.'; await refresh();
+      } catch(error) { status.textContent=error.message; } finally { button.disabled=false; }
     });
     refresh().catch(() => { statusEl.textContent = 'Não foi possível carregar os relatos.'; });
   </script>

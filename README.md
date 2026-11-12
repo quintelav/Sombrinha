@@ -1,4 +1,4 @@
-# Bairro que Cuida — protótipo MVC
+# Sombrinha — protótipo MVC
 
 Aplicação web móvel em Python para registrar locais com falta de sombra, visualizar as demandas num mapa, sugerir pontos de refresco e organizar ações de cuidado de áreas verdes. Pode funcionar localmente com arquivo JSON ou hospedada com PostgreSQL.
 
@@ -50,7 +50,9 @@ O Blueprint usa instâncias gratuitas para demonstração. Serviços web gratuit
 - Agrupa relatos em células geográficas aproximadas de 100 m; relatos antigos sem coordenadas são agrupados pelo texto do local.
 - Calcula um **sinal comunitário demonstrativo** com base em volume, tipo e atualidade dos relatos.
 - Sugere um próximo passo para conversa com a comunidade.
-- Salva os dados em `data/relatos.json` localmente ou no PostgreSQL quando `DATABASE_URL` está configurada.
+- Permite propor adoção de pontos de refresco, pontos de ônibus e áreas verdes, com organização responsável, compromisso, horário e localização.
+- Exibe as propostas de adoção no mapa e na lista como **Proposta recebida**; a plataforma não aprova nem representa autorização oficial.
+- Salva relatos e propostas em arquivos JSON locais ou no PostgreSQL quando `DATABASE_URL` está configurada.
 
 O mapa usa Leaflet e tiles OpenStreetMap, carregados da internet, com os créditos exibidos no mapa. O índice não é temperatura, previsão ou avaliação oficial de risco. Dados enviados à versão publicada são compartilhados com todos que acessarem a URL. Não use dados pessoais ou relatos sensíveis.
 
@@ -60,5 +62,6 @@ O mapa usa Leaflet e tiles OpenStreetMap, carregados da internet, com os crédit
 - O mapa exige conexão à internet para carregar a biblioteca Leaflet e as imagens cartográficas do OpenStreetMap.
 - A lista de bairros é baseada no [Perfil dos Bairros da Prefeitura do Recife](https://www2.recife.pe.gov.br/servico/perfil-dos-bairros) e pode ser atualizada a partir dos [dados abertos municipais](https://dados.recife.pe.gov.br/dataset/area-urbana).
 - Recomendações de plantio, instalação de sombra ou ponto de refresco precisam de validação comunitária e dos responsáveis pelo espaço.
+- As propostas de adoção ainda não têm fluxo de validação, conta de organização ou confirmação comunitária de execução. Não significam que água ou manutenção já estejam disponíveis.
 - O protótipo não tem autenticação nem moderação de relatos; a versão pública é apenas para demonstração e não deve receber informações pessoais ou sensíveis.
 
