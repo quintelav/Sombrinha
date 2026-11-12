@@ -1,5 +1,22 @@
 __pycache__/
 *.py[cod]
+*.pyc
 .env
+.env.*
+!.env.example
+
+.venv/
+venv/
+
+data/*.json
 data/relatos.json
 data/adocoes.json
+data/trocas.json
+
+.DS_Store
+
+# Frontend & Node
+node_modules/
+dist/
+.npm
+.cache
