@@ -1,67 +1,87 @@
-# Sombrinha — protótipo MVC
+# Sombrinha
 
-Aplicação web móvel em Python para registrar locais com falta de sombra, visualizar as demandas num mapa, sugerir pontos de refresco e organizar ações de cuidado de áreas verdes. Pode funcionar localmente com arquivo JSON ou hospedada com PostgreSQL.
+- **Hackathon:** APONTI Academy · REC'n'Play 2026
+- **Desafio:** Antena na Lama
+- **Caminho:** Prevenir e cuidar, com mobilização comunitária
 
-## Executar no computador
+## Sobre o projeto
 
-1. Instale Python 3.10 ou superior.
-2. Abra o PowerShell nesta pasta.
-3. Instale as dependências com `pip install -r requirements.txt`.
-4. Execute `python app.py`.
-5. Abra `http://localhost:8000` no navegador do computador.
+Sombrinha é um protótipo web pensado para apoiar comunidades do Recife na prevenção e no cuidado diante dos impactos das mudanças climáticas. A plataforma reúne relatos de locais com pouca sombra ou arborização e permite visualizar as demandas em um mapa, ajudando a comunidade a identificar pontos prioritários para conversar e agir.
 
-O servidor imprimirá também um endereço de rede, por exemplo `http://192.168.1.25:8000`.
+Além dos relatos, moradores e organizações podem registrar propostas de adoção de pontos de ônibus, áreas verdes e pontos de apoio. A ideia é tornar as necessidades mais visíveis e facilitar a articulação comunitária com organizações e poder público. O protótipo também considera o calor urbano e a desigualdade na distribuição de arborização e espaços de proteção térmica.
 
-## Organização MVC
+As propostas são indicações comunitárias: o sistema não aprova intervenções, não representa autorização oficial e não garante a disponibilidade de água ou manutenção.
 
-- `models/`: dados, validação, persistência e agregação dos relatos.
-- `controllers/`: rotas HTTP e coordenação entre o Model e a View.
-- `views/`: renderização HTML e template da interface.
+## Equipe
+
+Preencher com os nomes e funções da equipe antes da entrega:
+
+- **Desenvolvimento:** [nomes e trilhas]
+- **Validador(a) do Movimento Pró-Criança:** [nome]
+- **Como o(a) validador(a) participou:** [tarefas realizadas no teste e retorno recebido]
+
+## Tecnologias
+
+- **Aplicação:** Python e Flask
+- **Arquitetura:** MVC — Models, Controllers e Views separados
+- **Interface e mapa:** HTML, CSS, JavaScript, Leaflet e OpenStreetMap
+- **Persistência:** JSON local para demonstração ou PostgreSQL via `DATABASE_URL`
+- **Deploy configurado:** Render (`render.yaml`)
+
+## Funcionalidades do protótipo
+
+- Registrar bairro, referência pública, tipo de situação e localização aproximada no mapa.
+- Escolher entre os 94 bairros do Recife, organizados pelas seis RPAs.
+- Ver relatos agrupados em células geográficas aproximadas de 100 metros e consultar um sinal comunitário demonstrativo baseado no volume, tipo e atualidade dos registros.
+- Receber uma sugestão de próximo passo para discussão comunitária.
+- Cadastrar e visualizar propostas de adoção de pontos de ônibus, áreas verdes e pontos de apoio, com organização responsável, compromisso, horário e localização.
+- Guardar relatos e propostas em JSON local ou PostgreSQL quando `DATABASE_URL` estiver configurada.
+
+## Executar localmente
+
+Requisitos: Python 3.10 ou superior.
+
+```bash
+pip install -r requirements.txt
+python app.py
+```
+
+Abra `http://localhost:8000` no computador. Para testar pelo celular na mesma rede Wi-Fi, use o endereço de rede mostrado no terminal, também na porta `8000`.
+
+## Deploy público
+
+O arquivo `render.yaml` descreve o serviço web e o banco PostgreSQL para o Render:
+
+1. Conecte o repositório Sombrinha ao Render e crie um Blueprint.
+2. Revise os recursos identificados no `render.yaml` e aplique o deploy.
+3. Abra a URL gerada em um celular com internet.
+
+O serviço gratuito pode hibernar após um período sem acesso e o PostgreSQL gratuito tem prazo de expiração definido pelo Render. Consulte as condições atuais do serviço antes de usar o protótipo além da demonstração. Não armazene credenciais no repositório.
+
+## Uso de inteligência artificial
+
+- **Onde foi usada:** apoio ao brainstorming, à estrutura inicial e à documentação do protótipo.
+- **Revisão humana necessária:** a equipe deve revisar o código, testar os fluxos no celular e validar as sugestões e os textos com o(a) validador(a) e a comunidade antes da apresentação. Registrem aqui as correções feitas e as ferramentas usadas durante o hackathon.
+
+## Testes e validação
+
+A validação prevista para esta etapa é feita com a equipe e o(a) participante do Movimento Pró-Criança, usando tarefas simples no celular: registrar um ponto, localizar uma demanda no mapa e cadastrar uma proposta. **Testes automatizados ainda não estão configurados neste repositório.** Registrem os resultados do teste com o(a) validador(a) antes da entrega.
+
+## Arquitetura
+
+- `models/`: validação, agregação e persistência dos relatos e propostas.
+- `controllers/`: rotas HTTP e coordenação entre Model e View.
+- `views/`: apresentação e templates HTML.
 - `app.py`: configuração e inicialização da aplicação Flask.
 
-O Controller não contém regras de persistência nem HTML; solicita operações ao Model e chama a View para apresentar a página.
+## Limites e cuidados
 
-## Testar no celular
+- O mapa usa Leaflet e tiles do OpenStreetMap e precisa de internet; mantenha os créditos visíveis na interface.
+- O sinal exibido é demonstrativo, não mede temperatura, não é previsão e não constitui avaliação oficial de risco.
+- A versão pública compartilha os registros com quem acessa a URL. Não insira dados pessoais nem relatos sensíveis.
+- O protótipo não tem autenticação, moderação, confirmação de execução ou fluxo de validação institucional.
+- Intervenções de arborização, instalação de estruturas de sombra ou criação de pontos de apoio dependem de validação comunitária e autorização dos responsáveis pelo espaço.
 
-1. Mantenha o servidor rodando no computador.
-2. Conecte o celular à mesma rede Wi-Fi do computador.
-3. Digite no navegador do celular o endereço de rede mostrado no terminal, incluindo `:8000`.
+## Fontes de dados dos bairros
 
-O protótipo é uma página web responsiva; não precisa ser instalado. Se o celular não conectar, o firewall do computador pode estar bloqueando a porta 8000. Para acessar de fora da rede local, publique a aplicação conforme a seção abaixo.
-
-## Publicar para acesso em qualquer dispositivo
-
-O repositório inclui `render.yaml` para criar um serviço web e um banco PostgreSQL no Render:
-
-1. Envie o projeto para um repositório GitHub.
-2. No Render, crie um Blueprint e conecte esse repositório.
-3. Revise os serviços detectados no `render.yaml` e aplique a publicação.
-4. Abra a URL pública gerada pelo Render em um celular com internet.
-
-Quando `DATABASE_URL` está configurada, os relatos são guardados no PostgreSQL. Sem essa variável, o app usa `data/relatos.json` localmente. Nunca publique credenciais ou arquivos `.env` no repositório.
-
-O Blueprint usa instâncias gratuitas para demonstração. Serviços web gratuitos podem dormir após 15 minutos sem acesso, e o banco PostgreSQL gratuito do Render expira após 30 dias. Planeje uma alternativa de armazenamento se a demonstração precisar continuar depois desse período.
-
-## O que o protótipo faz
-
-- Registra bairro/local de referência e tipo de situação, sem pedir nome ou endereço residencial.
-- Oferece os 94 bairros do Recife organizados pelas seis RPAs e exige uma referência pública para facilitar a localização.
-- Permite marcar o local aproximado tocando no mapa e exibe os relatos geolocalizados em marcadores.
-- Agrupa relatos em células geográficas aproximadas de 100 m; relatos antigos sem coordenadas são agrupados pelo texto do local.
-- Calcula um **sinal comunitário demonstrativo** com base em volume, tipo e atualidade dos relatos.
-- Sugere um próximo passo para conversa com a comunidade.
-- Permite propor adoção de pontos de refresco, pontos de ônibus e áreas verdes, com organização responsável, compromisso, horário e localização.
-- Exibe as propostas de adoção no mapa e na lista como **Proposta recebida**; a plataforma não aprova nem representa autorização oficial.
-- Salva relatos e propostas em arquivos JSON locais ou no PostgreSQL quando `DATABASE_URL` está configurada.
-
-O mapa usa Leaflet e tiles OpenStreetMap, carregados da internet, com os créditos exibidos no mapa. O índice não é temperatura, previsão ou avaliação oficial de risco. Dados enviados à versão publicada são compartilhados com todos que acessarem a URL. Não use dados pessoais ou relatos sensíveis.
-
-## Limites desta versão
-
-- Não há integração com WhatsApp; o link pode ser compartilhado manualmente para acesso no navegador.
-- O mapa exige conexão à internet para carregar a biblioteca Leaflet e as imagens cartográficas do OpenStreetMap.
-- A lista de bairros é baseada no [Perfil dos Bairros da Prefeitura do Recife](https://www2.recife.pe.gov.br/servico/perfil-dos-bairros) e pode ser atualizada a partir dos [dados abertos municipais](https://dados.recife.pe.gov.br/dataset/area-urbana).
-- Recomendações de plantio, instalação de sombra ou ponto de refresco precisam de validação comunitária e dos responsáveis pelo espaço.
-- As propostas de adoção ainda não têm fluxo de validação, conta de organização ou confirmação comunitária de execução. Não significam que água ou manutenção já estejam disponíveis.
-- O protótipo não tem autenticação nem moderação de relatos; a versão pública é apenas para demonstração e não deve receber informações pessoais ou sensíveis.
-
+A lista de bairros é baseada no [Perfil dos Bairros da Prefeitura do Recife](https://www2.recife.pe.gov.br/servico/perfil-dos-bairros) e pode ser atualizada com os [dados abertos municipais](https://dados.recife.pe.gov.br/dataset/area-urbana).
