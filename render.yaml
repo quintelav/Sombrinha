@@ -11,6 +11,8 @@ services:
         fromDatabase:
           name: sombrinha-db
           property: connectionString
+      - key: GOOGLE_WEATHER_API_KEY
+        sync: false
 
 databases:
   - name: sombrinha-db

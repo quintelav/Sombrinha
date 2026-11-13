@@ -4,15 +4,20 @@ import os
 import socket
 
 from flask import Flask
+from dotenv import load_dotenv
 
 from controllers.adoption_controller import adoptions_blueprint
 from controllers.ai_controller import ai_blueprint
+from controllers.climate_controller import climate_blueprint
 from controllers.health_controller import health_blueprint
 from controllers.recycle_controller import recycle_blueprint
 from controllers.report_controller import reports_blueprint
 from controllers.shade_controller import shade_blueprint
 from models.adoption_model import AdoptionModel
 from models.report_model import ReportModel
+
+
+load_dotenv()
 
 
 HOST = "0.0.0.0"
@@ -32,6 +37,7 @@ def create_app() -> Flask:
         reports_blueprint,
         adoptions_blueprint,
         health_blueprint,
+        climate_blueprint,
         shade_blueprint,
         recycle_blueprint,
         ai_blueprint,

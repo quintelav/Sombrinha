@@ -26,6 +26,7 @@ Preencher com os nomes e funções da equipe antes da entrega:
 - **Arquitetura:** MVC — Models, Controllers e Views separados
 - **Interface e mapa:** HTML, CSS, JavaScript, Leaflet e OpenStreetMap
 - **Persistência:** JSON local para demonstração ou PostgreSQL via `DATABASE_URL`
+- **Clima:** Google Maps Platform Weather API, consulta pelo backend
 - **Servidor de produção:** Gunicorn
 - **Deploy configurado:** Render (`render.yaml`)
 
@@ -38,6 +39,7 @@ Preencher com os nomes e funções da equipe antes da entrega:
 - Cadastrar e visualizar propostas de adoção de pontos de ônibus, áreas verdes e pontos de apoio, com organização responsável, compromisso, horário e localização.
 - Guardar relatos e propostas em JSON local ou PostgreSQL quando `DATABASE_URL` estiver configurada.
 - Consultar referências de locais no mapa, ainda sem validação de funcionamento ou disponibilidade.
+- Consultar temperatura atual, sensação térmica, umidade, UV e condição para uma coordenada de referência no centro do Recife.
 - Demonstrar classificação de texto por regras simples e simular pontuação de reciclagem; não são serviços de IA, coleta ou recompensa ativos.
 
 ## Executar localmente
@@ -45,9 +47,13 @@ Preencher com os nomes e funções da equipe antes da entrega:
 Requisitos: Python 3.12 (ou superior) e `pip`.
 
 ```bash
-pip install -r requirements.txt
-python app.py
+py -3.12 -m venv .venv
+Copy-Item .env.example .env
+.\.venv\Scripts\python.exe -m pip install -r requirements.txt
+.\.venv\Scripts\python.exe app.py
 ```
+
+Abra `.env` no VS Code e preencha `GOOGLE_WEATHER_API_KEY` com uma chave de prototipagem do Google. A aplicação carrega esse arquivo ao iniciar. Nunca envie a chave ao GitHub nem a coloque no JavaScript. Você também pode iniciar sem a chave; o restante do protótipo funciona e a área do clima informa que a integração está desativada.
 
 Abra `http://localhost:8000` no computador. Para testar pelo celular na mesma rede Wi-Fi, use o endereço de rede mostrado no terminal, também na porta `8000`.
 
@@ -60,6 +66,8 @@ O arquivo `render.yaml` descreve o serviço web e o banco PostgreSQL para o Rend
 3. Abra a URL gerada em um celular com internet.
 
 O serviço gratuito pode hibernar após um período sem acesso e o PostgreSQL gratuito tem prazo de expiração definido pelo Render. Consulte as condições atuais do serviço antes de usar o protótipo além da demonstração. Não armazene credenciais no repositório.
+
+No Render, configure `GOOGLE_WEATHER_API_KEY` nas variáveis de ambiente do serviço. Para prototipagem, o Google oferece uma Maps Demo Key sem custo, destinada a testes; uma chave padrão exige ativar faturamento. Restrinja a chave à Weather API e acompanhe cotas e custos no Google Cloud. [Configuração oficial da API](https://developers.google.com/maps/documentation/weather/get-api-key) · [Uso e faturamento](https://developers.google.com/maps/documentation/weather/usage-and-billing).
 
 ## Uso de inteligência artificial
 
@@ -81,6 +89,8 @@ A validação prevista para esta etapa é feita com a equipe e o(a) participante
 
 - O mapa usa Leaflet e tiles do OpenStreetMap e precisa de internet; mantenha os créditos visíveis na interface.
 - O sinal exibido é demonstrativo, não mede temperatura, não é previsão e não constitui avaliação oficial de risco.
+- A API retorna condições atuais para uma coordenada de referência no centro do Recife. As condições do Google são resultados meteorológicos modelados e não correspondem necessariamente a uma estação local; a resolução não identifica diferenças de calor entre bairros ou ruas. Use os relatos comunitários para apontar necessidades locais. [FAQ da Weather API](https://developers.google.com/maps/documentation/weather/faq).
+- O backend mantém a resposta atual em memória por 10 minutos para reduzir chamadas; a API permite cache temporário das condições atuais por até uma hora conforme os termos aplicáveis. [Termos da Weather API](https://cloud.google.com/maps-platform/terms/maps-service-terms).
 - Os marcadores de sombra, água e coleta são referências de demonstração; confirme existência, acesso e funcionamento antes de se deslocar.
 - O assistente classifica algumas palavras localmente. A rota não é calculada; pontos e recompensas da reciclagem são apenas simulações.
 - Não há CORS aberto: a interface deve consumir a API na mesma origem do site.

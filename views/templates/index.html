@@ -124,9 +124,9 @@
       outline-offset: 2px;
     }
 
-    /* Alerta de Calor */
+    /* Condições meteorológicas */
     .climate-alert {
-      background: linear-gradient(135deg, #ea580c, #dc2626);
+      background: linear-gradient(135deg, #145b4b, #0d3d32);
       color: white;
       border-radius: 12px;
       padding: 16px;
@@ -254,17 +254,18 @@
   </header>
 
   <main class="wrap">
-    <!-- Placeholder until an official climate data source is integrated -->
-    <div class="climate-alert" role="region" aria-label="Limites dos dados climáticos">
+    <!-- Clima atual retornado pelo backend; não confundir com alerta oficial -->
+    <div class="climate-alert" role="region" aria-label="Condições climáticas atuais">
       <div>
-        <strong>Dados climáticos em tempo real não integrados</strong>
-        <div style="font-size: 0.95rem; margin-top: 4px;">
-          Este protótipo não consulta temperatura, índice UV ou alertas oficiais.
-        </div>
+        <strong id="climate-title">Condições climáticas no Recife</strong>
+        <div id="climate-values" role="status" aria-live="polite" style="font-size: 0.95rem; margin-top: 4px;">Consultando dados climáticos…</div>
+        <div id="climate-condition" aria-live="polite" style="font-size: 0.95rem; margin-top: 4px;"></div>
       </div>
       <div>
-        <span class="badge">Relatos do mapa são comunitários</span>
+        <button id="climate-refresh" type="button" class="badge">Atualizar</button>
+        <div id="climate-updated" style="font-size: 0.8rem; margin-top: 6px;"></div>
       </div>
+      <p id="climate-note" style="flex-basis:100%;font-size:.82rem;margin:8px 0 0;">Dados meteorológicos para uma coordenada de referência no centro do Recife; não representam medições por bairro nem alerta oficial. Fonte: <a href="https://developers.google.com/maps/documentation/weather" target="_blank" rel="noopener noreferrer" style="color:inherit;">Google Weather API</a>.</p>
     </div>
 
     <!-- 1. Assistente por Voz e Texto Acessível -->
@@ -452,6 +453,7 @@
     // Leaflet e Controles de Mapa
     const form = document.querySelector('#report-form');
     const statusEl = document.querySelector('#status');
+    const climateRefreshButton = document.querySelector('#climate-refresh');
     const latitudeInput = document.querySelector('#latitude');
     const longitudeInput = document.querySelector('#longitude');
     const selectedCoords = document.querySelector('#selected-coords');
@@ -460,6 +462,43 @@
     const adoptionLat = document.querySelector('#adoption-latitude');
     const adoptionLon = document.querySelector('#adoption-longitude');
     const adoptionCoords = document.querySelector('#adoption-coords');
+
+    function formatClimateValue(value, suffix = '') {
+      if (value === null || value === undefined || !Number.isFinite(Number(value))) return 'indisponível';
+      const number = Number(value);
+      return `${Number.isInteger(number) ? number : number.toFixed(1).replace('.', ',')}${suffix}`;
+    }
+
+    async function loadCurrentWeather() {
+      const values = document.querySelector('#climate-values');
+      const condition = document.querySelector('#climate-condition');
+      const updated = document.querySelector('#climate-updated');
+      climateRefreshButton.disabled = true;
+      values.textContent = 'Consultando Google Weather API…';
+      try {
+        const response = await fetch('/api/climate/current', {cache: 'no-store'});
+        const result = await response.json();
+        if (!response.ok || result.status !== 'ok') {
+          throw new Error(result.error || 'Os dados climáticos estão indisponíveis.');
+        }
+        const data = result.data;
+        values.textContent = `Temperatura ${formatClimateValue(data.temperature_c, ' °C')} · Sensação ${formatClimateValue(data.feels_like_c, ' °C')} · Índice de calor ${formatClimateValue(data.heat_index_c, ' °C')} · UV ${formatClimateValue(data.uv_index)} · Umidade ${formatClimateValue(data.relative_humidity_percent, '%')}`;
+        condition.textContent = `${data.condition || 'Condição não informada'}${data.precipitation_probability_percent == null ? '' : ` · Chance de precipitação ${formatClimateValue(data.precipitation_probability_percent, '%')}`}`;
+        const observedAt = data.observed_at ? new Date(data.observed_at) : null;
+        updated.textContent = observedAt && !Number.isNaN(observedAt.getTime())
+          ? `Atualização: ${observedAt.toLocaleString('pt-BR', {timeZone: data.time_zone || 'America/Recife'})}`
+          : 'Horário de atualização não informado';
+        document.querySelector('#climate-note').textContent = data.note;
+      } catch (error) {
+        values.textContent = 'Dados climáticos indisponíveis.';
+        condition.textContent = error.message;
+        updated.textContent = 'Configure GOOGLE_WEATHER_API_KEY no arquivo .env para habilitar a consulta.';
+      } finally {
+        climateRefreshButton.disabled = false;
+      }
+    }
+
+    climateRefreshButton.addEventListener('click', loadCurrentWeather);
 
     const map = L.map('map').setView([-8.0583, -34.8819], 13);
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -694,6 +733,7 @@
     }
 
     refresh().catch(() => { statusEl.textContent = 'Não foi possível carregar os relatos.'; });
+    loadCurrentWeather();
     carregarPontosDeReferencia();
   </script>
 </body>
