@@ -1,0 +1,250 @@
+:root {
+  --primary: #145b4b;
+  --primary-light: #e1f2eb;
+  --primary-dark: #0d3d32;
+  --blue: #0284c7;
+  --blue-light: #e0f2fe;
+  --accent: #f59e0b;
+  --danger: #dc2626;
+  --danger-light: #fee2e2;
+  --bg-main: #f2f7f4;
+  --bg-card: #ffffff;
+  --text-main: #17332d;
+  --text-muted: #55706a;
+  --border: #d8e5df;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.05);
+  --shadow-md: 0 4px 12px rgba(23, 51, 45, 0.08);
+  --shadow-lg: 0 10px 25px rgba(0,0,0,0.12);
+  --font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+/* Modo Sol Forte (Alto contraste para legibilidade máxima ao ar livre) */
+body.sol-forte {
+  --bg-main: #000000;
+  --bg-card: #141414;
+  --text-main: #ffffff;
+  --text-muted: #fef08a;
+  --border: #facc15;
+  --primary: #22c55e;
+  --primary-light: #064e3b;
+  --blue: #38bdf8;
+  --blue-light: #082f49;
+  --danger-light: #450a0a;
+  --shadow-md: 0 0 0 2px #facc15;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-family);
+  background-color: var(--bg-main);
+  color: var(--text-main);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+button {
+  cursor: pointer;
+  font-family: inherit;
+  border: none;
+  border-radius: 10px;
+  min-height: 48px;
+  padding: 10px 18px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.2s;
+}
+
+button:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.container {
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+/* Header */
+.app-header {
+  background: var(--primary);
+  color: white;
+  padding: 16px 0;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  box-shadow: var(--shadow-sm);
+}
+
+.header-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.brand-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.brand-icon {
+  font-size: 2.2rem;
+  line-height: 1;
+}
+
+.brand-title {
+  font-size: 1.45rem;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+}
+
+.brand-subtitle {
+  font-size: 0.8rem;
+  opacity: 0.9;
+  display: block;
+}
+
+.header-buttons {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.btn-contrast {
+  background: #facc15;
+  color: #000;
+  border: 2px solid #ca8a04;
+}
+
+.btn-blue {
+  background: var(--blue);
+  color: white;
+}
+
+/* Card Proativo de Notificação */
+.proactive-alert {
+  background: linear-gradient(135deg, #ea580c, #dc2626);
+  color: white;
+  border-radius: 14px;
+  padding: 18px;
+  margin-top: 14px;
+  box-shadow: var(--shadow-lg);
+  animation: pulse-border 2s infinite;
+}
+
+@keyframes pulse-border {
+  0% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.4); }
+  70% { box-shadow: 0 0 0 10px rgba(220, 38, 38, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0); }
+}
+
+body.sol-forte .proactive-alert {
+  background: #000;
+  border: 3px solid #ef4444;
+  color: #fef08a;
+}
+
+/* Cards principais */
+.card-section {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 20px;
+  margin-top: 18px;
+  box-shadow: var(--shadow-md);
+}
+
+.card-title {
+  font-size: 1.25rem;
+  font-weight: 750;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+/* Mapa */
+#map-container {
+  height: 420px;
+  width: 100%;
+  border-radius: 14px;
+  border: 2px solid var(--border);
+  margin-top: 12px;
+  z-index: 1;
+}
+
+/* Tabs */
+.tabs-scroll {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 8px;
+  margin-top: 12px;
+}
+
+.tab-pill {
+  background: var(--bg-card);
+  border: 2px solid var(--border);
+  color: var(--text-main);
+  white-space: nowrap;
+  font-size: 0.88rem;
+  padding: 8px 14px;
+  border-radius: 20px;
+  min-height: 40px;
+}
+
+.tab-pill.active {
+  background: var(--primary);
+  color: white;
+  border-color: var(--primary);
+}
+
+/* Lista de Ruas Quentes */
+.corridor-item {
+  border-left: 4px solid var(--danger);
+  background: var(--danger-light);
+  border-radius: 8px;
+  padding: 12px 16px;
+  margin-top: 10px;
+}
+
+body.sol-forte .corridor-item {
+  background: #330505;
+  border-color: #f87171;
+}
+
+/* Modais */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  z-index: 1000;
+}
+
+.modal-dialog {
+  background: var(--bg-card);
+  border: 2px solid var(--border);
+  border-radius: 16px;
+  max-width: 520px;
+  width: 100%;
+  padding: 24px;
+  max-height: 90vh;
+  overflow-y: auto;
+}

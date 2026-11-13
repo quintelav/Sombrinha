@@ -6,7 +6,7 @@ from flask import current_app, render_template, send_from_directory
 
 
 def render_home():
-    build_directory = Path(current_app.static_folder or "frontend/dist")
+    build_directory = Path(current_app.static_folder)
     entrypoint = build_directory / "index.html"
     if not entrypoint.exists():
         return render_template("frontend_not_built.html"), 503

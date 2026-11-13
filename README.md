@@ -95,12 +95,37 @@ A validação com a equipe e o(a) participante do Movimento Pró-Criança contin
 
 ## Arquitetura
 
-- `frontend/`: interface Svelte/TypeScript, componentes, cliente tipado da API e build com Vite.
-- `backend/app.py`: configuração e inicialização da aplicação Flask.
-- `backend/models/`: validação, agregação e persistência dos relatos e propostas.
-- `backend/controllers/`: rotas HTTP e coordenação entre Model e View.
-- `backend/views/`: entrega da página compilada pelo Flask e tela de orientação se o frontend ainda não foi compilado.
+- `frontend/`: interface Svelte/TypeScript (legada/alternativa), build Vite.
+- `frontend-react/`: nova interface React 18 PWA com foco mobile-first, Leaflet, geofencing proativo, modo Sol Forte (alto contraste), assistente de voz e Cartão Cidadão com QR Code.
+- `backend/app.py`: configuração e inicialização da aplicação Flask (serve automaticamente a build do React ou Svelte).
+- `backend/models/`: validação, agregação de relatos, modelo de adoção, fallback resiliente do clima (Open-Meteo) e estudo estratégico territorial de calor (`heat_islands_model.py`).
+- `backend/controllers/`: rotas HTTP e coordenação entre Model e View (incluindo `/api/heat-islands/study` e `/api/heat-islands/proximity`).
+- `backend/views/`: entrega da página compilada pelo Flask.
 - `backend/requirements.txt`: dependências Python do backend.
+
+## Estudo Estratégico de Ilhas de Calor & Pontos de Alívio (Centro do Recife)
+
+Com base em dados térmicos urbanos e fluxo de pedestres no Centro do Recife, identificamos os corredores mais críticos e os locais prioritários para instalação de bebedouros públicos e totens de nebulização:
+
+1. **Avenida Conde da Boa Vista (Boa Vista):** Corredor BRT com asfalto escuro e pouca copa arbórea. Solução: Bebedouro refrigerado e totens de névoa nas estações BRT Soledade e Hospício.
+2. **Rua da Palma & Rua da Concórdia (São José):** Ruas comerciais estreitas com lonas plásticas que aprisionam o calor. Solução: Ponto de hidratação na interseção com a Rua Nova e marquises reflexivas.
+3. **Avenida Dantas Barreto (Santo Antônio):** Canteiro central descampado com alta circulação de ambulantes. Solução: Abrigo climático solar com água mineral gelada.
+4. **Terminal Integrado Cais de Santa Rita (São José):** Piso de paralelepípedo e asfalto com alto fluxo de passageiros. Solução: Bebedouro industrial de alto fluxo próximo ao Mercado das Cujas.
+5. **Rua Nova & Pátio do Livramento (Santo Antônio):** Calçadão histórico de pedra com retenção solar. Solução: Ponto de frescor e bebedouro na Praça do Diário.
+
+### Geofencing e Notificação Proativa
+O aplicativo solicita a localização do usuário ao abrir. Ao detectar que o usuário está no Centro ou se deslocando em direção a ele, emite um alerta com a temperatura/sensação térmica em tempo real e calcula a rota para os pontos de água e refúgio térmico mais próximos a pé.
+
+### Clima com Fallback Resiliente (Zero 503)
+A integração meteorológica suporta a Google Weather API e, caso a chave não esteja configurada ou atinja limites de cota, aciona automaticamente o fallback em tempo real da Open-Meteo para as coordenadas do Recife (`-8.0476, -34.8770`). A aplicação nunca fica indisponível ou exibe erro 503.
+
+### Executar o Frontend em React
+```bash
+cd frontend-react
+npm install
+npm run dev   # Executa em http://localhost:5173
+npm run build # Gera dist/ para ser servido pelo Flask
+```
 
 ## Limites e cuidados
 

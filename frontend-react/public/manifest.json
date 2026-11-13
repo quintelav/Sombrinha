@@ -1,0 +1,16 @@
+{
+  "name": "Sombrinha — Pontos de Frescor no Recife",
+  "short_name": "Sombrinha",
+  "description": "Encontre pontos de água gelada, sombra e refúgio climático no Centro do Recife.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#145b4b",
+  "theme_color": "#145b4b",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>☂️</text></svg>",
+      "sizes": "192x192 512x512",
+      "type": "image/svg+xml"
+    }
+  ]
+}
