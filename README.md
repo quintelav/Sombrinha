@@ -6,19 +6,22 @@
 
 ## Sobre o projeto
 
-Sombrinha é um protótipo web pensado para apoiar comunidades do Recife na prevenção e no cuidado diante dos impactos das mudanças climáticas. A plataforma reúne relatos de locais com pouca sombra ou arborização e permite visualizar as demandas em um mapa, ajudando a comunidade a identificar pontos prioritários para conversar e agir.
+Sombrinha é um protótipo web de mobilização comunitária para prevenção e cuidado diante dos impactos das mudanças climáticas no Recife. A proposta é reunir relatos sobre locais com pouca sombra, arborização ou estrutura de apoio, mostrar essas demandas em um mapa e ajudar moradores, organizações e poder público a discutir possíveis ações.
 
-Além dos relatos, moradores e organizações podem registrar propostas de adoção de pontos de ônibus, áreas verdes e pontos de apoio. A ideia é tornar as necessidades mais visíveis e facilitar a articulação comunitária com organizações e poder público. O protótipo também considera o calor urbano e a desigualdade na distribuição de arborização e espaços de proteção térmica.
+O protótipo também apresenta informações meteorológicas de referência, locais demonstrativos de atenção ao calor e propostas comunitárias para cuidar de pontos de ônibus, áreas verdes e espaços de apoio. A prioridade é tornar necessidades locais visíveis e apoiar a conversa comunitária; a ferramenta não executa nem autoriza intervenções.
 
-As propostas são indicações comunitárias: o sistema não aprova intervenções, não representa autorização oficial e não garante a disponibilidade de água ou manutenção.
+Relatos, pontos e propostas são indicações para discussão. O sistema não mede a temperatura de cada rua, não confirma a existência ou disponibilidade dos locais e não aprova intervenções nem garante água, manutenção ou atendimento público.
 
 ## Equipe
 
-Preencher com os nomes e funções da equipe antes da entrega:
+- **Desenvolvimento:**
+  - Vitor Quintela — Back-end.
+  - Maria Eduarda — Front-end.
+  - Ana Paula — Front-end.
+- **Validador do Movimento Pró-Criança:** Charles Magno.
+- **Validação do protótipo:** registrar as tarefas realizadas por Charles, o retorno recebido e os ajustes feitos. Os resultados da validação ainda não foram informados neste README.
 
-- **Desenvolvimento:** [nomes e trilhas]
-- **Validador(a) do Movimento Pró-Criança:** [nome]
-- **Como o(a) validador(a) participou:** [tarefas realizadas no teste e retorno recebido]
+> **Composição da equipe:** foram informados três desenvolvedores e um validador. O item 5.1 do edital descreve equipes com quatro desenvolvedores e um validador; confirmem com a coordenação se a composição atual foi aprovada.
 
 ## Tecnologias
 
@@ -27,21 +30,22 @@ Preencher com os nomes e funções da equipe antes da entrega:
 - **Frontend principal:** React, JavaScript, Vite, CSS, Leaflet e OpenStreetMap
 - **Frontend alternativo:** Svelte e TypeScript em `frontend/`
 - **Persistência:** JSON local para demonstração ou PostgreSQL via `DATABASE_URL`
-- **Clima:** Google Maps Platform Weather API, consulta pelo backend
+- **Clima:** Google Weather API, com fallback para Open-Meteo e uma estimativa de contingência; consulta pelo backend
 - **Servidor de produção:** Gunicorn
 - **Deploy configurado:** Render (`render.yaml`)
 
 ## Funcionalidades do protótipo
 
-- Registrar bairro, referência pública, tipo de situação e localização aproximada no mapa.
+- Registrar um relato comunitário com bairro, referência pública, tipo de situação e localização aproximada no mapa.
 - Escolher entre os 94 bairros do Recife, organizados pelas seis RPAs.
-- Ver relatos agrupados em células geográficas aproximadas de 100 metros e consultar um sinal comunitário demonstrativo baseado no volume, tipo e atualidade dos registros.
-- Receber uma sugestão de próximo passo para discussão comunitária.
+- Ver relatos agrupados em células geográficas aproximadas de 100 metros e um indicador demonstrativo baseado no volume, tipo e atualidade dos registros.
+- Consultar no mapa pontos de referência, cuja existência, acesso e funcionamento precisam ser confirmados.
 - Cadastrar e visualizar propostas de adoção de pontos de ônibus, áreas verdes e pontos de apoio, com organização responsável, compromisso, horário e localização.
 - Guardar relatos e propostas em JSON local ou PostgreSQL quando `DATABASE_URL` estiver configurada.
-- Consultar referências de locais no mapa, ainda sem validação de funcionamento ou disponibilidade.
-- Consultar temperatura atual, sensação térmica, umidade, UV e condição para uma coordenada de referência no centro do Recife.
-- Demonstrar classificação de texto por regras simples e simular pontuação de reciclagem; não são serviços de IA, coleta ou recompensa ativos.
+- Consultar temperatura, sensação térmica, umidade, índice UV e condição meteorológica para uma coordenada de referência no Centro do Recife.
+- Usar um assistente de texto e voz com reconhecimento de voz do navegador quando disponível; a classificação das mensagens usa regras locais por palavras-chave, não um modelo de IA conectado.
+- Consultar locais demonstrativos de atenção ao calor e uma estimativa de proximidade; a localização é opcional e, sem permissão, o protótipo usa um ponto fixo de demonstração no Centro.
+- Simular pontuação de reciclagem; não há coleta, entrega ou resgate de recompensa reais.
 
 ## Executar localmente
 
@@ -58,7 +62,7 @@ Set-Location ..
 .\.venv\Scripts\python.exe backend\app.py
 ```
 
-Abra `.env` no VS Code e preencha `GOOGLE_WEATHER_API_KEY` com uma chave de prototipagem do Google. A aplicação carrega esse arquivo ao iniciar. Nunca envie a chave ao GitHub nem a coloque no JavaScript. Você também pode iniciar sem a chave; o restante do protótipo funciona e a área do clima informa que a integração está desativada.
+`GOOGLE_WEATHER_API_KEY` é opcional para executar o protótipo. Se configurada, deve ficar apenas no arquivo `.env` local ou nas variáveis secretas do serviço de hospedagem; nunca a inclua no GitHub nem no JavaScript do frontend. Sem a chave, o backend tenta consultar o Open-Meteo e, se as fontes externas não responderem, usa valores estimados de contingência.
 
 Abra `http://localhost:8000` no computador. Para testar pelo celular na mesma rede Wi-Fi, use o endereço de rede mostrado no terminal, também na porta `8000`.
 
@@ -66,7 +70,7 @@ Para desenvolver a interface principal com atualização rápida, mantenha o Fla
 
 ## Deploy público
 
-O `Dockerfile` compila o frontend React e prepara a aplicação Flask com Gunicorn. O `render.yaml` configura esse serviço e o banco PostgreSQL:
+O `Dockerfile` compila o frontend React e prepara a aplicação Flask com Gunicorn. O `render.yaml` configura esse serviço e o banco PostgreSQL. O endereço público informado para a demonstração é [https://sombrinha-demo.onrender.com/](https://sombrinha-demo.onrender.com/); confirme que a página abre antes do pitch, pois a disponibilidade do serviço não foi verificada por este README.
 
 1. Conecte o repositório Sombrinha ao Render e crie um Blueprint.
 2. Configure `GOOGLE_WEATHER_API_KEY` nas variáveis do serviço.
@@ -74,12 +78,13 @@ O `Dockerfile` compila o frontend React e prepara a aplicação Flask com Gunico
 
 O serviço gratuito pode hibernar após um período sem acesso e o PostgreSQL gratuito tem prazo de expiração definido pelo Render. Consulte as condições atuais do serviço antes de usar o protótipo além da demonstração. Não armazene credenciais no repositório.
 
-No Render, configure `GOOGLE_WEATHER_API_KEY` nas variáveis de ambiente do serviço. Para prototipagem, o Google oferece uma Maps Demo Key sem custo, destinada a testes; uma chave padrão exige ativar faturamento. Restrinja a chave à Weather API e acompanhe cotas e custos no Google Cloud. [Configuração oficial da API](https://developers.google.com/maps/documentation/weather/get-api-key) · [Uso e faturamento](https://developers.google.com/maps/documentation/weather/usage-and-billing).
+No Render, configure `GOOGLE_WEATHER_API_KEY` nas variáveis de ambiente do serviço caso queira usar a fonte Google. O app tenta usar Open-Meteo quando a chave estiver ausente ou a consulta Google falhar. Planos e limites de hospedagem podem mudar; consulte as condições atuais do Render. [Configuração oficial da API Google Weather](https://developers.google.com/maps/documentation/weather/get-api-key) · [Uso e faturamento](https://developers.google.com/maps/documentation/weather/usage-and-billing).
 
 ## Uso de inteligência artificial
 
-- **Onde foi usada:** apoio ao brainstorming, à estrutura inicial e à documentação do protótipo.
-- **Revisão humana necessária:** a equipe deve revisar o código, testar os fluxos no celular e validar as sugestões e os textos com o(a) validador(a) e a comunidade antes da apresentação. Registrem aqui as correções feitas e as ferramentas usadas durante o hackathon.
+- **Onde foi usada:** apoio ao brainstorming, à elaboração e revisão de código, à depuração e à documentação.
+- **No protótipo:** o assistente classifica texto por regras locais; não há integração com um modelo externo de IA para responder aos usuários.
+- **Correções registradas nesta documentação:** foram esclarecidos os limites dos dados demonstrativos de calor, das estimativas de distância e da classificação por palavras-chave, removendo alegações de medições locais ou cálculo de rota. A equipe deve revisar o código e registrar outras sugestões corrigidas ou descartadas. Não inserir dados pessoais nas ferramentas de IA.
 
 ## Testes e validação
 
@@ -92,35 +97,37 @@ Instale as dependências de desenvolvimento do backend e execute os testes a par
 
 No GitHub Actions, a interface React é compilada e o workflow verifica a existência de `frontend-react/dist/index.html` antes de executar os testes do backend. A CI roda automaticamente a cada `push` e `pull_request`. Os testes cobrem apenas comportamentos automatizados do backend; não validam o deploy, o uso no celular nem a validação comunitária.
 
-Os testes cobrem as respostas das rotas de criação de relatos e simulações de reciclagem, incluindo validação, pontos simulados e aviso de que não há entrega ou resgate real. Eles usam arquivos temporários e não acessam os dados JSON da demonstração.
+Há 8 testes automatizados no backend: verificam a página inicial com um frontend temporário, os endpoints de calor e clima, a criação e validação de relatos e a simulação de reciclagem, incluindo pontos e aviso explícito de que não houve entrega ou resgate real. Os testes usam arquivos temporários e não acessam os JSON da demonstração. O resultado local mais recente foi 8 testes aprovados; confirme também o status da execução mais recente em GitHub Actions.
 
-A validação com a equipe e o(a) participante do Movimento Pró-Criança continua sendo feita separadamente, usando tarefas simples no celular: registrar um ponto, localizar uma demanda no mapa e cadastrar uma proposta. Registrem os resultados desse teste antes da entrega.
+A validação com a equipe e o(a) participante do Movimento Pró-Criança deve ser feita separadamente, usando tarefas simples no celular: registrar um relato, localizar uma demanda no mapa e cadastrar uma proposta. Registrem tarefas, observações e alterações realizadas; os testes automatizados não substituem essa validação.
+
+### Entregáveis do edital
+
+- **Solução funcionando no celular com deploy público:** abrir a URL pública em um celular, inclusive por rede móvel, e confirmar os fluxos principais antes da apresentação.
+- **Repositório com README preenchido:** completar os nomes e trilhas da equipe, identificar o(a) validador(a), descrever a validação e registrar o uso e as correções da IA.
+- **Testes automatizados no CI:** o projeto tem 8 testes; o GitHub Actions compila o frontend, confere o arquivo de saída e executa os testes em cada `push` e `pull_request`.
+- **Pitch:** preparar apresentação de 3 minutos com demonstração dos fluxos principais até o code freeze às 16h do dia 13/11.
+- **Validação do problema e do protótipo:** incluir no processo e neste README a contribuição real do(a) validador(a) do Movimento Pró-Criança.
 
 ## Arquitetura
 
 - `frontend/`: interface Svelte/TypeScript (legada/alternativa), build Vite.
-- `frontend-react/`: nova interface React 18 PWA com foco mobile-first, Leaflet, geofencing proativo, modo Sol Forte (alto contraste), assistente de voz e Cartão Cidadão com QR Code.
+- `frontend-react/`: interface React 18 responsiva para celular e computador, com Leaflet, modo de alto contraste para sol forte, assistente de voz e Cartão Cidadão com QR Code.
 - `backend/app.py`: configuração e inicialização da aplicação Flask (serve automaticamente a build do React ou Svelte).
 - `backend/models/`: validação, agregação de relatos, modelo de adoção, fallback resiliente do clima (Open-Meteo) e estudo estratégico territorial de calor (`heat_islands_model.py`).
-- `backend/controllers/`: rotas HTTP e coordenação entre Model e View (incluindo `/api/heat-islands/study` e `/api/heat-islands/proximity`).
+- `backend/controllers/`: rotas HTTP e coordenação entre Model e View, incluindo relatos, clima, propostas, reciclagem e os endpoints `/api/heat-islands/study` e `/api/heat-islands/proximity`.
 - `backend/views/`: entrega da página compilada pelo Flask.
 - `backend/requirements.txt`: dependências Python do backend.
 
-## Estudo Estratégico de Ilhas de Calor & Pontos de Alívio (Centro do Recife)
+## Estudo demonstrativo de calor urbano e pontos de apoio
 
-Com base em dados térmicos urbanos e fluxo de pedestres no Centro do Recife, identificamos os corredores mais críticos e os locais prioritários para instalação de bebedouros públicos e totens de nebulização:
+O endpoint `/api/heat-islands/study` apresenta corredores e pontos de apoio de referência no Centro do Recife. Os registros e estimativas de temperatura de superfície estão definidos como dados demonstrativos no código: não foram verificados neste projeto por medições de campo nem por uma base geoespacial oficial. Não devem ser apresentados como medições reais ou como ranking oficial de bairros.
 
-1. **Avenida Conde da Boa Vista (Boa Vista):** Corredor BRT com asfalto escuro e pouca copa arbórea. Solução: Bebedouro refrigerado e totens de névoa nas estações BRT Soledade e Hospício.
-2. **Rua da Palma & Rua da Concórdia (São José):** Ruas comerciais estreitas com lonas plásticas que aprisionam o calor. Solução: Ponto de hidratação na interseção com a Rua Nova e marquises reflexivas.
-3. **Avenida Dantas Barreto (Santo Antônio):** Canteiro central descampado com alta circulação de ambulantes. Solução: Abrigo climático solar com água mineral gelada.
-4. **Terminal Integrado Cais de Santa Rita (São José):** Piso de paralelepípedo e asfalto com alto fluxo de passageiros. Solução: Bebedouro industrial de alto fluxo próximo ao Mercado das Cujas.
-5. **Rua Nova & Pátio do Livramento (Santo Antônio):** Calçadão histórico de pedra com retenção solar. Solução: Ponto de frescor e bebedouro na Praça do Diário.
+### Localização e aviso de proximidade
+Quando disponível, o navegador solicita permissão de geolocalização. O sistema consulta proximidade em relação a um ponto de referência no Centro e pode mostrar um aviso e destacar um ponto no mapa. Se a pessoa negar a permissão, usa coordenadas fixas para demonstração. A distância e o tempo a pé são aproximações em linha reta; o app não calcula uma rota viária nem confirma acesso, funcionamento ou abastecimento dos pontos.
 
-### Geofencing e Notificação Proativa
-O aplicativo solicita a localização do usuário ao abrir. Ao detectar que o usuário está no Centro ou se deslocando em direção a ele, emite um alerta com a temperatura/sensação térmica em tempo real e calcula a rota para os pontos de água e refúgio térmico mais próximos a pé.
-
-### Clima com Fallback Resiliente (Zero 503)
-A integração meteorológica suporta a Google Weather API e, caso a chave não esteja configurada ou atinja limites de cota, aciona automaticamente o fallback em tempo real da Open-Meteo para as coordenadas do Recife (`-8.0476, -34.8770`). A aplicação nunca fica indisponível ou exibe erro 503.
+### Consulta meteorológica
+A consulta usa uma coordenada de referência no Centro do Recife (`-8.0476, -34.8770`). O backend tenta a Google Weather API quando há chave, depois Open-Meteo e, se ambas falharem, retorna uma estimativa de contingência. Esses dados não medem diferenças de temperatura entre bairros ou ruas e a estimativa não é uma observação meteorológica.
 
 ### Executar o Frontend em React
 ```bash
@@ -134,11 +141,11 @@ npm run build # Gera dist/ para ser servido pelo Flask
 
 - O mapa usa Leaflet e tiles do OpenStreetMap e precisa de internet; mantenha os créditos visíveis na interface.
 - O sinal exibido é demonstrativo, não mede temperatura, não é previsão e não constitui avaliação oficial de risco.
-- A API retorna condições atuais para uma coordenada de referência no centro do Recife. As condições do Google são resultados meteorológicos modelados e não correspondem necessariamente a uma estação local; a resolução não identifica diferenças de calor entre bairros ou ruas. Use os relatos comunitários para apontar necessidades locais. [FAQ da Weather API](https://developers.google.com/maps/documentation/weather/faq).
+- A API retorna condições para uma coordenada de referência no Centro do Recife. As condições são modeladas e não correspondem necessariamente a uma estação local; não identificam diferenças de calor entre bairros ou ruas. Use os relatos comunitários para apontar necessidades locais. [FAQ da Weather API](https://developers.google.com/maps/documentation/weather/faq).
 - O backend mantém a resposta atual em memória por 10 minutos para reduzir chamadas; a API permite cache temporário das condições atuais por até uma hora conforme os termos aplicáveis. [Termos da Weather API](https://cloud.google.com/maps-platform/terms/maps-service-terms).
 - Os marcadores de sombra, água e coleta são referências de demonstração; confirme existência, acesso e funcionamento antes de se deslocar.
 - O assistente classifica algumas palavras localmente. A rota não é calculada; pontos e recompensas da reciclagem são apenas simulações.
-- Não há CORS aberto: a interface deve consumir a API na mesma origem do site.
+- O backend atualmente permite requisições CORS de qualquer origem; não há autenticação. Essa configuração é adequada apenas ao protótipo e deve ser restringida antes de uso com dados sensíveis.
 - A versão pública compartilha os registros com quem acessa a URL. Não insira dados pessoais nem relatos sensíveis.
 - O protótipo não tem autenticação, moderação, confirmação de execução ou fluxo de validação institucional.
 - Intervenções de arborização, instalação de estruturas de sombra ou criação de pontos de apoio dependem de validação comunitária e autorização dos responsáveis pelo espaço.
