@@ -118,6 +118,290 @@ const ESTACOES_AGUA_RECIFE = [
   }
 ];
 
+export const PARQUES_E_SOMBRAS_RECIFE_RMR = [
+  // Centro
+  {
+    id: 'parque-treze-de-maio',
+    nome: 'Parque Treze de Maio',
+    tipo: 'sombra',
+    cidade: 'Recife',
+    regiao: 'Centro',
+    bairro: 'Santo Amaro',
+    endereco: 'Rua do Hospício, s/n - Santo Amaro',
+    latitude: -8.0583,
+    longitude: -34.8819,
+    descricao: 'Pulmão verde central com árvores centenárias, pau-brasil, palmeiras imperiais e ampla cobertura de sombra para pedestres.'
+  },
+  {
+    id: 'praca-da-republica',
+    nome: 'Praça da República & Jardins de Burle Marx',
+    tipo: 'sombra',
+    cidade: 'Recife',
+    regiao: 'Centro',
+    bairro: 'Santo Antônio',
+    endereco: 'Praça da República, Santo Antônio',
+    latitude: -8.0618,
+    longitude: -34.8765,
+    descricao: 'Famoso Baobá centenário tombado e jardins históricos sombreados projetados por Burle Marx em frente ao Palácio.'
+  },
+  {
+    id: 'parque-linear-aurora',
+    nome: 'Parque Linear da Rua da Aurora',
+    tipo: 'sombra',
+    cidade: 'Recife',
+    regiao: 'Centro',
+    bairro: 'Santo Amaro',
+    endereco: 'Cais da Rua da Aurora, Santo Amaro',
+    latitude: -8.0560,
+    longitude: -34.8775,
+    descricao: 'Alameda arborizada com bancos sombreados à margem do Rio Capibaribe, recebendo brisa fluvial refrescante.'
+  },
+  {
+    id: 'praca-do-derby',
+    nome: 'Praça do Derby',
+    tipo: 'sombra',
+    cidade: 'Recife',
+    regiao: 'Centro',
+    bairro: 'Derby',
+    endereco: 'Praça do Derby, s/n',
+    latitude: -8.0567,
+    longitude: -34.8998,
+    descricao: 'Bosque tradicional com canópio denso de árvores frondosas no entroncamento viário mais movimentado.'
+  },
+  // Zona Norte
+  {
+    id: 'parque-da-jaqueira',
+    nome: 'Parque da Jaqueira (Sítio da Jaqueira)',
+    tipo: 'sombra',
+    cidade: 'Recife',
+    regiao: 'Zona Norte',
+    bairro: 'Jaqueira',
+    endereco: 'Rua do Futuro, 959 - Jaqueira',
+    latitude: -8.0375,
+    longitude: -34.9048,
+    descricao: 'Principal parque da Zona Norte com mais de 7 hectares, centenas de jaqueiras, pista sombreada e bebedouros públicos.'
+  },
+  {
+    id: 'parque-santana',
+    nome: 'Parque Santana Ariano Suassuna',
+    tipo: 'sombra',
+    cidade: 'Recife',
+    regiao: 'Zona Norte',
+    bairro: 'Santana',
+    endereco: 'Rua Jorge Gomes de Sá, s/n - Santana',
+    latitude: -8.0360,
+    longitude: -34.9184,
+    descricao: 'Parque arborizado à beira do Rio Capibaribe com espécies da Mata Atlântica, ciclovia e corredores de sombra fresca.'
+  },
+  {
+    id: 'parque-da-tamarineira',
+    nome: 'Parque da Tamarineira (Memorial da Saúde)',
+    tipo: 'sombra',
+    cidade: 'Recife',
+    regiao: 'Zona Norte',
+    bairro: 'Tamarineira',
+    endereco: 'Av. Conselheiro Rosa e Silva, 2130 - Tamarineira',
+    latitude: -8.0298,
+    longitude: -34.9075,
+    descricao: 'Bosque preservado com árvores centenárias frondosas, promovendo microclima até 3°C mais ameno.'
+  },
+  {
+    id: 'parque-da-macaxeira',
+    nome: 'Parque Urbano da Macaxeira',
+    tipo: 'sombra',
+    cidade: 'Recife',
+    regiao: 'Zona Norte',
+    bairro: 'Macaxeira',
+    endereco: 'Av. Norte Miguel Arraes de Alencar, s/n - Macaxeira',
+    latitude: -8.0142,
+    longitude: -34.9298,
+    descricao: 'Grande complexo de convivência e lazer sombreado da Zona Norte, com quiosques cobertos e bosque.'
+  },
+  {
+    id: 'sitio-trindade',
+    nome: 'Sítio Trindade',
+    tipo: 'sombra',
+    cidade: 'Recife',
+    regiao: 'Zona Norte',
+    bairro: 'Casa Amarela',
+    endereco: 'Estrada do Arraial, 3259 - Casa Amarela',
+    latitude: -8.0255,
+    longitude: -34.9168,
+    descricao: 'Bosque histórico secular de mangueiras, baobás e cajueiros com canópio denso e preservação patrimonial.'
+  },
+  {
+    id: 'parque-dois-irmaos',
+    nome: 'Parque Estadual Dois Irmãos (Horto Florestal)',
+    tipo: 'sombra',
+    cidade: 'Recife',
+    regiao: 'Zona Norte',
+    bairro: 'Dois Irmãos',
+    endereco: 'Praça Farias Neves, s/n - Dois Irmãos',
+    latitude: -8.0108,
+    longitude: -34.9455,
+    descricao: 'Maior reserva de Mata Atlântica urbana do Recife com 387 hectares, o pulmão e regulador térmico da RMR.'
+  },
+  {
+    id: 'parque-de-apipucos',
+    nome: 'Parque de Apipucos Maximiano Campos',
+    tipo: 'sombra',
+    cidade: 'Recife',
+    regiao: 'Zona Norte',
+    bairro: 'Apipucos',
+    endereco: 'Rua de Apipucos, s/n - Apipucos',
+    latitude: -8.0195,
+    longitude: -34.9355,
+    descricao: "Orla verde do Açude de Apipucos, com canópio de mangueiras e alívio térmico do espelho d'água."
+  },
+  {
+    id: 'parque-das-gracas',
+    nome: 'Parque das Graças (Parque Linear Capibaribe)',
+    tipo: 'sombra',
+    cidade: 'Recife',
+    regiao: 'Zona Norte',
+    bairro: 'Graças',
+    endereco: 'Rua das Graças / Beira-Rio, Graças',
+    latitude: -8.0494,
+    longitude: -34.8992,
+    descricao: 'Parque linear suspenso e arborizado margeando o Rio Capibaribe, com mirantes sombreados e ventilação fluvial.'
+  },
+  // Zona Sul
+  {
+    id: 'parque-dona-lindu',
+    nome: 'Parque Dona Lindu',
+    tipo: 'sombra',
+    cidade: 'Recife',
+    regiao: 'Zona Sul',
+    bairro: 'Boa Viagem',
+    endereco: 'Av. Boa Viagem, s/n - Boa Viagem',
+    latitude: -8.1425,
+    longitude: -34.9038,
+    descricao: 'Bosque de coqueiros, gramados e galerias sombreadas à beira da orla marítima com brisa litorânea constante.'
+  },
+  {
+    id: 'segundo-jardim-boa-viagem',
+    nome: 'Segundo Jardim de Boa Viagem',
+    tipo: 'sombra',
+    cidade: 'Recife',
+    regiao: 'Zona Sul',
+    bairro: 'Boa Viagem',
+    endereco: 'Av. Boa Viagem (altura do Segundo Jardim)',
+    latitude: -8.1132,
+    longitude: -34.8942,
+    descricao: 'Alameda arborizada com castanholas de copa aberta, pergolados e refúgio de sombra para pedestres.'
+  },
+  {
+    id: 'parque-dos-manguezais',
+    nome: 'Parque Natural Municipal dos Manguezais',
+    tipo: 'sombra',
+    cidade: 'Recife',
+    regiao: 'Zona Sul',
+    bairro: 'Pina / Imbiribeira',
+    endereco: 'Bacia do Pina até Imbiribeira',
+    latitude: -8.0935,
+    longitude: -34.8920,
+    descricao: 'Maior manguezal urbano contínuo das Américas, responsável pelo amortecimento térmico da Zona Sul.'
+  },
+  {
+    id: 'lagoa-do-araca',
+    nome: 'Parque da Lagoa do Araçá',
+    tipo: 'sombra',
+    cidade: 'Recife',
+    regiao: 'Zona Sul',
+    bairro: 'Imbiribeira',
+    endereco: 'Rua José de Holanda, s/n - Imbiribeira',
+    latitude: -8.0995,
+    longitude: -34.9125,
+    descricao: 'Única lagoa natural de Recife, cercada por árvores frutíferas e pista de caminhada arborizada.'
+  },
+  // Zona Oeste
+  {
+    id: 'jardim-botanico-recife',
+    nome: 'Jardim Botânico do Recife',
+    tipo: 'sombra',
+    cidade: 'Recife',
+    regiao: 'Zona Oeste',
+    bairro: 'Curado',
+    endereco: 'BR-232, Km 7.5 - Curado',
+    latitude: -8.0772,
+    longitude: -34.9658,
+    descricao: '10 hectares de Mata Atlântica nativa protegida com trilhas na floresta, jardins sensoriais e microclima ameno.'
+  },
+  {
+    id: 'parque-urbano-caiara',
+    nome: 'Parque Urbano do Caiara',
+    tipo: 'sombra',
+    cidade: 'Recife',
+    regiao: 'Zona Oeste',
+    bairro: 'Iputinga',
+    endereco: 'Av. Maurício de Nassau, s/n - Iputinga',
+    latitude: -8.0402,
+    longitude: -34.9305,
+    descricao: 'Ampla área verde arborizada na Zona Oeste às margens do Rio Capibaribe, com bosques sombreados.'
+  },
+  {
+    id: 'engenho-uchoa',
+    nome: 'Refúgio Ecológico Engenho Uchôa',
+    tipo: 'sombra',
+    cidade: 'Recife',
+    regiao: 'Zona Oeste',
+    bairro: 'Areias / San Martin',
+    endereco: 'Rua Engenho Uchôa - Areias',
+    latitude: -8.0912,
+    longitude: -34.9360,
+    descricao: 'Unidade de conservação de 192 hectares com remanescentes de floresta e mangue da Zona Oeste.'
+  },
+  // Região Metropolitana (Olinda, Jaboatão, Camaragibe)
+  {
+    id: 'horto-del-rey-olinda',
+    nome: "Horto d'El Rey (Sítio Histórico de Olinda)",
+    tipo: 'sombra',
+    cidade: 'Olinda (RMR)',
+    regiao: 'Olinda & RMR',
+    bairro: 'Carmo / Bonsucesso',
+    endereco: 'Rua do Bonsucesso, Olinda',
+    latitude: -8.0125,
+    longitude: -34.8512,
+    descricao: 'Segundo jardim botânico mais antigo do Brasil (1637), refúgio com árvores seculares voltado ao mar.'
+  },
+  {
+    id: 'parque-memorial-arcoverde',
+    nome: 'Parque Memorial Arcoverde',
+    tipo: 'sombra',
+    cidade: 'Olinda / Recife (RMR)',
+    regiao: 'Olinda & RMR',
+    bairro: 'Salgadinho (Divisa Olinda/Recife)',
+    endereco: 'Av. Olinda Dom Hélder Câmara, s/n',
+    latitude: -8.0305,
+    longitude: -34.8625,
+    descricao: 'Parque metropolitano com bosques de eucaliptos, coqueiros e sombra na divisa entre Recife e Olinda.'
+  },
+  {
+    id: 'parque-cidade-jaboatao',
+    nome: 'Parque da Cidade de Jaboatão',
+    tipo: 'sombra',
+    cidade: 'Jaboatão dos Guararapes (RMR)',
+    regiao: 'Jaboatão & RMR Sul',
+    bairro: 'Prazeres / Piedade',
+    endereco: 'Estrada da Batalha, s/n - Prazeres',
+    latitude: -8.1725,
+    longitude: -34.9190,
+    descricao: 'Área de lazer e caminhada arborizada na Região Metropolitana Sul, proporcionando sombra e esportes.'
+  },
+  {
+    id: 'parque-serra-dos-cocos',
+    nome: 'Reserva Ecológica de Aldeia (Camaragibe)',
+    tipo: 'sombra',
+    cidade: 'Camaragibe (RMR)',
+    regiao: 'Camaragibe & Aldeia',
+    bairro: 'Aldeia dos Camarás',
+    endereco: 'Estrada de Aldeia, Km 9.5',
+    latitude: -7.9890,
+    longitude: -34.9810,
+    descricao: 'Reserva florestal com clima de serra, altitude e mata densa proporcionando alívio térmico.'
+  }
+];
+
 function haversineKm(lat1, lon1, lat2, lon2) {
   const R = 6371;
   const dLat = ((lat2 - lat1) * Math.PI) / 180;
@@ -227,6 +511,19 @@ export const api = {
 
       const maisProximo = pontosOrdenados[0];
 
+      // Encontra parque / sombra mais próximo em toda a cidade e RMR
+      const sombrasOrdenadas = PARQUES_E_SOMBRAS_RECIFE_RMR.map((s) => {
+        const dKm = haversineKm(latitude, longitude, s.latitude, s.longitude);
+        const dMetros = Math.round(dKm * 1000);
+        const tempoPe = Math.max(1, Math.round(dMetros / 70));
+        return {
+          ...s,
+          distancia_metros: dMetros,
+          tempo_pe_min: tempoPe
+        };
+      }).sort((a, b) => a.distancia_metros - b.distancia_metros);
+      const sombraMaisProxima = sombrasOrdenadas[0];
+
       return {
         esta_no_centro: estaNoCentro,
         distancia_centro_km: Number(distCentro.toFixed(2)),
@@ -241,12 +538,20 @@ export const api = {
             ? '☀️ Você está no Centro do Recife — Calor Crítico'
             : aproximando
             ? '🚶 Você está se aproximando do Centro do Recife'
-            : '☂️ Monitor Climático Sombrinha Recife',
-          mensagem: `Sensação térmica acima de 35°C no asfalto. Ponto de água potável mais próximo: ${maisProximo.nome} a ${maisProximo.distancia_metros}m (${maisProximo.tempo_pe_min} min a pé).`,
-          sugestao_acao: `Caminhe ${maisProximo.tempo_pe_min} min até ${maisProximo.nome} para encher sua garrafa gratuitamente.`
+            : sombraMaisProxima && sombraMaisProxima.distancia_metros <= 2500
+            ? `🌳 Perto de você: ${sombraMaisProxima.nome}`
+            : '☂️ Monitor Climático Sombrinha Recife & RMR',
+          mensagem: estaNoCentro
+            ? `Sensação térmica acima de 35°C no asfalto. Ponto de água potável mais próximo: ${maisProximo.nome} a ${maisProximo.distancia_metros}m (${maisProximo.tempo_pe_min} min a pé).`
+            : sombraMaisProxima
+            ? `Parque e refúgio de sombra a ${sombraMaisProxima.distancia_metros}m (~${sombraMaisProxima.tempo_pe_min} min a pé) em ${sombraMaisProxima.bairro}.`
+            : 'Consulte os parques e pontos de sombra mais próximos do seu bairro.',
+          sugestao_acao: `Caminhe até ${sombraMaisProxima?.nome || maisProximo.nome} para descanso sob sombra natural.`
         },
         ponto_mais_proximo: maisProximo,
-        pontos_frescor_proximos: pontosOrdenados.slice(0, 3)
+        pontos_frescor_proximos: pontosOrdenados.slice(0, 3),
+        sombra_mais_proxima: sombraMaisProxima,
+        parques_proximos: sombrasOrdenadas.slice(0, 4)
       };
     }
   },
@@ -257,7 +562,7 @@ export const api = {
       const res = await fetchJson('/api/reference-points');
       return res.dados || [];
     } catch {
-      return ESTACOES_AGUA_RECIFE.map((e) => ({
+      const bebedouros = ESTACOES_AGUA_RECIFE.map((e) => ({
         id: e.id,
         nome: e.nome,
         endereco: `${e.bairro}, Recife - PE`,
@@ -266,6 +571,7 @@ export const api = {
         longitude: e.longitude,
         descricao: e.capacidade
       }));
+      return [...PARQUES_E_SOMBRAS_RECIFE_RMR, ...bebedouros];
     }
   },
 

@@ -17,8 +17,8 @@ export default function HeatStudyModal({ isOpen, onClose, studyData: propStudyDa
 
   if (!isOpen) return null;
 
-  const corredores = studyData.corredores_criticos_calor || [];
-  const estacoes = studyData.pontos_recomendados_alivio || [];
+  const corredores = studyData?.corredores_criticos_calor || [];
+  const estacoes = studyData?.pontos_recomendados_alivio || [];
 
   return (
     <div className="modal-overlay" role="dialog" aria-modal="true" aria-label="Estudo Estratégico de Ilhas de Calor">
@@ -39,7 +39,7 @@ export default function HeatStudyModal({ isOpen, onClose, studyData: propStudyDa
         </div>
 
         <p style={{ marginTop: '8px', fontSize: '0.9rem', color: 'var(--text-muted)' }}>
-          {studyData.resumo_estrategico}
+          {studyData?.resumo_estrategico || 'Carregando dados territoriais do Centro do Recife...'}
         </p>
 
         {/* 1. As 5 Ruas Mais Quentes */}

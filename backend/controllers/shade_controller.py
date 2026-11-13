@@ -13,10 +13,12 @@ def list_reference_points():
     points = ShadePointsModel.list_all(
         kind=request.args.get("tipo"),
         neighborhood=request.args.get("bairro"),
+        region=request.args.get("regiao"),
+        city=request.args.get("cidade"),
     )
     return jsonify({
         "sucesso": True,
         "total": len(points),
         "dados": points,
-        "aviso": "Pontos demonstrativos; confirme existência, acesso e funcionamento antes de se deslocar.",
+        "aviso": "Pontos de sombra e refúgios arbóreos por todo o Recife e Região Metropolitana.",
     })

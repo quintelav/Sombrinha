@@ -58,3 +58,20 @@ def test_climate_current_with_resilient_fallback(client):
     assert "condition" in weather
     assert "heat_index_c" in weather
 
+
+def test_reference_points_expanded_rmr(client):
+    response = client.get("/api/reference-points")
+    assert response.status_code == 200
+    data = response.get_json()
+    assert data["sucesso"] is True
+    assert data["total"] >= 15
+    sombras = [p for p in data["dados"] if p["tipo"] == "sombra"]
+    assert len(sombras) >= 10
+    # Verifica presença de parques icônicos pela cidade e RMR
+    nomes = " ".join(s["nome"] for s in sombras)
+    assert "Jaqueira" in nomes
+    assert "Dona Lindu" in nomes
+    assert "Treze de Maio" in nomes
+    assert "Jardim Botânico" in nomes
+
+

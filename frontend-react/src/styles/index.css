@@ -94,13 +94,13 @@ button:focus-visible {
   outline-offset: 3px;
 }
 
-/* Container Responsivo: Preenche a tela em monitores e se adapta ao celular */
+/* Container Responsivo: Preenche a tela toda em computadores e se adapta perfeitamente ao celular */
 .container,
 .container-adaptativo {
   width: 100%;
-  max-width: 1680px;
-  margin: 0 auto;
-  padding: 16px 24px;
+  max-width: 100%;
+  margin: 0;
+  padding: 18px 32px;
   box-sizing: border-box;
 }
 
@@ -123,13 +123,22 @@ button:focus-visible {
   box-shadow: none;
 }
 
-/* Header Centralizado com Logo e Sombrinha de Frevo */
+/* Header Centralizado no Celular e Horizontal Amplo no Computador */
 .header-container-centered {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 12px;
+}
+
+@media (min-width: 768px) {
+  .header-container-centered {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+  }
 }
 
 .brand-lockup-centered {
@@ -254,46 +263,52 @@ body.sol-forte .btn-sol-forte {
 }
 
 /* ==========================================================================
-   LAYOUT ADAPTATIVO: DESKTOP (TELA TODA) VS CELULAR (MOBILE-FIRST)
+   LAYOUT RESPONSIVO (PADRÃO DESKTOP TELA CHEIA EM 2 COLUNAS)
    ========================================================================== */
 .layout-adaptativo {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+  grid-template-areas:
+    "radar mapa"
+    "clima mapa"
+    "voz reciclagem";
+  gap: 24px;
+  align-items: start;
   width: 100%;
 }
 
-/* NO COMPUTADOR / DESKTOP (Telas >= 1024px):
-   A tela se expande preenchendo o monitor em 2 colunas amplas:
-   - Coluna 1: Alertas climáticos, sensores, assistente de voz e reciclagem.
-   - Coluna 2: Mapa territorial interativo em visão panorâmica e sticky. */
-@media (min-width: 1024px) {
-  .layout-adaptativo {
-    display: grid;
-    grid-template-columns: 1fr 1.3fr;
-    gap: 24px;
-    align-items: start;
-  }
-
-  .coluna-painel {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-  }
-
-  .coluna-mapa {
-    position: sticky;
-    top: 20px;
-  }
-
-  #map-container {
-    height: 620px !important; /* Mapa grande no monitor */
-  }
+.grid-radar {
+  grid-area: radar;
+  min-width: 0;
 }
 
-/* NO CELULAR (Telas < 1024px):
-   Se adapta fluidamente à tela pequena em coluna única, sem quebra lateral. */
-@media (max-width: 1023px) {
+.grid-clima {
+  grid-area: clima;
+  min-width: 0;
+}
+
+.grid-mapa {
+  grid-area: mapa;
+  min-width: 0;
+}
+
+.grid-voz {
+  grid-area: voz;
+  min-width: 0;
+}
+
+.grid-reciclagem {
+  grid-area: reciclagem;
+  min-width: 0;
+}
+
+#map-container {
+  height: 440px !important;
+}
+
+/* NO CELULAR / SMARTPHONES (Telas < 768px):
+   Adaptação vertical nativa em coluna única para telas de toque */
+@media (max-width: 767px) {
   .container,
   .container-adaptativo {
     padding: 10px 12px;
@@ -303,20 +318,20 @@ body.sol-forte .btn-sol-forte {
     display: flex;
     flex-direction: column;
     gap: 16px;
-  }
-
-  .coluna-painel {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-  }
-
-  .coluna-mapa {
     width: 100%;
   }
 
+  .grid-radar,
+  .grid-clima,
+  .grid-mapa,
+  .grid-voz,
+  .grid-reciclagem {
+    width: 100%;
+    min-width: 0;
+  }
+
   #map-container {
-    height: 380px !important; /* Altura confortável para toque no celular */
+    height: 380px !important;
   }
 
   .header-buttons {

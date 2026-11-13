@@ -177,6 +177,20 @@ class HeatIslandsModel:
         pontos_ordenados.sort(key=lambda x: x["distancia_metros"])
         pontos_mais_proximos = pontos_ordenados[:3]
 
+        # Busca parques e pontos de sombra em toda a cidade e RMR
+        from models.shade_points_model import ShadePointsModel
+        sombras = ShadePointsModel.list_all(kind="sombra")
+        sombras_ordenadas = []
+        for s in sombras:
+            dist = _haversine_distance_meters(user_lat, user_lon, s["latitude"], s["longitude"])
+            sombras_ordenadas.append({
+                **s,
+                "distancia_metros": round(dist),
+                "tempo_a_pe_min": max(1, round(dist / 80)),
+            })
+        sombras_ordenadas.sort(key=lambda x: x["distancia_metros"])
+        sombra_mais_proxima = sombras_ordenadas[0] if sombras_ordenadas else None
+
         if esta_no_centro:
             status_movimento = "NO_CENTRO"
             notificacao = {
@@ -199,11 +213,21 @@ class HeatIslandsModel:
             }
         else:
             status_movimento = "OUTRA_REGIAO"
-            notificacao = {
-                "titulo": "☂️ Sombrinha Ativo",
-                "mensagem": "Monitore o calor e consulte os pontos de sombra mais próximos do seu bairro.",
-                "tipo_alerta": "INFORMATIVO",
-            }
+            if sombra_mais_proxima and sombra_mais_proxima["distancia_metros"] <= 3000:
+                notificacao = {
+                    "titulo": f"🌳 Perto de você: {sombra_mais_proxima['nome']}",
+                    "mensagem": (
+                        f"Refúgio verde e alívio térmico a {sombra_mais_proxima['distancia_metros']}m "
+                        f"(~{sombra_mais_proxima['tempo_a_pe_min']} min a pé) em {sombra_mais_proxima.get('bairro', 'seu bairro')}."
+                    ),
+                    "tipo_alerta": "INFORMATIVO",
+                }
+            else:
+                notificacao = {
+                    "titulo": "☂️ Sombrinha Ativo — Região Metropolitana",
+                    "mensagem": "Monitore o calor e consulte os parques e pontos de sombra mais próximos do seu bairro.",
+                    "tipo_alerta": "INFORMATIVO",
+                }
 
         return {
             "usuario_coordenadas": {"latitude": user_lat, "longitude": user_lon},
@@ -211,5 +235,8 @@ class HeatIslandsModel:
             "status_movimento": status_movimento,
             "esta_no_centro": esta_no_centro,
             "notificacao_proativa": notificacao,
+            "ponto_mais_proximo": pontos_mais_proximos[0] if pontos_mais_proximos else None,
             "pontos_frescor_proximos": pontos_mais_proximos,
+            "sombra_mais_proxima": sombra_mais_proxima,
+            "parques_proximos": sombras_ordenadas[:4],
         }
