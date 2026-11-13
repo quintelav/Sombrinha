@@ -83,18 +83,16 @@ No Render, configure `GOOGLE_WEATHER_API_KEY` nas variáveis de ambiente do serv
 
 ## Testes e validação
 
-Instale as dependências do frontend React e do backend e execute os testes a partir da raiz do repositório. O build React é necessário para que o Flask sirva a página inicial durante o teste de integração:
+Instale as dependências de desenvolvimento do backend e execute os testes a partir da raiz do repositório. O teste da página inicial usa um frontend temporário, portanto os testes do backend não dependem do Node.js nem de arquivos de build:
 
 ```powershell
-Set-Location frontend-react
-npm ci
-npm run build
-Set-Location ..
 .\.venv\Scripts\python.exe -m pip install -r backend\requirements-dev.txt
 .\.venv\Scripts\python.exe -m pytest backend\tests
 ```
 
-Os testes cobrem as respostas das rotas de criação de relatos e simulações de reciclagem, incluindo validação, pontos simulados e aviso de que não há entrega ou resgate real. Eles usam arquivos temporários e não acessam os dados JSON da demonstração. O GitHub Actions executa os mesmos testes automaticamente a cada `push` e `pull_request`. Essas verificações cobrem apenas os comportamentos automatizados do backend; não validam o deploy, o uso no celular nem a validação comunitária.
+No GitHub Actions, a interface React é compilada e o workflow verifica a existência de `frontend-react/dist/index.html` antes de executar os testes do backend. A CI roda automaticamente a cada `push` e `pull_request`. Os testes cobrem apenas comportamentos automatizados do backend; não validam o deploy, o uso no celular nem a validação comunitária.
+
+Os testes cobrem as respostas das rotas de criação de relatos e simulações de reciclagem, incluindo validação, pontos simulados e aviso de que não há entrega ou resgate real. Eles usam arquivos temporários e não acessam os dados JSON da demonstração.
 
 A validação com a equipe e o(a) participante do Movimento Pró-Criança continua sendo feita separadamente, usando tarefas simples no celular: registrar um ponto, localizar uma demanda no mapa e cadastrar uma proposta. Registrem os resultados desse teste antes da entrega.
 

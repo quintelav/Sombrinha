@@ -35,7 +35,14 @@ def test_heat_islands_proximity_approaching(client):
     assert data["dados"]["status_movimento"] == "APROXIMANDO_DO_CENTRO"
 
 
-def test_home_page_serves_built_frontend(client):
+def test_home_page_serves_frontend_index(client, tmp_path):
+    frontend_dir = tmp_path / "frontend"
+    frontend_dir.mkdir()
+    (frontend_dir / "index.html").write_text(
+        "<!doctype html><title>Sombrinha</title>", encoding="utf-8"
+    )
+    client.application.static_folder = str(frontend_dir)
+
     response = client.get("/")
     assert response.status_code == 200
     assert b"Sombrinha" in response.data

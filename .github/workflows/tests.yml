@@ -29,6 +29,10 @@ jobs:
         run: npm run build
         working-directory: frontend-react
 
+      - name: Verify React build output
+        run: test -f dist/index.html
+        working-directory: frontend-react
+
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
