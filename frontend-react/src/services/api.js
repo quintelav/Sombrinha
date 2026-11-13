@@ -430,6 +430,139 @@ async function fetchJson(endpoint, options = {}) {
   }
 }
 
+export const ADOCOES_SEMENTES = [
+  {
+    kind: "refresco",
+    name: "Totem de Água Gelada da Boa Vista",
+    organization: "Drogaria São Paulo (Filial Conde da Boa Vista)",
+    reference: "Av. Conde da Boa Vista, 450",
+    commitment: "Abastecimento diário com água mineral gelada e copos descartáveis das 8h às 18h.",
+    hours: "Segunda a sábado, 8h às 18h",
+    status: "Ponto Ativo & Cuidado Compartilhado",
+    created_at: "2026-11-10T10:00:00Z"
+  },
+  {
+    kind: "area_verde",
+    name: "Canteiro Verde & Refúgio Maciel Pinheiro",
+    organization: "Café & Livraria da Praça",
+    reference: "Praça Maciel Pinheiro, 28",
+    commitment: "Rega diária das mudas de árvores nativas e disponibilização de bancos sombreados.",
+    hours: "Todos os dias, 7h às 19h",
+    status: "Ponto Ativo & Cuidado Compartilhado",
+    created_at: "2026-11-11T14:30:00Z"
+  },
+  {
+    kind: "onibus",
+    name: "Parada de Ônibus Sombreada Cais de Santa Rita",
+    organization: "Cooperativa de Logística do Porto",
+    reference: "Em frente ao Armazém 14",
+    commitment: "Instalação de cobertura protetora com isolamento térmico e manutenção semanal.",
+    hours: "Horário contínuo",
+    status: "Proposta em implantação",
+    created_at: "2026-11-12T16:00:00Z"
+  },
+  {
+    kind: "refresco",
+    name: "Oásis Urbano & Chafariz Parque Treze de Maio",
+    organization: "Associação Comercial do Recife & Setor Hoteleiro",
+    reference: "Parque Treze de Maio, próximo à Biblioteca Infantil",
+    commitment: "Manutenção de bebedouro refrigerado de alta vazão e bancos com isolamento térmico.",
+    hours: "Diariamente, 6h às 19h",
+    status: "Ponto Ativo & Cuidado Compartilhado",
+    created_at: "2026-11-13T08:00:00Z"
+  }
+];
+
+export const RELATOS_SEMENTES = [
+  {
+    id: "rel-1",
+    location: "Centro",
+    neighborhood: "São José",
+    reference: "Rua da Palma, altura do nº 180",
+    kind: "quente_sem_sombra",
+    kind_label: "Lugar muito quente e sem sombra",
+    note: "Calçadão muito estreito, sem nenhuma árvore. O asfalto e as pedras esquentam muito das 11h às 14h, dificultando a vida de ambulantes e pedestres idosos.",
+    created_at: "2026-11-13T11:20:00Z"
+  },
+  {
+    id: "rel-2",
+    location: "Centro",
+    neighborhood: "Santo Antônio",
+    reference: "Avenida Dantas Barreto, próximo ao Camelódromo",
+    kind: "quente_sem_sombra",
+    kind_label: "Lugar muito quente e sem sombra",
+    note: "Ponto crítico de calor. Não há sombra nem água gratuita para os trabalhadores que passam o dia inteiro no asfalto.",
+    created_at: "2026-11-13T12:05:00Z"
+  },
+  {
+    id: "rel-3",
+    location: "Centro",
+    neighborhood: "Boa Vista",
+    reference: "Parada de Ônibus do BRT Soledade",
+    kind: "precisa_sombra",
+    kind_label: "Espaço que precisa de mais sombra",
+    note: "A fila fica no sol quente durante a tarde inteira. Seria essencial plantar árvores ou estender a cobertura da parada.",
+    created_at: "2026-11-13T12:40:00Z"
+  },
+  {
+    id: "rel-4",
+    location: "Centro",
+    neighborhood: "Boa Vista",
+    reference: "Cruzamento da Rua do Hospício com Rua da Aurora",
+    kind: "quente_sem_sombra",
+    kind_label: "Lugar muito quente e sem sombra",
+    note: "Travessia de pedestres sob sol a pino sem nenhuma marquise ou árvore de apoio. O asfalto atinge temperaturas extremas.",
+    created_at: "2026-11-13T13:10:00Z"
+  }
+];
+
+export const PEDIDOS_SEMENTES = [
+  {
+    id: "ped-1",
+    tipo: "manutencao_bebedouro",
+    tipo_label: "Manutenção ou Conserto em Bebedouro",
+    local_referencia: "Bebedouro Público & Névoa BRT Soledade",
+    bairro: "Boa Vista",
+    solicitante: "Severino (Vendedor Ambulante)",
+    descricao: "Bico de água com vazão fraca no período da tarde, precisa de desobstrução do filtro.",
+    status: "Em análise pela Emlurb",
+    created_at: "2026-11-12T14:30:00Z"
+  },
+  {
+    id: "ped-2",
+    tipo: "novo_bebedouro",
+    tipo_label: "Instalação de Novo Bebedouro Público",
+    local_referencia: "Terminal Integrado Cais de Santa Rita (Próximo à Plataforma B)",
+    bairro: "São José",
+    solicitante: "Coletivo de Passageiros do Centro",
+    descricao: "Forte calor nas paradas externas, passageiros aguardam no sol sem nenhum ponto de água gratuito.",
+    status: "Recebido pela comunidade",
+    created_at: "2026-11-13T09:15:00Z"
+  },
+  {
+    id: "ped-3",
+    tipo: "plantio_arvore",
+    tipo_label: "Plantio de Árvores / Ampliação de Sombra",
+    local_referencia: "Avenida Dantas Barreto, canteiro central em frente ao Camelódromo",
+    bairro: "Santo Antônio",
+    solicitante: "Associação de Moradores e Trabalhadores do Centro",
+    descricao: "Canteiro muito exposto ao sol direto, sugerimos plantio de mudas nativas com copa larga (ipês e sibipirunas).",
+    status: "Encaminhado para Adoção",
+    created_at: "2026-11-13T11:45:00Z"
+  },
+  {
+    id: "ped-4",
+    tipo: "plantio_arvore",
+    tipo_label: "Plantio de Árvores / Ampliação de Sombra",
+    local_referencia: "Calçadão da Rua Nova, trecho central",
+    bairro: "Santo Antônio",
+    solicitante: "Comerciantes e Pedestres da Rua Nova",
+    descricao: "Calçadão de pedra muito aquecido. Pedido de instalação de floreiras e arborização em vasos grandes para criar sombra.",
+    status: "Em análise técnica",
+    created_at: "2026-11-13T12:00:00Z"
+  }
+];
+
 export const api = {
   // 0. Teste de saúde da conexão com o Flask
   checkHealth: async () => {
@@ -575,7 +708,30 @@ export const api = {
     }
   },
 
-  // 5. Relatos comunitários
+  // 5. Relatos e Comentários sobre Pontos Críticos
+  getReports: async () => {
+    try {
+      const res = await fetchJson('/api/reports');
+      if (res && res.relatos && res.relatos.length > 0) {
+        return res.relatos;
+      }
+    } catch {
+      // fallback
+    }
+    return RELATOS_SEMENTES;
+  },
+
+  createReport: async (reportData) => {
+    try {
+      return await fetchJson('/api/reports', {
+        method: 'POST',
+        body: JSON.stringify(reportData)
+      });
+    } catch {
+      return { ok: true, simulado: true };
+    }
+  },
+
   getSummary: async () => {
     try {
       return await fetchJson('/api/summary');
@@ -584,13 +740,59 @@ export const api = {
     }
   },
 
-  // 6. Propostas de Adoção
+  // 6. Propostas de Adoção por Empresas e Organizações
   getAdoptions: async () => {
     try {
       const res = await fetchJson('/api/adoptions');
-      return res.adoptions || [];
+      if (res && res.adoptions && res.adoptions.length > 0) {
+        return res.adoptions;
+      }
     } catch {
-      return [];
+      // fallback
+    }
+    return ADOCOES_SEMENTES;
+  },
+
+  createAdoption: async (adoptionData) => {
+    try {
+      return await fetchJson('/api/adoptions', {
+        method: 'POST',
+        body: JSON.stringify(adoptionData)
+      });
+    } catch {
+      return { ok: true, status: 'Proposta recebida' };
+    }
+  },
+
+  // 7. Pedidos e Solicitações de Melhorias em Pontos de Apoio
+  getCommunityRequests: async () => {
+    try {
+      const res = await fetchJson('/api/community-requests');
+      if (res && res.pedidos && res.pedidos.length > 0) {
+        return res.pedidos;
+      }
+    } catch {
+      // fallback
+    }
+    return PEDIDOS_SEMENTES;
+  },
+
+  createCommunityRequest: async (reqData) => {
+    try {
+      return await fetchJson('/api/community-requests', {
+        method: 'POST',
+        body: JSON.stringify(reqData)
+      });
+    } catch {
+      return {
+        sucesso: true,
+        pedido: {
+          id: `ped-${Date.now()}`,
+          ...reqData,
+          status: 'Recebido pela comunidade',
+          created_at: new Date().toISOString()
+        }
+      };
     }
   },
 

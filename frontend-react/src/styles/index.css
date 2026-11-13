@@ -257,72 +257,185 @@ body.sol-forte .btn-header-sol-forte {
 }
 
 /* ==========================================================================
-   LAYOUT ADAPTATIVO EM 2 COLUNAS (DESKTOP) E 1 COLUNA (MOBILE)
+   LAYOUT TOTALMENTE ALINHADO E PROPORCIONAL (SEM ESPAÇOS EM BRANCO)
+   Dashboard cívico harmônico, equilibrado para telas de desktop e fluido no mobile.
    ========================================================================== */
-.layout-adaptativo {
+
+/* 1. Grade Superior: Alívio & Clima (Esquerda) + Mapa (Direita) */
+.layout-principal-topo {
   display: grid;
   grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
-  grid-template-areas:
-    "radar mapa"
-    "clima mapa"
-    "voz reciclagem";
-  gap: 22px;
-  align-items: start;
+  gap: 20px;
+  align-items: stretch;
   width: 100%;
 }
 
-.grid-radar {
-  grid-area: radar;
+.coluna-alivio-clima {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
   min-width: 0;
 }
 
-.grid-clima {
-  grid-area: clima;
+.coluna-mapa {
   min-width: 0;
+  display: flex;
+  flex-direction: column;
 }
 
-.grid-mapa {
-  grid-area: mapa;
-  min-width: 0;
-}
-
-.grid-voz {
-  grid-area: voz;
-  min-width: 0;
-}
-
-.grid-reciclagem {
-  grid-area: reciclagem;
-  min-width: 0;
+.coluna-mapa > section {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 #map-container {
-  height: 440px !important;
+  flex: 1;
+  min-height: 420px;
   width: 100%;
   border-radius: var(--raio-card);
   border: 1px solid var(--linha-divisoria);
   margin-top: 12px;
   z-index: 1;
+  position: relative;
 }
 
+/* 2. Barra Acessível de Busca e Voz (Totalmente Preenchida, Sem Buracos Brancos) */
+.banner-busca-voz {
+  width: 100%;
+  margin-top: 20px;
+}
+
+.busca-voz-topo {
+  display: grid;
+  grid-template-columns: minmax(280px, 1fr) minmax(360px, 1.4fr);
+  align-items: center;
+  gap: 24px;
+  width: 100%;
+}
+
+.busca-voz-info {
+  min-width: 0;
+}
+
+.campo-busca-voz {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-top: 0;
+  width: 100%;
+}
+
+.input-voz-texto {
+  flex: 1;
+  min-width: 180px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: 1px solid var(--linha-destaque);
+  background: var(--bg-card);
+  color: var(--ink-principal);
+  font-size: 0.92rem;
+  outline: none;
+  min-height: 42px;
+}
+
+/* 3. Pares Comunitários Perfeitamente Alinhados em Altura & Preenchimento */
+.grid-duplo-comunitario {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 20px;
+  align-items: stretch;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.grid-duplo-comunitario > section {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Subgrade Responsiva de Cartões Internos para Painéis Duplos (Exatamente 2x2 no Desktop) */
+.grade-subcards-comunitarios {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 10px;
+  margin-bottom: 14px;
+}
+
+@media (max-width: 640px) {
+  .busca-voz-topo {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 14px;
+  }
+
+  .grade-subcards-comunitarios {
+    grid-template-columns: 1fr;
+  }
+}
+
+.cartao-feed-item {
+  background: var(--bg-terreno);
+  border: 1px solid var(--linha-divisoria);
+  border-radius: 8px;
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.cartao-empresa-item {
+  border-top: 3px solid var(--mangue);
+}
+
+.banner-rodape-painel {
+  padding: 10px 14px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: auto;
+}
+
+.banner-terracota {
+  background: var(--terracota-light);
+  border: 1px solid #fde68a;
+}
+
+.banner-alerta {
+  background: var(--alerta-calor-light);
+  border: 1px solid #fecaca;
+}
+
+.banner-mangue {
+  background: var(--mangue-light);
+  border: 1px solid #c2dbd1;
+}
+
+/* Modo Mobile (< 768px): Coluna Única Fluida Sem Quebra */
 @media (max-width: 767px) {
   .container,
   .container-adaptativo {
     padding: 12px 14px;
   }
 
-  .layout-adaptativo {
+  .layout-principal-topo,
+  .grid-duplo-comunitario {
     display: flex;
     flex-direction: column;
     gap: 16px;
     width: 100%;
   }
 
-  .grid-radar,
-  .grid-clima,
-  .grid-mapa,
-  .grid-voz,
-  .grid-reciclagem {
+  .coluna-alivio-clima,
+  .coluna-mapa,
+  .banner-busca-voz {
     width: 100%;
     min-width: 0;
   }
@@ -386,6 +499,10 @@ body.sol-forte .btn-header-sol-forte {
   border-radius: var(--raio-card);
   padding: 18px 20px;
   box-shadow: var(--sombra-card);
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
 }
 
 .alerta-badge-origem {
@@ -409,38 +526,48 @@ body.sol-forte .alerta-badge-origem {
 }
 
 .cartoes-duplos-alivio {
-  display: grid;
-  grid-template-columns: 1fr;
+  display: flex;
+  flex-direction: column;
   gap: 10px;
   margin-top: 14px;
-}
-
-@media (min-width: 500px) {
-  .cartoes-duplos-alivio {
-    grid-template-columns: 1fr 1fr;
-  }
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 .cartao-alivio-item {
   background: var(--bg-terreno);
   border: 1px solid var(--linha-divisoria);
   border-radius: 10px;
-  padding: 12px 14px;
+  padding: 12px 16px;
   display: flex;
-  flex-direction: column;
+  align-items: center;
   justify-content: space-between;
-  gap: 8px;
+  gap: 12px;
+  flex-wrap: wrap;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  transition: background-color 0.15s ease;
+}
+
+.cartao-alivio-item:hover {
+  background: #f0eeea;
 }
 
 .cartao-alivio-topo {
   display: flex;
-  align-items: flex-start;
-  gap: 10px;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+  min-width: 220px;
+  max-width: 100%;
 }
 
 .cartao-alivio-icone {
-  width: 34px;
-  height: 34px;
+  width: 36px;
+  height: 36px;
   border-radius: 8px;
   display: flex;
   align-items: center;
@@ -448,15 +575,23 @@ body.sol-forte .alerta-badge-origem {
   flex-shrink: 0;
 }
 
+.cartao-alivio-lado-direito {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
 .btn-alivio-acao {
-  align-self: flex-start;
   background: #ffffff;
   color: var(--ink-principal);
   border: 1px solid var(--linha-destaque);
-  font-size: 0.8rem;
-  padding: 6px 12px;
-  min-height: 32px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  padding: 6px 14px;
+  min-height: 34px;
   border-radius: 6px;
+  white-space: nowrap;
 }
 
 .btn-alivio-acao:hover {
@@ -631,9 +766,16 @@ body.sol-forte .aviso-saude-card {
 
 .grid-recompensas {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  grid-template-columns: 1fr 1fr;
   gap: 10px;
-  margin-top: 14px;
+  margin-top: 10px;
+  margin-bottom: 14px;
+}
+
+@media (max-width: 480px) {
+  .grid-recompensas {
+    grid-template-columns: 1fr;
+  }
 }
 
 .card-recompensa {

@@ -80,24 +80,29 @@ export default function ProactiveNotification({ weather, onSelectPoint, onLocati
           <div className="cartao-alivio-item">
             <div className="cartao-alivio-topo">
               <div className="cartao-alivio-icone" style={{ background: 'var(--capibaribe-light)', color: 'var(--capibaribe)' }}>
-                <Droplets size={19} />
+                <Droplets size={20} />
               </div>
               <div style={{ flex: 1, minWidth: 0 }}>
-                <div style={{ fontSize: '0.74rem', fontWeight: 700, color: 'var(--capibaribe)', textTransform: 'uppercase' }}>
+                <div style={{ fontSize: '0.74rem', fontWeight: 700, color: 'var(--capibaribe)', textTransform: 'uppercase', letterSpacing: '0.03em' }}>
                   Bebedouro Público
                 </div>
-                <div style={{ fontSize: '0.94rem', fontWeight: 700, color: 'var(--ink-principal)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                <strong style={{ fontSize: '0.96rem', color: 'var(--ink-principal)', display: 'block', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                   {maisProximo.nome}
-                </div>
+                </strong>
                 <div style={{ fontSize: '0.8rem', color: 'var(--ink-secundario)' }}>
                   {maisProximo.bairro} · {maisProximo.capacidade || 'Água potável'}
                 </div>
               </div>
             </div>
 
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginTop: '6px', paddingTop: '6px', borderTop: '1px solid var(--linha-suave)' }}>
-              <div style={{ fontSize: '0.82rem', color: 'var(--capibaribe)', fontWeight: 700 }}>
-                {maisProximo.distancia_metros}m · ~{tempoAgua} min a pé
+            <div className="cartao-alivio-lado-direito">
+              <div style={{ textAlign: 'right' }}>
+                <div style={{ fontSize: '0.98rem', fontWeight: 800, color: 'var(--capibaribe)' }}>
+                  {maisProximo.distancia_metros}m
+                </div>
+                <div style={{ fontSize: '0.74rem', color: 'var(--ink-suave)' }}>
+                  ~{tempoAgua} min a pé
+                </div>
               </div>
               {onSelectPoint && (
                 <button
@@ -117,24 +122,29 @@ export default function ProactiveNotification({ weather, onSelectPoint, onLocati
           <div className="cartao-alivio-item">
             <div className="cartao-alivio-topo">
               <div className="cartao-alivio-icone" style={{ background: 'var(--mangue-light)', color: 'var(--mangue)' }}>
-                <TreePine size={19} />
+                <TreePine size={20} />
               </div>
               <div style={{ flex: 1, minWidth: 0 }}>
-                <div style={{ fontSize: '0.74rem', fontWeight: 700, color: 'var(--mangue)', textTransform: 'uppercase' }}>
+                <div style={{ fontSize: '0.74rem', fontWeight: 700, color: 'var(--mangue)', textTransform: 'uppercase', letterSpacing: '0.03em' }}>
                   Parque & Área Verde
                 </div>
-                <div style={{ fontSize: '0.94rem', fontWeight: 700, color: 'var(--ink-principal)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                <strong style={{ fontSize: '0.96rem', color: 'var(--ink-principal)', display: 'block', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                   {sombraMaisProxima.nome}
-                </div>
+                </strong>
                 <div style={{ fontSize: '0.8rem', color: 'var(--ink-secundario)' }}>
                   {sombraMaisProxima.bairro} {sombraMaisProxima.cidade ? `· ${sombraMaisProxima.cidade}` : ''}
                 </div>
               </div>
             </div>
 
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginTop: '6px', paddingTop: '6px', borderTop: '1px solid var(--linha-suave)' }}>
-              <div style={{ fontSize: '0.82rem', color: 'var(--mangue)', fontWeight: 700 }}>
-                {sombraMaisProxima.distancia_metros}m · ~{tempoSombra} min a pé
+            <div className="cartao-alivio-lado-direito">
+              <div style={{ textAlign: 'right' }}>
+                <div style={{ fontSize: '0.98rem', fontWeight: 800, color: 'var(--mangue)' }}>
+                  {sombraMaisProxima.distancia_metros}m
+                </div>
+                <div style={{ fontSize: '0.74rem', color: 'var(--ink-suave)' }}>
+                  ~{tempoSombra} min a pé
+                </div>
               </div>
               {onSelectPoint && (
                 <button

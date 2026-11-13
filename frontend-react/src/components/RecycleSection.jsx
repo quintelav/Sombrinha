@@ -230,6 +230,21 @@ export default function RecycleSection() {
           ))}
         </div>
       </div>
+
+      {/* Banner de Parceria Movimento Pró-Criança & Cooperativas */}
+      <div className="banner-rodape-painel banner-mangue" style={{ marginTop: 'auto' }}>
+        <div style={{ flex: 1, minWidth: '200px' }}>
+          <strong style={{ fontSize: '0.82rem', color: 'var(--mangue-dark)', display: 'block' }}>
+            Apoio ao Movimento Pró-Criança & Cooperativas
+          </strong>
+          <p style={{ fontSize: '0.76rem', color: 'var(--ink-secundario)', margin: '2px 0 0 0' }}>
+            Todo o plástico e alumínio recolhido é revertido para cooperativas de catadores e ações socioambientais no Recife.
+          </p>
+        </div>
+        <span style={{ fontSize: '0.76rem', color: 'var(--mangue-dark)', fontWeight: 700, whiteSpace: 'nowrap' }}>
+          ♻️ 100% Circular
+        </span>
+      </div>
     </section>
   );
 }

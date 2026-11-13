@@ -74,54 +74,57 @@ export default function VoiceAssistant({ onVoiceResponse, userLocation }) {
   };
 
   return (
-    <section className="painel-secao" aria-label="Orientação Acessível por Voz">
-      <div className="painel-header">
-        <div>
+    <section className="painel-secao banner-busca-voz" aria-label="Orientação Acessível por Voz">
+      <div className="busca-voz-topo">
+        <div className="busca-voz-info">
           <h2 className="painel-titulo">
             <Mic size={20} color="var(--capibaribe)" />
-            <span>Orientação por Voz & Dúvidas Rápidas</span>
+            <span>Orientação por Voz & Busca Rápida</span>
           </h2>
           <p className="painel-subtitulo">
-            Acessibilidade para quem está caminhando nas ruas. Fale ou digite sua pergunta:
+            Acessibilidade para quem está caminhando nas ruas. Fale ou digite sua dúvida:
           </p>
+        </div>
+
+        <div className="campo-busca-voz">
+          <input
+            type="text"
+            className="input-voz-texto"
+            value={texto}
+            onChange={(e) => setTexto(e.target.value)}
+            placeholder="Ex: Onde tem água na Boa Vista? ou Sombra perto do Pátio"
+            onKeyDown={(e) => e.key === 'Enter' && handleConsultar()}
+          />
+
+          <button
+            type="button"
+            onClick={alternarMicrofone}
+            className={`btn-voz-mic ${ouvindo ? 'ouvindo' : ''}`}
+            aria-label={ouvindo ? 'Ouvindo...' : 'Falar pelo microfone'}
+            title="Falar pelo microfone"
+          >
+            <Mic size={17} />
+            <span>{ouvindo ? 'Ouvindo...' : 'Falar'}</span>
+          </button>
+
+          <button
+            type="button"
+            onClick={() => handleConsultar()}
+            disabled={carregando}
+            className="btn-voz-enviar"
+            title="Consultar pergunta"
+          >
+            {carregando ? <Loader2 size={17} className="animate-spin" /> : <Send size={17} />}
+            <span>Buscar</span>
+          </button>
         </div>
       </div>
 
-      <div className="campo-busca-voz">
-        <input
-          type="text"
-          className="input-voz-texto"
-          value={texto}
-          onChange={(e) => setTexto(e.target.value)}
-          placeholder="Ex: Onde tem água na Boa Vista? ou Sombra perto do Pátio"
-          onKeyDown={(e) => e.key === 'Enter' && handleConsultar()}
-        />
-
-        <button
-          type="button"
-          onClick={alternarMicrofone}
-          className={`btn-voz-mic ${ouvindo ? 'ouvindo' : ''}`}
-          aria-label={ouvindo ? 'Ouvindo...' : 'Falar pelo microfone'}
-          title="Falar pelo microfone"
-        >
-          <Mic size={17} />
-          <span>{ouvindo ? 'Ouvindo...' : 'Falar'}</span>
-        </button>
-
-        <button
-          type="button"
-          onClick={() => handleConsultar()}
-          disabled={carregando}
-          className="btn-voz-enviar"
-          title="Consultar pergunta"
-        >
-          {carregando ? <Loader2 size={17} className="animate-spin" /> : <Send size={17} />}
-          <span>Buscar</span>
-        </button>
-      </div>
-
-      {/* Sugestões de perguntas frequentes sem emojis infantis */}
-      <div className="chips-perguntas-rapidas">
+      {/* Sugestões de perguntas frequentes alinhadas */}
+      <div className="chips-perguntas-rapidas" style={{ marginTop: '12px' }}>
+        <span style={{ fontSize: '0.78rem', color: 'var(--ink-suave)', fontWeight: 600, alignSelf: 'center', marginRight: '4px' }}>
+          Consultas rápidas:
+        </span>
         <button
           type="button"
           className="chip-pergunta"
@@ -139,6 +142,13 @@ export default function VoiceAssistant({ onVoiceResponse, userLocation }) {
         <button
           type="button"
           className="chip-pergunta"
+          onClick={() => simularVoz('Parques arborizados com sombra no Centro')}
+        >
+          Parques no Centro
+        </button>
+        <button
+          type="button"
+          className="chip-pergunta"
           onClick={() => simularVoz('Como trocar garrafa PET por água mineral nos ecopontos?')}
         >
           Troca de recicláveis
@@ -146,7 +156,7 @@ export default function VoiceAssistant({ onVoiceResponse, userLocation }) {
       </div>
 
       {resposta && (
-        <div className="resposta-voz-container" role="status">
+        <div className="resposta-voz-container" role="status" style={{ marginTop: '12px' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <span style={{ fontSize: '0.82rem', fontWeight: 700, color: 'var(--mangue)', textTransform: 'uppercase' }}>
               Resposta do Sombrinha

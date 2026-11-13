@@ -4,6 +4,9 @@ import ProactiveNotification from './components/ProactiveNotification';
 import MapSection from './components/MapSection';
 import VoiceAssistant from './components/VoiceAssistant';
 import RecycleSection from './components/RecycleSection';
+import CommunityRequestsSection from './components/CommunityRequestsSection';
+import CompanyAdoptionSection from './components/CompanyAdoptionSection';
+import CriticalPointsCommentsSection from './components/CriticalPointsCommentsSection';
 import HeatStudyModal from './components/HeatStudyModal';
 import CitizenCardModal from './components/CitizenCardModal';
 import { api } from './services/api';
@@ -62,104 +65,106 @@ export default function App() {
       />
 
       <main className="container-adaptativo">
-        {/* Layout Adaptativo: 2 colunas equilibradas no PC, coluna única no celular */}
-        <div className="layout-adaptativo">
-          {/* 1. Alívio Térmico & Pontos Mais Próximos */}
-          <div className="grid-radar">
+        {/* 1. Grade Superior: Alívio Térmico & Clima à Esquerda; Mapa à Direita */}
+        <div className="layout-principal-topo">
+          <div className="coluna-alivio-clima">
             <ProactiveNotification
               weather={weather}
               onLocationDetected={(loc) => setUserLocation(loc)}
               onSelectPoint={(ponto) => setFocusedPoint(ponto)}
             />
+
+            <section className="clima-editorial-box" aria-labelledby="weather-heading">
+              <div className="painel-header">
+                <div>
+                  <h2 id="weather-heading" className="painel-titulo">
+                    <CloudSun size={20} color="var(--capibaribe)" />
+                    <span>Clima no Recife hoje</span>
+                  </h2>
+                  <p className="painel-subtitulo">
+                    Condições térmicas e radiação solar na Região Metropolitana
+                  </p>
+                </div>
+                <span style={{ fontSize: '0.78rem', color: 'var(--ink-suave)', fontWeight: 600 }}>
+                  {weather?.source ? `Dados: ${weather.source}` : 'Tempo real'}
+                </span>
+              </div>
+
+              {loadingWeather ? (
+                <div style={{ padding: '24px', textAlign: 'center', color: 'var(--ink-secundario)' }}>
+                  Consultando dados meteorológicos do Recife...
+                </div>
+              ) : (
+                <div>
+                  <div className="clima-destaque-row">
+                    <div>
+                      <div className="clima-temp-principal">
+                        {Math.round(tempAtual)}°C
+                      </div>
+                      <div style={{ fontSize: '0.92rem', color: 'var(--ink-secundario)', marginTop: '2px' }}>
+                        Sensação térmica de <strong>{Math.round(sensacao)}°C</strong> no asfalto
+                      </div>
+                    </div>
+
+                    <div style={{ textAlign: 'right' }}>
+                      <div style={{ fontSize: '0.92rem', fontWeight: 700, color: 'var(--terracota)' }}>
+                        Calor Equatorial Intenso
+                      </div>
+                      <div style={{ fontSize: '0.8rem', color: 'var(--ink-suave)' }}>
+                        Recomenda-se hidratação constante
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="clima-detalhes-grid">
+                    <div className="clima-metrica-bloco">
+                      <div className="clima-metrica-label">Sensação</div>
+                      <div className="clima-metrica-valor" style={{ color: 'var(--terracota)' }}>
+                        {sensacao}°C
+                      </div>
+                    </div>
+
+                    <div className="clima-metrica-bloco">
+                      <div className="clima-metrica-label">Umidade</div>
+                      <div className="clima-metrica-valor">
+                        {umidade}%
+                      </div>
+                    </div>
+
+                    <div className="clima-metrica-bloco">
+                      <div className="clima-metrica-label">Índice UV</div>
+                      <div className="clima-metrica-valor" style={{ color: Number(uv) >= 8 ? 'var(--alerta-calor)' : 'var(--terracota)' }}>
+                        {uv} {Number(uv) >= 8 ? '(Muito Alto)' : ''}
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="aviso-saude-card">
+                    <strong>Recomendação de Saúde Comunitária:</strong> Radiação solar em níveis críticos entre 10h e 15h. Evite caminhar longos trechos exposto ao sol direto nos corredores de asfalto e aproveite os refúgios arborizados indicados no mapa.
+                  </div>
+                </div>
+              )}
+            </section>
           </div>
 
-          {/* 2. Clima no Recife Hoje (Estilo Editorial e Humano) */}
-          <section className="clima-editorial-box grid-clima" aria-labelledby="weather-heading">
-            <div className="painel-header">
-              <div>
-                <h2 id="weather-heading" className="painel-titulo">
-                  <CloudSun size={20} color="var(--capibaribe)" />
-                  <span>Clima no Recife hoje</span>
-                </h2>
-                <p className="painel-subtitulo">
-                  Condições térmicas e radiação solar na Região Metropolitana
-                </p>
-              </div>
-              <span style={{ fontSize: '0.78rem', color: 'var(--ink-suave)', fontWeight: 600 }}>
-                {weather?.source ? `Dados: ${weather.source}` : 'Tempo real'}
-              </span>
-            </div>
-
-            {loadingWeather ? (
-              <div style={{ padding: '24px', textAlign: 'center', color: 'var(--ink-secundario)' }}>
-                Consultando dados meteorológicos do Recife...
-              </div>
-            ) : (
-              <div>
-                <div className="clima-destaque-row">
-                  <div>
-                    <div className="clima-temp-principal">
-                      {Math.round(tempAtual)}°C
-                    </div>
-                    <div style={{ fontSize: '0.92rem', color: 'var(--ink-secundario)', marginTop: '2px' }}>
-                      Sensação térmica de <strong>{Math.round(sensacao)}°C</strong> no asfalto
-                    </div>
-                  </div>
-
-                  <div style={{ textAlign: 'right' }}>
-                    <div style={{ fontSize: '0.92rem', fontWeight: 700, color: 'var(--terracota)' }}>
-                      Calor Equatorial Intenso
-                    </div>
-                    <div style={{ fontSize: '0.8rem', color: 'var(--ink-suave)' }}>
-                      Recomenda-se hidratação constante
-                    </div>
-                  </div>
-                </div>
-
-                <div className="clima-detalhes-grid">
-                  <div className="clima-metrica-bloco">
-                    <div className="clima-metrica-label">Sensação</div>
-                    <div className="clima-metrica-valor" style={{ color: 'var(--terracota)' }}>
-                      {sensacao}°C
-                    </div>
-                  </div>
-
-                  <div className="clima-metrica-bloco">
-                    <div className="clima-metrica-label">Umidade</div>
-                    <div className="clima-metrica-valor">
-                      {umidade}%
-                    </div>
-                  </div>
-
-                  <div className="clima-metrica-bloco">
-                    <div className="clima-metrica-label">Índice UV</div>
-                    <div className="clima-metrica-valor" style={{ color: Number(uv) >= 8 ? 'var(--alerta-calor)' : 'var(--terracota)' }}>
-                      {uv} {Number(uv) >= 8 ? '(Muito Alto)' : ''}
-                    </div>
-                  </div>
-                </div>
-
-                <div className="aviso-saude-card">
-                  <strong>Recomendação de Saúde Comunitária:</strong> Radiação solar em níveis críticos entre 10h e 15h. Evite caminhar longos trechos exposto ao sol direto nos corredores de asfalto e aproveite os refúgios arborizados indicados no mapa.
-                </div>
-              </div>
-            )}
-          </section>
-
-          {/* 3. Mapa Territorial de Sombras e Parques */}
-          <div className="grid-mapa">
+          <div className="coluna-mapa">
             <MapSection userLocation={userLocation} focusedPoint={focusedPoint} />
           </div>
+        </div>
 
-          {/* 4. Orientação Acessível por Voz e Busca Rápida */}
-          <div className="grid-voz">
-            <VoiceAssistant userLocation={userLocation} />
-          </div>
+        {/* 2. Barra Acessível de Orientação por Voz e Busca Rápida (Largura Total 100%) */}
+        <VoiceAssistant userLocation={userLocation} />
 
-          {/* 5. Coleta Seletiva & Ecopontos Comunitários */}
-          <div className="grid-reciclagem">
-            <RecycleSection />
-          </div>
+        {/* 3. Par Comunitário 1: Pedidos de Melhorias & Comentários de Ruas Críticas */}
+        <div className="grid-duplo-comunitario">
+          <CommunityRequestsSection />
+          <CriticalPointsCommentsSection />
+        </div>
+
+        {/* 4. Par Comunitário 2: Adoção Cidadã por Empresas & Coleta Seletiva / Ecopontos */}
+        <div className="grid-duplo-comunitario">
+          <CompanyAdoptionSection />
+          <RecycleSection />
         </div>
 
         {/* Rodapé Cívico e Institucional */}

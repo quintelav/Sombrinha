@@ -15,6 +15,11 @@ def home():
     return render_home()
 
 
+@reports_blueprint.get("/api/reports")
+def list_reports():
+    return jsonify({"relatos": ReportModel.all()})
+
+
 @reports_blueprint.get("/api/summary")
 def report_summary():
     return jsonify(ReportModel.summary())

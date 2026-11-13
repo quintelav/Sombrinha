@@ -14,9 +14,11 @@ from controllers.health_controller import health_blueprint
 from controllers.heat_islands_controller import heat_islands_blueprint
 from controllers.recycle_controller import recycle_blueprint
 from controllers.report_controller import reports_blueprint
+from controllers.request_controller import requests_blueprint
 from controllers.shade_controller import shade_blueprint
 from models.adoption_model import AdoptionModel
 from models.report_model import ReportModel
+from models.request_model import RequestModel
 
 
 load_dotenv()
@@ -75,6 +77,7 @@ def create_app() -> Flask:
         recycle_blueprint,
         ai_blueprint,
         heat_islands_blueprint,
+        requests_blueprint,
     ):
         app.register_blueprint(blueprint)
 
@@ -82,6 +85,7 @@ def create_app() -> Flask:
     with app.app_context():
         ReportModel.initialize_database()
         AdoptionModel.initialize_database()
+        RequestModel.initialize_database()
 
     return app
 

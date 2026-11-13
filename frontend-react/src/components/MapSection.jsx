@@ -120,7 +120,16 @@ export default function MapSection({
 
     mapInstanceRef.current = map;
 
+    const handleResize = () => {
+      if (mapInstanceRef.current) {
+        mapInstanceRef.current.invalidateSize();
+      }
+    };
+    window.addEventListener('resize', handleResize);
+    setTimeout(handleResize, 200);
+
     return () => {
+      window.removeEventListener('resize', handleResize);
       map.remove();
       mapInstanceRef.current = null;
     };
