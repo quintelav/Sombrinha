@@ -272,8 +272,10 @@
   <header class="site-header">
     <div class="page-width header-inner">
       <a class="brand" href="#inicio" aria-label="Sombrinha, início">
-        <span class="brand-icon" aria-hidden="true">☂</span>
-        <span><strong>Sombrinha</strong><small>Bairro que Cuida</small></span>
+        <span class="brand-logo-window" aria-hidden="true">
+          <img class="brand-logo" src={`${import.meta.env.BASE_URL}assets/sombrinha-logo.png`} alt="" />
+        </span>
+        <span><strong>Sombrinha</strong><small>Cuidado climático comunitário</small></span>
       </a>
       <div class="header-actions">
         <a class="button button-primary header-cta" href="#report-form">Registrar demanda</a>
