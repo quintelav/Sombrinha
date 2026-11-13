@@ -19,9 +19,7 @@ Relatos, pontos e propostas são indicações para discussão. O sistema não me
   - Maria Eduarda — Front-end.
   - Ana Paula — Front-end.
 - **Validador do Movimento Pró-Criança:** Charles Magno.
-- **Validação do protótipo:** registrar as tarefas realizadas por Charles, o retorno recebido e os ajustes feitos. Os resultados da validação ainda não foram informados neste README.
-
-> **Composição da equipe:** foram informados três desenvolvedores e um validador. O item 5.1 do edital descreve equipes com quatro desenvolvedores e um validador; confirmem com a coordenação se a composição atual foi aprovada.
+- **Retorno da validação:** Charles Magno considerou que a aplicação pode ser útil, principalmente para quem anda muito a pé ou utiliza ônibus. A equipe pode complementar este registro com as tarefas testadas e outros ajustes sugeridos.
 
 ## Tecnologias
 
@@ -106,7 +104,7 @@ A validação com a equipe e o(a) participante do Movimento Pró-Criança deve s
 - **Solução funcionando no celular com deploy público:** abrir a URL pública em um celular, inclusive por rede móvel, e confirmar os fluxos principais antes da apresentação.
 - **Repositório com README preenchido:** completar os nomes e trilhas da equipe, identificar o(a) validador(a), descrever a validação e registrar o uso e as correções da IA.
 - **Testes automatizados no CI:** o projeto tem 8 testes; o GitHub Actions compila o frontend, confere o arquivo de saída e executa os testes em cada `push` e `pull_request`.
-- **Pitch:** preparar apresentação de 3 minutos com demonstração dos fluxos principais até o code freeze às 16h do dia 13/11.
+- **Pitch:** [abrir apresentação do Sombrinha no Canva](https://canva.link/7572xg2duxam6zn). A apresentação deve durar 3 minutos e demonstrar os fluxos principais até o code freeze às 16h do dia 13/11.
 - **Validação do problema e do protótipo:** incluir no processo e neste README a contribuição real do(a) validador(a) do Movimento Pró-Criança.
 
 ## Arquitetura
