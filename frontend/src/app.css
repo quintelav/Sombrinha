@@ -1,0 +1,177 @@
+:root {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  color: #17332d;
+  background: #f3f7f5;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  --green: #145b4b;
+  --green-dark: #0d3d32;
+  --mint: #e7f2ed;
+  --blue: #216a86;
+  --ink: #17332d;
+  --muted: #536b64;
+  --paper: #f3f7f5;
+  --white: #fff;
+  --line: #d9e5df;
+  --warning: #8a4a10;
+  --shadow: 0 10px 32px rgb(23 51 45 / 6%);
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 1rem; }
+body { margin: 0; min-width: 320px; min-height: 100vh; background: var(--paper); }
+button, input, select, textarea { font: inherit; }
+button, a, select { -webkit-tap-highlight-color: transparent; }
+a { color: var(--green); }
+button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible, summary:focus-visible {
+  outline: 3px solid #e3a514;
+  outline-offset: 3px;
+}
+button:disabled { cursor: wait; opacity: .65; }
+h1, h2, h3, p { margin-top: 0; }
+h1, h2, h3 { font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+
+.app-shell { min-height: 100vh; color: var(--ink); }
+.page-width { width: min(100% - 32px, 1040px); margin-inline: auto; }
+.site-header { position: sticky; top: 0; z-index: 1000; background: rgb(255 255 255 / 94%); border-bottom: 1px solid var(--line); backdrop-filter: blur(14px); }
+.header-inner { min-height: 72px; display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+.brand { display: inline-flex; align-items: center; gap: 10px; color: var(--green-dark); text-decoration: none; }
+.brand-icon { display: grid; place-items: center; width: 42px; height: 42px; border-radius: 14px; background: var(--mint); color: var(--green); font-size: 1.45rem; }
+.brand strong, .brand small { display: block; }
+.brand strong { font: 800 1.08rem system-ui, sans-serif; }
+.brand small { margin-top: 1px; color: var(--muted); font-size: .75rem; }
+.header-actions { display: flex; align-items: center; gap: 8px; }
+.button, .icon-button { min-height: 46px; border: 1px solid transparent; border-radius: 12px; padding: 10px 16px; font-weight: 700; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; justify-content: center; gap: 8px; transition: transform .14s ease, background-color .14s ease; }
+.button:hover, .icon-button:hover { transform: translateY(-1px); }
+.button-primary { color: #fff; background: var(--green); }
+.button-primary:hover { background: var(--green-dark); }
+.button-secondary { color: var(--green-dark); border-color: #bdd3c9; background: var(--mint); }
+.button-secondary:hover { background: #d9ebe2; }
+.button-quiet, .icon-button { color: var(--ink); background: transparent; border-color: var(--line); }
+.icon-button { width: 46px; padding: 0; font-size: 1.2rem; }
+.button-full { width: 100%; margin-top: 10px; }
+.main-content { padding-block: 34px 52px; }
+.welcome-row { display: flex; justify-content: space-between; align-items: end; gap: 24px; padding: 10px 0 26px; }
+.welcome-row h1 { max-width: 690px; margin-bottom: 10px; font-size: clamp(1.8rem, 4vw, 2.8rem); line-height: 1.13; letter-spacing: -.04em; }
+.eyebrow { margin: 0 0 8px; color: var(--green); font-size: .73rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+.lead { max-width: 680px; margin: 0; color: var(--muted); font-size: 1.04rem; line-height: 1.65; }
+.welcome-cta { flex-shrink: 0; }
+.climate-card { margin-bottom: 18px; padding: 20px; border-radius: 18px; color: white; background: linear-gradient(130deg, #145b4b, #0d3d32); box-shadow: var(--shadow); }
+.climate-heading, .section-heading, .community-item-heading { display: flex; align-items: center; justify-content: space-between; gap: 14px; }
+.climate-heading { align-items: flex-start; }
+.climate-card .eyebrow { color: #b8e0cd; }
+.climate-card h2 { margin: 0; font-size: 1.18rem; }
+.climate-card .button-quiet { color: white; border-color: rgb(255 255 255 / 34%); }
+.climate-condition { margin: 14px 0 10px; font-size: 1rem; font-weight: 700; }
+.weather-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+.weather-grid div { min-height: 67px; padding: 10px 12px; border: 1px solid rgb(255 255 255 / 17%); border-radius: 12px; background: rgb(255 255 255 / 8%); }
+.weather-grid span, .weather-grid strong { display: block; }
+.weather-grid span { color: #c5e1d4; font-size: .75rem; }
+.weather-grid strong { margin-top: 4px; font-size: 1.05rem; }
+.updated-at { display: block; margin-top: 10px; color: #d3e8de; }
+.climate-note { margin: 14px 0 0; color: #e0efe8; font-size: .8rem; line-height: 1.5; }
+.climate-note span { display: block; margin-top: 4px; }
+.climate-note a { color: inherit; }
+.climate-status { margin: 14px 0 0; color: #f0f7f3; }
+.climate-status p { margin-bottom: 5px; }
+.climate-status small { color: #d3e8de; }
+.climate-status code { color: white; }
+.panel { border: 1px solid var(--line); border-radius: 18px; background: var(--white); box-shadow: var(--shadow); }
+.map-panel { padding: 20px; margin-bottom: 18px; }
+.section-heading { align-items: flex-start; margin-bottom: 12px; }
+.section-heading h2 { margin: 0; font-size: 1.26rem; letter-spacing: -.02em; }
+.section-heading .eyebrow { margin-bottom: 4px; }
+.segmented-control { display: inline-flex; gap: 4px; padding: 4px; border: 1px solid var(--line); border-radius: 12px; background: #f6f9f7; }
+.segmented-control button { min-height: 38px; padding: 7px 12px; border: 0; border-radius: 9px; color: var(--muted); background: transparent; font-size: .88rem; font-weight: 700; cursor: pointer; }
+.segmented-control button.active { color: white; background: var(--green); }
+.map-instruction { margin: 0 0 10px; color: var(--muted); font-size: .92rem; }
+.map-frame { width: 100%; min-height: 280px; height: clamp(280px, 48vw, 390px); border: 1px solid var(--line); border-radius: 14px; z-index: 1; }
+.adoption-marker { display: grid; place-items: center; border: 2px solid white; border-radius: 50%; background: var(--blue); font-size: 16px; line-height: 1; box-shadow: 0 2px 8px rgb(0 0 0 / 25%); }
+.map-legend { display: flex; flex-wrap: wrap; gap: 12px 18px; margin-top: 12px; color: var(--muted); font-size: .78rem; }
+.legend-dot { display: inline-block; width: 9px; height: 9px; margin-right: 5px; border-radius: 50%; }
+.legend-dot.demand { background: #b54735; }
+.legend-dot.reference { background: #26805f; }
+.form-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; margin-bottom: 18px; align-items: start; }
+.form-panel, .community-section { padding: 20px; }
+.step-pill, .count-pill, .status-badge, .priority-badge { flex-shrink: 0; padding: 6px 9px; border-radius: 999px; color: var(--green-dark); background: var(--mint); font-size: .75rem; font-weight: 700; }
+.count-pill { color: var(--muted); background: #f2f6f4; }
+.section-intro { margin-bottom: 14px; color: var(--muted); font-size: .9rem; line-height: 1.5; }
+label { display: block; margin: 14px 0 6px; font-size: .9rem; font-weight: 700; }
+label span { color: var(--muted); font-weight: 400; }
+input, select, textarea { width: 100%; min-height: 46px; border: 1px solid #bdcec6; border-radius: 11px; padding: 10px 12px; color: var(--ink); background: white; }
+textarea { min-height: 84px; resize: vertical; }
+input::placeholder, textarea::placeholder { color: #788982; }
+.field-hint { display: block; margin: 5px 0 0; color: var(--muted); font-size: .78rem; line-height: 1.45; }
+.location-button { width: 100%; margin-top: 14px; }
+.form-status { min-height: 1.35rem; margin: 9px 0 0; color: var(--green-dark); font-size: .88rem; font-weight: 600; }
+.form-status:empty { display: none; }
+.community-section { margin-bottom: 18px; }
+.community-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.community-item { padding: 14px; border: 1px solid var(--line); border-radius: 13px; background: #fbfdfc; }
+.community-item h3 { margin: 0; font-size: 1rem; line-height: 1.35; }
+.community-item p { margin: 7px 0 0; color: var(--muted); font-size: .86rem; line-height: 1.5; }
+.community-item .next-step { color: var(--ink); }
+.priority-badge { color: #76500a; background: #fff2cf; font-size: .68rem; }
+.status-badge { color: #235d49; background: #e7f2ed; }
+.empty-state { margin: 0; padding: 15px; border-radius: 12px; color: var(--muted); background: #f6f9f7; }
+.notice { margin-top: 18px; padding: 14px 16px; border: 1px solid #eadab5; border-radius: 12px; color: #624914; background: #fff9e9; font-size: .84rem; line-height: 1.55; }
+.notice-error { display: flex; justify-content: space-between; gap: 10px; margin: 0 0 18px; border-color: #e8b7ae; color: #7e2e23; background: #fff4f2; }
+.text-button { border: 0; padding: 0; color: inherit; background: transparent; font-weight: 800; text-decoration: underline; cursor: pointer; }
+.prototype-tools { margin-top: 18px; padding: 17px 20px; }
+.prototype-tools summary { color: var(--green-dark); font-weight: 800; cursor: pointer; }
+.tools-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; padding-top: 18px; }
+.tools-grid h2 { margin: 0 0 8px; font-size: 1.05rem; }
+.tools-grid section:last-child { grid-column: 1 / -1; }
+.inline-controls { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.inline-controls > input:first-child { flex: 1 1 220px; }
+.inline-controls select { flex: 1 1 145px; }
+.inline-controls input[type='number'] { width: 90px; }
+.stacked-controls label { margin-top: 10px; }
+.stacked-controls .button { margin-top: 10px; }
+.result-box { margin: 10px 0 0; padding: 12px; border: 1px solid #cadfd3; border-radius: 11px; color: var(--green-dark); background: #f3faf6; font-size: .88rem; line-height: 1.5; }
+.result-box p { margin: 6px 0 0; }
+.citizen-dialog { width: min(420px, calc(100% - 28px)); border: 1px solid var(--line); border-radius: 18px; padding: 20px; color: var(--ink); box-shadow: 0 24px 80px rgb(0 0 0 / 25%); }
+.citizen-dialog::backdrop { background: rgb(12 35 29 / 55%); backdrop-filter: blur(3px); }
+.citizen-dialog .section-heading { align-items: center; }
+.citizen-dialog .section-heading h2 { font-size: 1.1rem; }
+.citizen-card-graphic { display: grid; gap: 12px; margin: 16px 0; padding: 18px; border-radius: 14px; color: white; background: linear-gradient(135deg, #145b4b, #216a86); }
+.citizen-card-graphic span { font-size: .78rem; }
+.citizen-card-graphic strong { font: 800 1.2rem system-ui, sans-serif; }
+.site-footer { padding-block: 0 28px; color: var(--muted); text-align: center; font-size: .82rem; }
+.visually-hidden { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+
+.high-contrast { --paper: #000; --white: #101010; --ink: #fff; --muted: #f5e889; --line: #e5d434; --mint: #102d23; --green: #8beb5c; --green-dark: #e5ff77; --blue: #9ce6ff; }
+.high-contrast .site-header, .high-contrast .community-item, .high-contrast input, .high-contrast select, .high-contrast textarea { color: white; background: #101010; }
+.high-contrast .brand, .high-contrast .button-primary, .high-contrast .segmented-control button.active { color: #06120c; background: #9beb5c; }
+.high-contrast .climate-card { color: #fff; background: #101010; border: 2px solid #e5d434; }
+.high-contrast .climate-card .eyebrow, .high-contrast .weather-grid span, .high-contrast .updated-at, .high-contrast .climate-note { color: #f5e889; }
+.high-contrast .notice { color: #fff3a8; border-color: #e5d434; background: #241f00; }
+.high-contrast .button-secondary, .high-contrast .button-quiet, .high-contrast .icon-button { color: #fff3a8; border-color: #e5d434; background: #151515; }
+
+@media (max-width: 720px) {
+  .page-width { width: min(100% - 24px, 600px); }
+  .header-inner { min-height: 64px; gap: 8px; }
+  .brand-icon { width: 38px; height: 38px; }
+  .header-cta { display: none; }
+  .contrast-toggle { min-height: 40px; padding: 8px 10px; font-size: .8rem; }
+  .icon-button { min-height: 40px; width: 40px; }
+  .main-content { padding-top: 22px; }
+  .welcome-row { display: block; padding-bottom: 20px; }
+  .welcome-row h1 { font-size: clamp(1.8rem, 9vw, 2.4rem); }
+  .welcome-cta { margin-top: 16px; width: 100%; }
+  .climate-card, .map-panel, .form-panel, .community-section { padding: 16px; border-radius: 15px; }
+  .weather-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .form-grid, .community-list { grid-template-columns: 1fr; }
+  .section-heading { flex-wrap: wrap; }
+  .segmented-control { width: 100%; }
+  .segmented-control button { flex: 1; }
+  .community-item-heading { align-items: flex-start; flex-direction: column; }
+  .tools-grid { grid-template-columns: 1fr; }
+  .tools-grid section:last-child { grid-column: auto; }
+  .prototype-tools { padding: 15px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; }
+}

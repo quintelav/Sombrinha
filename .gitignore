@@ -20,3 +20,5 @@ node_modules/
 dist/
 .npm
 .cache
+frontend/node_modules/
+frontend/dist/

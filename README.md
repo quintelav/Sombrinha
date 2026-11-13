@@ -24,7 +24,7 @@ Preencher com os nomes e funções da equipe antes da entrega:
 
 - **Aplicação:** Python e Flask
 - **Arquitetura:** MVC — Models, Controllers e Views separados
-- **Interface e mapa:** HTML, CSS, JavaScript, Leaflet e OpenStreetMap
+- **Frontend:** TypeScript, Svelte, Vite, CSS, Leaflet e OpenStreetMap
 - **Persistência:** JSON local para demonstração ou PostgreSQL via `DATABASE_URL`
 - **Clima:** Google Maps Platform Weather API, consulta pelo backend
 - **Servidor de produção:** Gunicorn
@@ -44,12 +44,16 @@ Preencher com os nomes e funções da equipe antes da entrega:
 
 ## Executar localmente
 
-Requisitos: Python 3.12 (ou superior) e `pip`.
+Requisitos: Python 3.12+, Node.js 22.12+ e npm.
 
-```bash
+```powershell
 py -3.12 -m venv .venv
 Copy-Item .env.example .env
 .\.venv\Scripts\python.exe -m pip install -r requirements.txt
+Set-Location frontend
+npm ci
+npm run build
+Set-Location ..
 .\.venv\Scripts\python.exe app.py
 ```
 
@@ -57,13 +61,15 @@ Abra `.env` no VS Code e preencha `GOOGLE_WEATHER_API_KEY` com uma chave de prot
 
 Abra `http://localhost:8000` no computador. Para testar pelo celular na mesma rede Wi-Fi, use o endereço de rede mostrado no terminal, também na porta `8000`.
 
+Para desenvolver a interface com atualização rápida, mantenha o Flask rodando em um terminal e, em outro, execute `Set-Location frontend` e `npm run dev`. Acesse `http://localhost:5173`; o Vite encaminha as chamadas `/api` para o Flask. Para servir a versão compilada pelo Flask, execute `npm run build` dentro da pasta `frontend` antes de iniciar o servidor.
+
 ## Deploy público
 
-O arquivo `render.yaml` descreve o serviço web e o banco PostgreSQL para o Render. O serviço Flask é executado com Gunicorn em produção:
+O `Dockerfile` compila o frontend Svelte e prepara a aplicação Flask com Gunicorn. O `render.yaml` configura esse serviço e o banco PostgreSQL:
 
 1. Conecte o repositório Sombrinha ao Render e crie um Blueprint.
-2. Revise os recursos identificados no `render.yaml` e aplique o deploy.
-3. Abra a URL gerada em um celular com internet.
+2. Configure `GOOGLE_WEATHER_API_KEY` nas variáveis do serviço.
+3. Aplique o deploy definido pelo `render.yaml` e abra a URL gerada no celular.
 
 O serviço gratuito pode hibernar após um período sem acesso e o PostgreSQL gratuito tem prazo de expiração definido pelo Render. Consulte as condições atuais do serviço antes de usar o protótipo além da demonstração. Não armazene credenciais no repositório.
 
@@ -80,9 +86,10 @@ A validação prevista para esta etapa é feita com a equipe e o(a) participante
 
 ## Arquitetura
 
+- `frontend/src/`: interface Svelte/TypeScript, componentes e cliente tipado da API.
 - `models/`: validação, agregação e persistência dos relatos e propostas.
 - `controllers/`: rotas HTTP e coordenação entre Model e View.
-- `views/`: apresentação e templates HTML.
+- `views/`: entrega da página compilada pelo Flask e tela de orientação se o frontend ainda não foi compilado.
 - `app.py`: configuração e inicialização da aplicação Flask.
 
 ## Limites e cuidados

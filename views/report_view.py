@@ -1,9 +1,13 @@
 """Renderização da interface web."""
 
-from flask import render_template
+from pathlib import Path
 
-from models.neighborhood_model import NEIGHBORHOODS_BY_RPA
+from flask import current_app, render_template, send_from_directory
 
 
 def render_home():
-    return render_template("index.html", neighborhoods=NEIGHBORHOODS_BY_RPA)
+    build_directory = Path(current_app.static_folder or "frontend/dist")
+    entrypoint = build_directory / "index.html"
+    if not entrypoint.exists():
+        return render_template("frontend_not_built.html"), 503
+    return send_from_directory(build_directory, "index.html")

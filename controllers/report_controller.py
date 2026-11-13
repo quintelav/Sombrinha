@@ -2,6 +2,7 @@
 
 from flask import Blueprint, jsonify, request
 
+from models.neighborhood_model import NEIGHBORHOODS_BY_RPA
 from models.report_model import ReportModel
 from views.report_view import render_home
 
@@ -17,6 +18,11 @@ def home():
 @reports_blueprint.get("/api/summary")
 def report_summary():
     return jsonify(ReportModel.summary())
+
+
+@reports_blueprint.get("/api/neighborhoods")
+def neighborhoods():
+    return jsonify({"bairros_por_rpa": NEIGHBORHOODS_BY_RPA})
 
 
 @reports_blueprint.post("/api/reports")
