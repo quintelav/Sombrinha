@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Header from './components/Header';
 import ProactiveNotification from './components/ProactiveNotification';
 import MapSection from './components/MapSection';
+import ThermalMapSection from './components/ThermalMapSection';
 import VoiceAssistant from './components/VoiceAssistant';
 import RecycleSection from './components/RecycleSection';
 import CommunityRequestsSection from './components/CommunityRequestsSection';
@@ -18,6 +19,7 @@ export default function App() {
   const [isCitizenCardOpen, setIsCitizenCardOpen] = useState(false);
   const [userLocation, setUserLocation] = useState(null);
   const [focusedPoint, setFocusedPoint] = useState(null);
+  const [selectedRegion, setSelectedRegion] = useState(null);
   const [weather, setWeather] = useState(null);
   const [loadingWeather, setLoadingWeather] = useState(true);
 
@@ -145,10 +147,17 @@ export default function App() {
                 </div>
               )}
             </section>
+
+            {/* Mapa Térmico com Temperaturas posicionado diretamente abaixo do Clima */}
+            <ThermalMapSection region={selectedRegion} />
           </div>
 
           <div className="coluna-mapa">
-            <MapSection userLocation={userLocation} focusedPoint={focusedPoint} />
+            <MapSection
+              userLocation={userLocation}
+              focusedPoint={focusedPoint}
+              onRegionSelect={(reg) => setSelectedRegion(reg)}
+            />
           </div>
         </div>
 

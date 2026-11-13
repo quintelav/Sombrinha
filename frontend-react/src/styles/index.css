@@ -1,60 +1,66 @@
 /* ==========================================================================
-   SOMBRINHA RECIFE — DESIGN CÍVICO DE RESILIÊNCIA CLIMÁTICA URBANA
-   Estética editorial, humana e calorosa, inspirada no Recife, manguezais e pontes.
-   Livre de clichês visuais de IA (sem néons, sem gradientes artificiais, tipografia limpa).
+   SOMBRINHA RECIFE — DESIGN CÍVICO MINIMALISTA
+   Estética limpa, contemporânea, com linhas simples e bordas sóbrias.
+   Cores precisas, tipografia de alta legibilidade, preservando 100% da estrutura.
    ========================================================================== */
 
 :root {
-  /* Cores Naturais: Mangue Verde Profundo, Terracota/Barro, Águas do Capibaribe */
-  --mangue: #143d34;
-  --mangue-dark: #0c2822;
-  --mangue-light: #edf5f2;
-  --terracota: #b45309;
-  --terracota-dark: #92400e;
-  --terracota-light: #fef3c7;
-  --capibaribe: #1b6278;
-  --capibaribe-light: #e6f1f5;
-  --alerta-calor: #b91c1c;
-  --alerta-calor-light: #fef2f2;
+  /* Paleta Minimalista — Tons neutros refinados com acentos cívicos sóbrios */
+  --mangue: #0f766e;            /* Verde Esmeralda Cívico (Teal 700) */
+  --mangue-dark: #115e59;       /* Teal 800 */
+  --mangue-light: #f0fdfa;      /* Teal 50 */
+  --terracota: #c2410c;         /* Âmbar / Terracota Refinado (Orange 700) */
+  --terracota-dark: #9a3412;    /* Orange 800 */
+  --terracota-light: #fff7ed;   /* Orange 50 */
+  --capibaribe: #0284c7;        /* Azul Capibaribe / Água (Sky 600) */
+  --capibaribe-light: #f0f9ff;  /* Sky 50 */
+  --alerta-calor: #dc2626;      /* Vermelho Térmico Minimalista (Red 600) */
+  --alerta-calor-light: #fef2f2;/* Red 50 */
   
-  /* Superfícies & Tipografia */
-  --bg-terreno: #f7f6f2; /* Fundo papel linho acolhedor */
-  --bg-card: #ffffff;
-  --ink-principal: #1a2723;
-  --ink-secundario: #50645e;
-  --ink-suave: #738781;
-  --linha-divisoria: #e2ded4;
-  --linha-suave: #eae7df;
+  /* Superfícies & Tipografia Neutras e Limpas */
+  --bg-terreno: #f8fafc;        /* Fundo neutro suave (Slate 50) */
+  --bg-card: #ffffff;           /* Superfície pura e clara */
+  --bg-subtle: #f1f5f9;         /* Bloco neutro secundário (Slate 100) */
+  --bg-hover: #f1f5f9;
   
-  /* Sombras Naturais & Formas */
-  --sombra-card: 0 1px 3px rgba(20, 61, 52, 0.05), 0 4px 14px -2px rgba(20, 61, 52, 0.04);
-  --sombra-flutuante: 0 8px 24px -4px rgba(20, 61, 52, 0.10);
+  --ink-principal: #0f172a;     /* Texto de alta legibilidade (Slate 900) */
+  --ink-secundario: #475569;    /* Texto secundário (Slate 600) */
+  --ink-suave: #94a3b8;         /* Texto terciário / metadados (Slate 400) */
+  --linha-divisoria: #e2e8f0;   /* Linhas simples de 1px (Slate 200) */
+  --linha-suave: #f1f5f9;       /* Divisórias sutis 1px (Slate 100) */
+  --linha-destaque: #cbd5e1;    /* Foco sutil 1px (Slate 300) */
   
-  --raio-card: 12px;
-  --raio-pill: 24px;
-  --fonte: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  /* Sombras & Formas Minimalistas (Linhas e Bordas Simples) */
+  --sombra-card: 0 1px 3px 0 rgba(0, 0, 0, 0.04);
+  --sombra-flutuante: 0 4px 12px 0 rgba(0, 0, 0, 0.05);
+  
+  --raio-card: 8px;             /* Bordas simples com raio suave */
+  --raio-subitem: 6px;
+  --raio-pill: 6px;             /* Pílulas retangulares limpas */
+  --fonte: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 
 /* ==========================================================================
-   MODO SOL FORTE (Acessibilidade Tática sob Luz Solar Direta nas Ruas)
+   MODO SOL FORTE (Acessibilidade Minimalista de Alto Contraste nas Ruas)
    ========================================================================== */
 body.sol-forte {
   --bg-terreno: #000000;
-  --bg-card: #0d0d0d;
+  --bg-card: #09090b;
+  --bg-subtle: #18181b;
   --ink-principal: #ffffff;
   --ink-secundario: #fef08a;
   --ink-suave: #eab308;
   --linha-divisoria: #facc15;
   --linha-suave: #854d0e;
-  --mangue: #15803d;
+  --mangue: #22c55e;
   --mangue-dark: #000000;
   --mangue-light: #052e16;
   --capibaribe: #38bdf8;
   --capibaribe-light: #082f49;
   --alerta-calor: #f87171;
   --alerta-calor-light: #450a0a;
-  --sombra-card: 0 0 0 2px #facc15;
-  --sombra-flutuante: 0 0 0 3px #facc15;
+  --sombra-card: 0 0 0 1px #facc15;
+  --sombra-flutuante: 0 0 0 2px #facc15;
 }
 
 /* Reset & Estrutura */
@@ -68,31 +74,31 @@ body {
   font-family: var(--fonte);
   background-color: var(--bg-terreno);
   color: var(--ink-principal);
-  line-height: 1.55;
+  line-height: 1.5;
   -webkit-font-smoothing: antialiased;
-  transition: background-color 0.2s ease, color 0.2s ease;
+  transition: background-color 0.15s ease, color 0.15s ease;
   overflow-x: hidden;
 }
 
-/* Botões Tácteis Acessíveis */
+/* Botões Tácteis com Linhas e Bordas Simples */
 button {
   cursor: pointer;
   font-family: inherit;
-  border: none;
-  border-radius: 8px;
-  min-height: 44px;
-  padding: 9px 16px;
-  font-size: 0.92rem;
-  font-weight: 600;
+  border: 1px solid transparent;
+  border-radius: var(--raio-subitem);
+  min-height: 40px;
+  padding: 8px 14px;
+  font-size: 0.88rem;
+  font-weight: 500;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 7px;
+  gap: 6px;
   transition: background-color 0.15s ease, border-color 0.15s ease, transform 0.1s ease;
 }
 
 button:active {
-  transform: scale(0.98);
+  transform: scale(0.985);
 }
 
 button:focus-visible {
@@ -111,18 +117,18 @@ button:focus-visible {
 }
 
 /* ==========================================================================
-   CABEÇALHO CÍVICO & AUTÊNTICO
+   CABEÇALHO MINIMALISTA & SÓBRIO
    ========================================================================== */
 .app-header {
-  background: var(--mangue);
+  background: #0f172a; /* Slate 900 minimalista */
   color: #ffffff;
-  padding: 14px 0;
+  padding: 12px 0;
   position: sticky;
   top: 0;
   z-index: 100;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
-  box-shadow: 0 2px 10px rgba(12, 40, 34, 0.14);
-  transition: transform 0.28s ease, box-shadow 0.25s ease;
+  border-bottom: 1px solid #1e293b;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  transition: transform 0.25s ease;
   will-change: transform;
 }
 
@@ -136,7 +142,7 @@ button:focus-visible {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 14px;
+  gap: 12px;
 }
 
 @media (min-width: 768px) {
@@ -144,24 +150,23 @@ button:focus-visible {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    gap: 20px;
+    gap: 18px;
   }
 }
 
 .brand-lockup {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 12px;
 }
 
 .brand-logo-img {
-  width: 52px;
-  height: 52px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
   object-fit: cover;
   background: #ffffff;
-  border: 2px solid rgba(255, 255, 255, 0.7);
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.18);
+  border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 .brand-text {
@@ -176,10 +181,10 @@ button:focus-visible {
 }
 
 .brand-title {
-  font-size: 1.65rem;
-  font-weight: 800;
-  letter-spacing: -0.4px;
-  line-height: 1.1;
+  font-size: 1.45rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
   color: #ffffff;
 }
 
@@ -191,21 +196,21 @@ body.sol-forte .brand-title {
   display: inline-flex;
   align-items: center;
   gap: 5px;
-  background: rgba(255, 255, 255, 0.15);
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  color: #ffffff;
-  font-size: 0.75rem;
-  font-weight: 700;
-  padding: 2px 8px;
-  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: #f1f5f9;
+  font-size: 0.74rem;
+  font-weight: 600;
+  padding: 2px 7px;
+  border-radius: 4px;
   letter-spacing: 0.2px;
 }
 
 .brand-slogan {
-  font-size: 0.83rem;
-  font-weight: 500;
-  color: #d1e3dd;
-  margin-top: 2px;
+  font-size: 0.8rem;
+  font-weight: 400;
+  color: #94a3b8;
+  margin-top: 1px;
 }
 
 body.sol-forte .brand-slogan {
@@ -216,37 +221,39 @@ body.sol-forte .brand-slogan {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 8px;
 }
 
 .btn-header {
-  background: rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.08);
   color: #ffffff;
-  border: 1px solid rgba(255, 255, 255, 0.22);
-  font-size: 0.88rem;
-  font-weight: 600;
-  padding: 8px 14px;
-  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  font-size: 0.84rem;
+  font-weight: 500;
+  padding: 6px 12px;
+  border-radius: var(--raio-subitem);
+  min-height: 36px;
 }
 
 .btn-header:hover {
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.25);
 }
 
 .btn-header-destaque {
-  background: #c05621;
+  background: #c2410c;
   color: #ffffff;
-  border: 1px solid #9c4217;
+  border: 1px solid #9a3412;
 }
 
 .btn-header-destaque:hover {
-  background: #a84717;
+  background: #9a3412;
 }
 
 .btn-header-sol-forte {
   background: #facc15;
-  color: #1a2723;
-  font-weight: 750;
+  color: #0f172a;
+  font-weight: 650;
   border: 1px solid #eab308;
 }
 
@@ -283,21 +290,138 @@ body.sol-forte .btn-header-sol-forte {
   flex-direction: column;
 }
 
-.coluna-mapa > section {
+.coluna-mapa > section,
+.painel-mapa-principal {
   height: 100%;
   display: flex;
   flex-direction: column;
 }
 
-#map-container {
+.mapa-canvas-principal,
+#map-street-container {
   flex: 1;
-  min-height: 420px;
+  min-height: 580px;
   width: 100%;
   border-radius: var(--raio-card);
   border: 1px solid var(--linha-divisoria);
-  margin-top: 12px;
+  margin-top: 10px;
   z-index: 1;
   position: relative;
+}
+
+/* Painel do Mapa Térmico posicionado diretamente abaixo do Clima */
+.painel-mapa-termico-clima {
+  display: flex;
+  flex-direction: column;
+  margin-top: 0;
+}
+
+.mapa-canvas-clima,
+#map-thermal-container {
+  height: 380px;
+  min-height: 340px;
+  width: 100%;
+  border-radius: var(--raio-card);
+  border: 1px solid var(--linha-divisoria);
+  margin-top: 8px;
+  z-index: 1;
+  position: relative;
+}
+
+/* Botão Minimalista de Tela Cheia */
+.btn-tela-cheia {
+  background: var(--bg-card);
+  border: 1px solid var(--linha-divisoria);
+  color: var(--ink-secundario);
+  font-size: 0.78rem;
+  font-weight: 500;
+  padding: 4px 10px;
+  border-radius: var(--raio-subitem);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  min-height: 28px;
+}
+
+.btn-tela-cheia:hover {
+  background: var(--bg-terreno);
+  border-color: var(--linha-destaque);
+  color: var(--ink-principal);
+}
+
+.btn-tela-cheia.ativo {
+  background: var(--ink-principal);
+  color: #ffffff;
+  border-color: var(--ink-principal);
+  font-weight: 600;
+}
+
+body.sol-forte .btn-tela-cheia.ativo {
+  background: #facc15;
+  color: #000000;
+  border-color: #facc15;
+}
+
+/* Modo Tela Cheia Expandido para Ambos os Mapas */
+.mapa-em-tela-cheia {
+  position: fixed !important;
+  inset: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  z-index: 99999 !important;
+  background: var(--bg-card) !important;
+  margin: 0 !important;
+  border-radius: 0 !important;
+  padding: 18px 24px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  box-shadow: none !important;
+  overflow: hidden !important;
+}
+
+.mapa-em-tela-cheia .mapa-canvas-principal,
+.mapa-em-tela-cheia #map-street-container,
+.mapa-em-tela-cheia .mapa-canvas-clima,
+.mapa-em-tela-cheia #map-thermal-container {
+  flex: 1 !important;
+  height: 100% !important;
+  min-height: 0 !important;
+  border-radius: 8px !important;
+}
+
+.badge-tecnologia-mapa {
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 2px 7px;
+  border-radius: 4px;
+  background: var(--bg-subtle);
+  border: 1px solid var(--linha-divisoria);
+  color: var(--ink-secundario);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.badge-tecnologia-mapa.badge-termico {
+  background: #fee2e2;
+  border-color: #fca5a5;
+  color: #991b1b;
+}
+
+.ponto-termico-ativo {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #ef4444;
+  animation: pulsoTermico 1.5s infinite;
+}
+
+@keyframes pulsoTermico {
+  0% { transform: scale(0.9); opacity: 0.8; }
+  50% { transform: scale(1.3); opacity: 1; }
+  100% { transform: scale(0.9); opacity: 0.8; }
 }
 
 /* 2. Barra Acessível de Busca e Voz (Totalmente Preenchida, Sem Buracos Brancos) */
@@ -378,23 +502,24 @@ body.sol-forte .btn-header-sol-forte {
 }
 
 .cartao-feed-item {
-  background: var(--bg-terreno);
+  background: var(--bg-card);
   border: 1px solid var(--linha-divisoria);
-  border-radius: 8px;
+  border-radius: var(--raio-subitem);
   padding: 12px 14px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   gap: 8px;
+  box-shadow: none;
 }
 
 .cartao-empresa-item {
-  border-top: 3px solid var(--mangue);
+  border: 1px solid var(--linha-divisoria);
 }
 
 .banner-rodape-painel {
-  padding: 10px 14px;
-  border-radius: 8px;
+  padding: 9px 12px;
+  border-radius: var(--raio-subitem);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -405,7 +530,7 @@ body.sol-forte .btn-header-sol-forte {
 
 .banner-terracota {
   background: var(--terracota-light);
-  border: 1px solid #fde68a;
+  border: 1px solid #fed7aa;
 }
 
 .banner-alerta {
@@ -415,7 +540,7 @@ body.sol-forte .btn-header-sol-forte {
 
 .banner-mangue {
   background: var(--mangue-light);
-  border: 1px solid #c2dbd1;
+  border: 1px solid #ccfbf1;
 }
 
 /* Modo Mobile (< 768px): Coluna Única Fluida Sem Quebra */
@@ -456,13 +581,13 @@ body.sol-forte .btn-header-sol-forte {
 }
 
 /* ==========================================================================
-   CARTÕES & COMPONENTES VISUAIS SÓBRIOS
+   CARTÕES & COMPONENTES VISUAIS MINIMALISTAS (LINHAS E BORDAS SIMPLES)
    ========================================================================== */
 .painel-secao {
   background: var(--bg-card);
   border: 1px solid var(--linha-divisoria);
   border-radius: var(--raio-card);
-  padding: 20px;
+  padding: 18px 20px;
   box-shadow: var(--sombra-card);
 }
 
@@ -476,9 +601,9 @@ body.sol-forte .btn-header-sol-forte {
 }
 
 .painel-titulo {
-  font-size: 1.15rem;
-  font-weight: 750;
-  letter-spacing: -0.2px;
+  font-size: 1.1rem;
+  font-weight: 650;
+  letter-spacing: -0.015em;
   display: flex;
   align-items: center;
   gap: 8px;
@@ -486,7 +611,7 @@ body.sol-forte .btn-header-sol-forte {
 }
 
 .painel-subtitulo {
-  font-size: 0.88rem;
+  font-size: 0.84rem;
   color: var(--ink-secundario);
   margin-top: 2px;
 }
@@ -494,8 +619,7 @@ body.sol-forte .btn-header-sol-forte {
 /* 1. Alerta / Notificação de Alívio Térmico */
 .alerta-resiliencia {
   background: var(--bg-card);
-  border: 1px solid var(--linha-destaque);
-  border-left: 4px solid var(--terracota);
+  border: 1px solid var(--linha-divisoria);
   border-radius: var(--raio-card);
   padding: 18px 20px;
   box-shadow: var(--sombra-card);
@@ -509,14 +633,15 @@ body.sol-forte .btn-header-sol-forte {
   display: inline-flex;
   align-items: center;
   gap: 5px;
-  font-size: 0.76rem;
-  font-weight: 700;
+  font-size: 0.74rem;
+  font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.3px;
+  letter-spacing: 0.2px;
   color: var(--terracota);
   background: var(--terracota-light);
-  padding: 3px 8px;
-  border-radius: 6px;
+  border: 1px solid #fed7aa;
+  padding: 2px 7px;
+  border-radius: 4px;
   margin-bottom: 8px;
 }
 
@@ -536,10 +661,10 @@ body.sol-forte .alerta-badge-origem {
 }
 
 .cartao-alivio-item {
-  background: var(--bg-terreno);
+  background: var(--bg-subtle);
   border: 1px solid var(--linha-divisoria);
-  border-radius: 10px;
-  padding: 12px 16px;
+  border-radius: var(--raio-subitem);
+  padding: 11px 14px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -553,7 +678,7 @@ body.sol-forte .alerta-badge-origem {
 }
 
 .cartao-alivio-item:hover {
-  background: #f0eeea;
+  background: #eef2f6;
 }
 
 .cartao-alivio-topo {
@@ -566,9 +691,9 @@ body.sol-forte .alerta-badge-origem {
 }
 
 .cartao-alivio-icone {
-  width: 36px;
-  height: 36px;
-  border-radius: 8px;
+  width: 34px;
+  height: 34px;
+  border-radius: 6px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -586,11 +711,11 @@ body.sol-forte .alerta-badge-origem {
   background: #ffffff;
   color: var(--ink-principal);
   border: 1px solid var(--linha-destaque);
-  font-size: 0.82rem;
-  font-weight: 600;
-  padding: 6px 14px;
-  min-height: 34px;
-  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  padding: 5px 12px;
+  min-height: 32px;
+  border-radius: var(--raio-subitem);
   white-space: nowrap;
 }
 
@@ -810,11 +935,11 @@ body.sol-forte .aviso-saude-card {
   border: 1px solid var(--linha-divisoria);
   color: var(--ink-secundario);
   white-space: nowrap;
-  font-size: 0.84rem;
-  font-weight: 600;
-  padding: 6px 14px;
-  border-radius: var(--raio-pill);
-  min-height: 36px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  padding: 5px 12px;
+  border-radius: var(--raio-subitem);
+  min-height: 32px;
 }
 
 .pilula-filtro:hover {
@@ -826,6 +951,7 @@ body.sol-forte .aviso-saude-card {
   background: var(--mangue);
   color: #ffffff;
   border-color: var(--mangue);
+  font-weight: 600;
 }
 
 body.sol-forte .pilula-filtro.ativa {
@@ -834,13 +960,106 @@ body.sol-forte .pilula-filtro.ativa {
   border-color: #facc15;
 }
 
+/* ==========================================================================
+   CONTROLES DO MAPA ARCGIS (ESRI) & MODO TÉRMICO
+   ========================================================================== */
+.mapa-topo-controles {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 4px;
+  margin-bottom: 8px;
+}
+
+.seletor-mapa-arcgis {
+  display: inline-flex;
+  align-items: center;
+  background: var(--bg-subtle);
+  border: 1px solid var(--linha-divisoria);
+  border-radius: var(--raio-subitem);
+  padding: 2px;
+  gap: 2px;
+}
+
+.btn-modo-mapa {
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--ink-secundario);
+  font-size: 0.78rem;
+  font-weight: 500;
+  padding: 4px 10px;
+  min-height: 28px;
+  border-radius: 4px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.btn-modo-mapa:hover {
+  color: var(--ink-principal);
+}
+
+.btn-modo-mapa.ativo {
+  background: #ffffff;
+  color: var(--ink-principal);
+  border-color: var(--linha-divisoria);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+  font-weight: 600;
+}
+
+body.sol-forte .btn-modo-mapa.ativo {
+  background: #facc15;
+  color: #000000;
+  border-color: #facc15;
+}
+
+/* Escala Térmica Esri (°C) */
+.escala-termica-card {
+  margin-top: 10px;
+  padding: 8px 12px;
+  background: var(--bg-subtle);
+  border: 1px solid var(--linha-divisoria);
+  border-radius: var(--raio-subitem);
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.escala-termica-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.74rem;
+  font-weight: 600;
+  color: var(--ink-secundario);
+}
+
+.gradiente-termico-linha {
+  width: 100%;
+  height: 7px;
+  border-radius: 4px;
+  background: linear-gradient(to right, #0284c7 0%, #10b981 25%, #eab308 50%, #f97316 75%, #e11d48 100%);
+}
+
+.escala-termica-rotulos {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.7rem;
+  color: var(--ink-suave);
+  font-weight: 500;
+}
+
 .legenda-mapa {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
   gap: 14px;
   margin-top: 10px;
-  font-size: 0.82rem;
+  font-size: 0.8rem;
   color: var(--ink-secundario);
 }
 
@@ -851,8 +1070,8 @@ body.sol-forte .pilula-filtro.ativa {
 }
 
 .legenda-ponto {
-  width: 10px;
-  height: 10px;
+  width: 9px;
+  height: 9px;
   border-radius: 50%;
 }
 
