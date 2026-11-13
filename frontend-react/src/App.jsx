@@ -165,7 +165,7 @@ export default function App() {
             <strong>Sombrinha Recife ☂️</strong> — Tecnologia Cívica para Resiliência Climática Urbana.
           </p>
           <p style={{ marginTop: '4px', fontSize: '0.78rem' }}>
-            Hackathon Antena na Lama | APONTI Academy & Movimento Pró-Criança | Desenvolvido por Madu Barretto & Equipe Sombrinha
+            Hackathon Antena na Lama | APONTI Academy & Movimento Pró-Criança | Equipe Sombrinha
           </p>
         </footer>
       </main>
