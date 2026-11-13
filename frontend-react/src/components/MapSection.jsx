@@ -35,12 +35,12 @@ const frevoUmbrellaIcon = L.divIcon({
 
 // Regiões da Cidade e Região Metropolitana para navegação rápida
 const REGIOES = [
-  { id: 'TODAS', label: '🗺️ Toda RMR & Recife', center: [-8.055, -34.910], zoom: 12 },
-  { id: 'Centro', label: '🏛️ Centro', center: [-8.0601, -34.8819], zoom: 14 },
-  { id: 'Zona Norte', label: '🌳 Zona Norte', center: [-8.028, -34.920], zoom: 13 },
-  { id: 'Zona Sul', label: '🌊 Zona Sul', center: [-8.115, -34.900], zoom: 13 },
-  { id: 'Zona Oeste', label: '🌿 Zona Oeste', center: [-8.065, -34.945], zoom: 13 },
-  { id: 'Olinda & RMR', label: '⛪ Olinda & RMR', center: [-8.020, -34.860], zoom: 13 },
+  { id: 'TODAS', label: 'Toda a Região Metropolitana', center: [-8.055, -34.910], zoom: 12 },
+  { id: 'Centro', label: 'Centro', center: [-8.0601, -34.8819], zoom: 14 },
+  { id: 'Zona Norte', label: 'Zona Norte', center: [-8.028, -34.920], zoom: 13 },
+  { id: 'Zona Sul', label: 'Zona Sul', center: [-8.115, -34.900], zoom: 13 },
+  { id: 'Zona Oeste', label: 'Zona Oeste', center: [-8.065, -34.945], zoom: 13 },
+  { id: 'Olinda & RMR', label: 'Olinda & RMR', center: [-8.020, -34.860], zoom: 13 },
 ];
 
 export default function MapSection({
@@ -298,13 +298,17 @@ export default function MapSection({
 
   return (
     <section className="painel-secao" aria-label="Mapa Territorial de Sombras e Frescor">
-      <div className="painel-titulo">
-        <Compass size={22} color="var(--rio-azul)" />
-        <h2>Mapa de Sombras, Parques & Alívio Térmico</h2>
+      <div className="painel-header">
+        <div>
+          <h2 className="painel-titulo">
+            <Compass size={20} color="var(--capibaribe)" />
+            <span>Mapa de Sombras, Parques & Alívio Térmico</span>
+          </h2>
+          <p className="painel-subtitulo">
+            Mapeamento de <strong>ilhas de calor e refúgios de sombra natural</strong> com parques urbanos por todo o Recife e Região Metropolitana.
+          </p>
+        </div>
       </div>
-      <p style={{ color: 'var(--ink-secundario)', fontSize: '0.92rem' }}>
-        Mapeamento de <strong>ilhas de calor e refúgios de sombra natural</strong> com parques urbanos por todo o Recife e Região Metropolitana (Zona Norte, Sul, Oeste, Centro e Olinda).
-      </p>
 
       {/* Filtros de Camada */}
       <div className="filtros-mapa" role="tablist">
@@ -320,27 +324,27 @@ export default function MapSection({
           className={`pilula-filtro ${activeFilter === 'SHADE' ? 'ativa' : ''}`}
           onClick={() => setActiveFilter('SHADE')}
         >
-          <span>⛱️</span> Sombras ({sombrasTotalCount})
+          <TreePine size={14} color="var(--mangue)" /> Sombras ({sombrasTotalCount})
         </button>
         <button
           type="button"
           className={`pilula-filtro ${activeFilter === 'HEAT' ? 'ativa' : ''}`}
           onClick={() => setActiveFilter('HEAT')}
         >
-          <Flame size={14} color="#be123c" /> Ruas Mais Quentes (5)
+          <Flame size={14} color="var(--alerta-calor)" /> Ruas Críticas (5)
         </button>
         <button
           type="button"
           className={`pilula-filtro ${activeFilter === 'WATER' ? 'ativa' : ''}`}
           onClick={() => setActiveFilter('WATER')}
         >
-          <Droplet size={14} color="#0284c7" /> Pontos de Água (5)
+          <Droplet size={14} color="var(--capibaribe)" /> Bebedouros (5)
         </button>
       </div>
 
       {/* Navegação por Região */}
-      <div style={{ marginTop: '4px', marginBottom: '4px' }}>
-        <div style={{ fontSize: '0.76rem', fontWeight: 800, color: 'var(--ink-secundario)', textTransform: 'uppercase', letterSpacing: '0.04em', marginBottom: '6px' }}>
+      <div style={{ marginTop: '8px', marginBottom: '4px' }}>
+        <div style={{ fontSize: '0.74rem', fontWeight: 700, color: 'var(--ink-suave)', textTransform: 'uppercase', letterSpacing: '0.04em', marginBottom: '6px' }}>
           Explorar por Região:
         </div>
         <div className="filtros-mapa" role="tablist" style={{ paddingBottom: '4px' }}>
@@ -350,7 +354,7 @@ export default function MapSection({
               type="button"
               className={`pilula-filtro ${activeRegion === reg.id ? 'ativa' : ''}`}
               onClick={() => handleSelectRegion(reg.id)}
-              style={{ fontSize: '0.82rem', padding: '6px 14px', minHeight: '36px' }}
+              style={{ fontSize: '0.8rem', padding: '5px 12px', minHeight: '32px' }}
             >
               {reg.label}
             </button>
@@ -362,12 +366,23 @@ export default function MapSection({
       <div id="map-container" ref={mapContainerRef} role="region" aria-label="Mapa Interativo"></div>
 
       {/* Legenda de Cores Cultural */}
-      <div style={{ marginTop: '14px', display: 'flex', gap: '14px', flexWrap: 'wrap', fontSize: '0.85rem' }}>
-        <span>⛱️ <strong>Sombras:</strong> Parques Urbanos e Refúgios Arbóreos</span>
-        <span>🔴 <strong>Vermelho:</strong> Ruas Críticas / Ilhas de Calor</span>
-        <span>🔵 <strong>Azul:</strong> Bebedouros & Água Grátis</span>
-        <span>🟡 <strong>Amarelo:</strong> Ecopontos</span>
-        <span>🔵 <strong>Ponto Azul Vivo:</strong> Sua Posição Atual</span>
+      <div className="legenda-mapa">
+        <span className="legenda-item">
+          <span className="legenda-ponto" style={{ background: '#16a34a' }}></span>
+          <span><strong>Sombras:</strong> Parques e Refúgios Naturais</span>
+        </span>
+        <span className="legenda-item">
+          <span className="legenda-ponto" style={{ background: '#b91c1c' }}></span>
+          <span><strong>Vermelho:</strong> Ruas Críticas de Calor</span>
+        </span>
+        <span className="legenda-item">
+          <span className="legenda-ponto" style={{ background: '#1b6278' }}></span>
+          <span><strong>Azul:</strong> Bebedouros Públicos</span>
+        </span>
+        <span className="legenda-item">
+          <span className="legenda-ponto" style={{ background: '#b45309' }}></span>
+          <span><strong>Ocre:</strong> Ecopontos</span>
+        </span>
       </div>
     </section>
   );

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { QrCode, X, Printer, ShieldCheck, Droplet, SunMedium, CreditCard } from 'lucide-react';
+import { QrCode, X, Printer, Droplet, SunMedium, CreditCard } from 'lucide-react';
 
 export default function CitizenCardModal({ isOpen, onClose }) {
   if (!isOpen) return null;
@@ -22,29 +22,29 @@ export default function CitizenCardModal({ isOpen, onClose }) {
   return (
     <div className="modal-overlay" onClick={onClose} role="dialog" aria-modal="true" aria-labelledby="card-title">
       <div className="modal-dialog" onClick={(e) => e.stopPropagation()}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
-          <h2 id="card-title" style={{ fontSize: '1.25rem', fontWeight: 800, display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <CreditCard size={22} color="var(--rio-azul)" />
-            Cartão Cidadão Sombrinha
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '14px' }}>
+          <h2 id="card-title" style={{ fontSize: '1.2rem', fontWeight: 800, display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--ink-principal)' }}>
+            <CreditCard size={20} color="var(--capibaribe)" />
+            <span>Cartão Cidadão · Acesso a Água e Sombra</span>
           </h2>
           <button
             onClick={onClose}
             aria-label="Fechar"
-            style={{ background: 'transparent', padding: '6px', minHeight: 'auto' }}
+            style={{ background: 'transparent', padding: '6px', minHeight: 'auto', color: 'var(--ink-secundario)' }}
           >
-            <X size={22} />
+            <X size={20} />
           </button>
         </div>
 
-        <p style={{ fontSize: '0.9rem', color: 'var(--ink-secundario)', marginBottom: '16px' }}>
-          Para quem não tem smartphone ou internet: cartão físico impresso com QR Code para coletar água mineral e acessar pontos de frescor credenciados no Centro do Recife.
+        <p style={{ fontSize: '0.88rem', color: 'var(--ink-secundario)', marginBottom: '16px', lineHeight: 1.45 }}>
+          Inclusão social para pessoas sem smartphone ou pacote de dados: gere um cartão físico para identificação nos bebedouros públicos e pontos de apoio do Centro do Recife.
         </p>
 
         {!gerado ? (
           <form onSubmit={handleGerar} style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
             <div>
-              <label style={{ fontSize: '0.85rem', fontWeight: 700, display: 'block', marginBottom: '4px' }}>
-                Nome do Cidadão / Ambulante
+              <label style={{ fontSize: '0.82rem', fontWeight: 700, display: 'block', marginBottom: '4px', color: 'var(--ink-principal)' }}>
+                Nome do Cidadão ou Ambulante
               </label>
               <input
                 type="text"
@@ -54,18 +54,18 @@ export default function CitizenCardModal({ isOpen, onClose }) {
                 style={{
                   width: '100%',
                   padding: '10px 12px',
-                  borderRadius: '8px',
-                  border: '1px solid var(--border)',
-                  fontSize: '0.95rem',
-                  background: 'var(--bg-main)',
-                  color: 'var(--text-main)'
+                  borderRadius: '6px',
+                  border: '1px solid var(--linha-destaque)',
+                  fontSize: '0.92rem',
+                  background: '#ffffff',
+                  color: 'var(--ink-principal)'
                 }}
               />
             </div>
 
             <div>
-              <label style={{ fontSize: '0.85rem', fontWeight: 700, display: 'block', marginBottom: '4px' }}>
-                CPF ou Número de Matrícula Social
+              <label style={{ fontSize: '0.82rem', fontWeight: 700, display: 'block', marginBottom: '4px', color: 'var(--ink-principal)' }}>
+                CPF ou Número de Identificação Social (NIS)
               </label>
               <input
                 type="text"
@@ -76,11 +76,11 @@ export default function CitizenCardModal({ isOpen, onClose }) {
                 style={{
                   width: '100%',
                   padding: '10px 12px',
-                  borderRadius: '8px',
-                  border: '1px solid var(--border)',
-                  fontSize: '0.95rem',
-                  background: 'var(--bg-main)',
-                  color: 'var(--text-main)'
+                  borderRadius: '6px',
+                  border: '1px solid var(--linha-destaque)',
+                  fontSize: '0.92rem',
+                  background: '#ffffff',
+                  color: 'var(--ink-principal)'
                 }}
               />
             </div>
@@ -88,72 +88,68 @@ export default function CitizenCardModal({ isOpen, onClose }) {
             <button
               type="submit"
               style={{
-                background: 'var(--primary)',
+                background: 'var(--mangue)',
                 color: 'white',
-                marginTop: '8px',
+                marginTop: '6px',
                 width: '100%'
               }}
             >
               <QrCode size={18} />
-              Gerar Cartão Cidadão
+              <span>Gerar Cartão de Acesso</span>
             </button>
           </form>
         ) : (
           <div>
-            {/* Visual do Cartão */}
+            {/* Visual do Cartão Físico */}
             <div
               style={{
-                border: '3px solid var(--primary)',
-                borderRadius: '16px',
-                padding: '20px',
-                background: 'linear-gradient(135deg, #145b4b 0%, #0d3d32 100%)',
+                border: '1px solid var(--mangue-dark)',
+                borderRadius: '12px',
+                padding: '18px',
+                background: 'var(--mangue)',
                 color: '#ffffff',
-                boxShadow: 'var(--shadow-md)',
+                boxShadow: 'var(--sombra-card)',
                 marginBottom: '16px',
                 position: 'relative'
               }}
             >
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid rgba(255,255,255,0.2)', paddingBottom: '10px', marginBottom: '12px' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                  <span style={{ fontSize: '1.6rem' }}>☂️</span>
+                  <img src="./logo-sombrinha.jpg" alt="" style={{ width: '28px', height: '28px', borderRadius: '50%' }} />
                   <div>
-                    <strong style={{ fontSize: '1.1rem', letterSpacing: '0.5px' }}>SOMBRINHA RECIFE</strong>
-                    <div style={{ fontSize: '0.72rem', opacity: 0.85 }}>ÁGUA & FRESCOR PÚBLICO</div>
+                    <strong style={{ fontSize: '1rem', letterSpacing: '0.3px' }}>SOMBRINHA RECIFE</strong>
+                    <div style={{ fontSize: '0.7rem', color: '#c2dbd1' }}>ACESSO A ÁGUA E ALÍVIO TÉRMICO</div>
                   </div>
                 </div>
-                <span style={{ background: '#22c55e', color: '#064e3b', fontWeight: 800, fontSize: '0.75rem', padding: '3px 8px', borderRadius: '12px' }}>
-                  ATIVO
+                <span style={{ background: 'rgba(255,255,255,0.2)', color: '#ffffff', fontWeight: 700, fontSize: '0.72rem', padding: '2px 8px', borderRadius: '10px' }}>
+                  CADASTRADO
                 </span>
               </div>
 
-              <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
+              <div style={{ display: 'flex', gap: '14px', alignItems: 'center' }}>
                 <div
                   style={{
                     background: '#ffffff',
-                    padding: '8px',
-                    borderRadius: '10px',
+                    padding: '6px',
+                    borderRadius: '8px',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    minWidth: '100px',
-                    minHeight: '100px'
+                    minWidth: '88px',
+                    minHeight: '88px'
                   }}
                 >
-                  {/* QR Code SVG simulado */}
-                  <svg width="90" height="90" viewBox="0 0 100 100">
+                  <svg width="80" height="80" viewBox="0 0 100 100">
                     <rect width="100" height="100" fill="white" />
                     <rect x="5" y="5" width="30" height="30" fill="black" />
                     <rect x="10" y="10" width="20" height="20" fill="white" />
                     <rect x="15" y="15" width="10" height="10" fill="black" />
-
                     <rect x="65" y="5" width="30" height="30" fill="black" />
                     <rect x="70" y="10" width="20" height="20" fill="white" />
                     <rect x="75" y="15" width="10" height="10" fill="black" />
-
                     <rect x="5" y="65" width="30" height="30" fill="black" />
                     <rect x="10" y="70" width="20" height="20" fill="white" />
                     <rect x="15" y="75" width="10" height="10" fill="black" />
-
                     <rect x="45" y="20" width="10" height="10" fill="black" />
                     <rect x="45" y="45" width="15" height="15" fill="black" />
                     <rect x="70" y="50" width="20" height="10" fill="black" />
@@ -162,26 +158,26 @@ export default function CitizenCardModal({ isOpen, onClose }) {
                   </svg>
                 </div>
 
-                <div style={{ flex: 1, fontSize: '0.85rem' }}>
-                  <div style={{ opacity: 0.8, fontSize: '0.75rem' }}>TITULAR</div>
-                  <div style={{ fontWeight: 800, fontSize: '1rem', marginBottom: '6px' }}>{nome}</div>
+                <div style={{ flex: 1, fontSize: '0.82rem' }}>
+                  <div style={{ color: '#c2dbd1', fontSize: '0.72rem' }}>TITULAR</div>
+                  <div style={{ fontWeight: 750, fontSize: '0.96rem', marginBottom: '4px' }}>{nome}</div>
                   
-                  <div style={{ opacity: 0.8, fontSize: '0.75rem' }}>IDENTIFICAÇÃO SOCIAL</div>
-                  <div style={{ fontWeight: 600, letterSpacing: '1px' }}>{cpfOuMatricula}</div>
+                  <div style={{ color: '#c2dbd1', fontSize: '0.72rem' }}>IDENTIFICAÇÃO SOCIAL</div>
+                  <div style={{ fontWeight: 600, letterSpacing: '0.5px' }}>{cpfOuMatricula}</div>
 
-                  <div style={{ display: 'flex', gap: '10px', marginTop: '8px' }}>
-                    <span style={{ display: 'inline-flex', alignItems: 'center', gap: '4px', fontSize: '0.75rem' }}>
-                      <Droplet size={14} color="#38bdf8" /> Água Livre
+                  <div style={{ display: 'flex', gap: '10px', marginTop: '6px' }}>
+                    <span style={{ display: 'inline-flex', alignItems: 'center', gap: '4px', fontSize: '0.72rem', color: '#e0f2fe' }}>
+                      <Droplet size={13} color="#7dd3fc" /> Água Livre
                     </span>
-                    <span style={{ display: 'inline-flex', alignItems: 'center', gap: '4px', fontSize: '0.75rem' }}>
-                      <SunMedium size={14} color="#facc15" /> Pontos de Frescor
+                    <span style={{ display: 'inline-flex', alignItems: 'center', gap: '4px', fontSize: '0.72rem', color: '#fef3c7' }}>
+                      <SunMedium size={13} color="#fde047" /> Refúgios Urbanos
                     </span>
                   </div>
                 </div>
               </div>
 
-              <div style={{ marginTop: '12px', fontSize: '0.7rem', opacity: 0.75, textAlign: 'center', borderTop: '1px dashed rgba(255,255,255,0.2)', paddingTop: '8px' }}>
-                Válido em todos os totens e bebedouros públicos do Centro do Recife
+              <div style={{ marginTop: '10px', fontSize: '0.7rem', color: '#d1e3dd', textAlign: 'center', borderTop: '1px dashed rgba(255,255,255,0.2)', paddingTop: '6px' }}>
+                Válido em todos os bebedouros públicos e pontos de apoio do Centro do Recife
               </div>
             </div>
 
@@ -191,20 +187,20 @@ export default function CitizenCardModal({ isOpen, onClose }) {
                 onClick={handlePrint}
                 style={{
                   flex: 1,
-                  background: 'var(--primary)',
+                  background: 'var(--mangue)',
                   color: 'white'
                 }}
               >
-                <Printer size={18} />
-                Imprimir Cartão
+                <Printer size={17} />
+                <span>Imprimir Cartão</span>
               </button>
               <button
                 type="button"
                 onClick={() => setGerado(false)}
                 style={{
                   background: 'transparent',
-                  border: '1px solid var(--border)',
-                  color: 'var(--text-main)'
+                  border: '1px solid var(--linha-destaque)',
+                  color: 'var(--ink-principal)'
                 }}
               >
                 Editar

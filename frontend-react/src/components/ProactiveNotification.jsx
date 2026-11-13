@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { AlertCircle, Droplets, MapPin, Navigation, Compass, ChevronRight, X } from 'lucide-react';
+import { Droplets, TreePine, ChevronRight, X, Compass } from 'lucide-react';
 import { api } from '../services/api';
 
 export default function ProactiveNotification({ weather, onSelectPoint, onLocationDetected }) {
@@ -18,18 +18,6 @@ export default function ProactiveNotification({ weather, onSelectPoint, onLocati
       const data = await api.checkProximity(lat, lon);
       if (data) {
         setProximityData(data);
-
-        // Notificação nativa se o usuário permitiu no celular
-        if ('Notification' in window && Notification.permission === 'granted' && data.notificacao_proativa) {
-          try {
-            new Notification(data.notificacao_proativa.titulo, {
-              body: data.notificacao_proativa.mensagem,
-              icon: 'https://cdn-icons-png.flaticon.com/512/869/869869.png'
-            });
-          } catch {
-            // Silencia caso o navegador móvel bloqueie notificações sem interação
-          }
-        }
       }
       setLoading(false);
     }
@@ -41,7 +29,6 @@ export default function ProactiveNotification({ weather, onSelectPoint, onLocati
         },
         (err) => {
           console.warn('Geolocalização não autorizada, aplicando ponto central de Recife:', err.message);
-          // Simula localização no corredor da Conde da Boa Vista para demonstração
           evaluateLocation(-8.0601, -34.8876);
         },
         { enableHighAccuracy: true, timeout: 6000 }
@@ -61,87 +48,65 @@ export default function ProactiveNotification({ weather, onSelectPoint, onLocati
   const tempoSombra = sombraMaisProxima?.tempo_pe_min || sombraMaisProxima?.tempo_a_pe_min || 1;
 
   return (
-    <section className="hero-radar" aria-label="Radar Proativo de Calor e Hidratação">
-      <div className="radar-header">
+    <section className="alerta-resiliencia" aria-label="Pontos de Alívio Térmico Próximos">
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '12px' }}>
         <div>
-          <span className="radar-alerta-tag">
-            <AlertCircle size={15} />
-            {proximityData.esta_no_centro ? 'ZONA TÉRMICA CRÍTICA' : 'MONITORAMENTO EM ROTA'}
+          <span className="alerta-badge-origem">
+            <Compass size={13} style={{ display: 'inline-block' }} />
+            {proximityData.esta_no_centro ? 'Apoio Térmico · Centro do Recife' : 'Apoio em Rota · Região Metropolitana'}
           </span>
-          <h2 style={{ fontSize: '1.2rem', fontWeight: 850, marginTop: '8px', lineHeight: 1.25 }}>
-            {notificacao?.titulo || 'Radar de Calor & Parques de Sombra'}
+          <h2 style={{ fontSize: '1.15rem', fontWeight: 750, color: 'var(--ink-principal)', marginTop: '4px' }}>
+            {notificacao?.titulo || 'Pontos públicos de alívio e descanso'}
           </h2>
+          <p style={{ fontSize: '0.9rem', color: 'var(--ink-secundario)', marginTop: '4px', lineHeight: 1.45 }}>
+            {notificacao?.mensagem || 'Encontre bebedouros de água gratuita e parques arborizados no seu caminho.'}
+          </p>
         </div>
 
         <button
           type="button"
           onClick={() => setDismissed(true)}
-          style={{ background: 'transparent', padding: '6px', minHeight: 'auto', color: 'var(--ink-secundario)' }}
+          style={{ background: 'transparent', padding: '6px', minHeight: 'auto', color: 'var(--ink-suave)' }}
           aria-label="Dispensar aviso"
+          title="Dispensar aviso"
         >
-          <X size={20} />
+          <X size={18} />
         </button>
       </div>
 
-      <p style={{ fontSize: '0.92rem', color: 'var(--ink-principal)', lineHeight: 1.45 }}>
-        {notificacao?.mensagem}
-      </p>
-
-      {/* Cartões de Alívio Rápido: Água e Sombra Natural */}
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginTop: '12px' }}>
+      {/* Cartões Duplos de Alívio: Água e Sombra Natural */}
+      <div className="cartoes-duplos-alivio">
         {maisProximo && (
-          <div className="destaque-agua-proxima">
-            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-              <div
-                style={{
-                  width: '44px',
-                  height: '44px',
-                  borderRadius: '50%',
-                  background: 'var(--rio-azul)',
-                  color: '#ffffff',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  flexShrink: 0
-                }}
-              >
-                <Droplets size={22} />
+          <div className="cartao-alivio-item">
+            <div className="cartao-alivio-topo">
+              <div className="cartao-alivio-icone" style={{ background: 'var(--capibaribe-light)', color: 'var(--capibaribe)' }}>
+                <Droplets size={19} />
               </div>
-              <div>
-                <div style={{ fontSize: '0.78rem', fontWeight: 800, color: 'var(--rio-azul)' }}>
-                  ÁGUA POTÁVEL MAIS PRÓXIMA
+              <div style={{ flex: 1, minWidth: 0 }}>
+                <div style={{ fontSize: '0.74rem', fontWeight: 700, color: 'var(--capibaribe)', textTransform: 'uppercase' }}>
+                  Bebedouro Público
                 </div>
-                <strong style={{ fontSize: '1rem' }}>{maisProximo.nome}</strong>
-                <div style={{ fontSize: '0.82rem', opacity: 0.85 }}>
-                  {maisProximo.bairro} • {maisProximo.capacidade}
+                <div style={{ fontSize: '0.94rem', fontWeight: 700, color: 'var(--ink-principal)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                  {maisProximo.nome}
+                </div>
+                <div style={{ fontSize: '0.8rem', color: 'var(--ink-secundario)' }}>
+                  {maisProximo.bairro} · {maisProximo.capacidade || 'Água potável'}
                 </div>
               </div>
             </div>
 
-            <div style={{ display: 'flex', alignItems: 'center', gap: '12px', flexShrink: 0 }}>
-              <div style={{ textAlign: 'right' }}>
-                <div style={{ fontSize: '1.15rem', fontWeight: 900, color: 'var(--rio-azul)' }}>
-                  {maisProximo.distancia_metros}m
-                </div>
-                <div style={{ fontSize: '0.76rem', color: 'var(--ink-secundario)' }}>
-                  ~{tempoAgua} min a pé
-                </div>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginTop: '6px', paddingTop: '6px', borderTop: '1px solid var(--linha-suave)' }}>
+              <div style={{ fontSize: '0.82rem', color: 'var(--capibaribe)', fontWeight: 700 }}>
+                {maisProximo.distancia_metros}m · ~{tempoAgua} min a pé
               </div>
-
               {onSelectPoint && (
                 <button
                   type="button"
+                  className="btn-alivio-acao"
                   onClick={() => onSelectPoint(maisProximo)}
-                  style={{
-                    background: 'var(--rio-azul)',
-                    color: '#ffffff',
-                    padding: '8px 14px',
-                    minHeight: '40px',
-                    fontSize: '0.85rem'
-                  }}
                 >
                   <span>No mapa</span>
-                  <ChevronRight size={16} />
+                  <ChevronRight size={14} />
                 </button>
               )}
             </div>
@@ -149,59 +114,36 @@ export default function ProactiveNotification({ weather, onSelectPoint, onLocati
         )}
 
         {sombraMaisProxima && (
-          <div className="destaque-agua-proxima" style={{ background: '#f0fdf4', borderColor: '#86efac' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-              <div
-                style={{
-                  width: '44px',
-                  height: '44px',
-                  borderRadius: '50%',
-                  background: 'var(--mangue)',
-                  color: '#ffffff',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  flexShrink: 0,
-                  fontSize: '20px'
-                }}
-              >
-                ⛱️
+          <div className="cartao-alivio-item">
+            <div className="cartao-alivio-topo">
+              <div className="cartao-alivio-icone" style={{ background: 'var(--mangue-light)', color: 'var(--mangue)' }}>
+                <TreePine size={19} />
               </div>
-              <div>
-                <div style={{ fontSize: '0.78rem', fontWeight: 800, color: 'var(--mangue)' }}>
-                  PARQUE & SOMBRA MAIS PRÓXIMO
+              <div style={{ flex: 1, minWidth: 0 }}>
+                <div style={{ fontSize: '0.74rem', fontWeight: 700, color: 'var(--mangue)', textTransform: 'uppercase' }}>
+                  Parque & Área Verde
                 </div>
-                <strong style={{ fontSize: '1rem', color: '#14532d' }}>{sombraMaisProxima.nome}</strong>
-                <div style={{ fontSize: '0.82rem', color: '#166534' }}>
-                  {sombraMaisProxima.bairro} {sombraMaisProxima.cidade ? `• ${sombraMaisProxima.cidade}` : ''}
+                <div style={{ fontSize: '0.94rem', fontWeight: 700, color: 'var(--ink-principal)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                  {sombraMaisProxima.nome}
+                </div>
+                <div style={{ fontSize: '0.8rem', color: 'var(--ink-secundario)' }}>
+                  {sombraMaisProxima.bairro} {sombraMaisProxima.cidade ? `· ${sombraMaisProxima.cidade}` : ''}
                 </div>
               </div>
             </div>
 
-            <div style={{ display: 'flex', alignItems: 'center', gap: '12px', flexShrink: 0 }}>
-              <div style={{ textAlign: 'right' }}>
-                <div style={{ fontSize: '1.15rem', fontWeight: 900, color: 'var(--mangue)' }}>
-                  {sombraMaisProxima.distancia_metros}m
-                </div>
-                <div style={{ fontSize: '0.76rem', color: '#166534' }}>
-                  ~{tempoSombra} min a pé
-                </div>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginTop: '6px', paddingTop: '6px', borderTop: '1px solid var(--linha-suave)' }}>
+              <div style={{ fontSize: '0.82rem', color: 'var(--mangue)', fontWeight: 700 }}>
+                {sombraMaisProxima.distancia_metros}m · ~{tempoSombra} min a pé
               </div>
-
               {onSelectPoint && (
                 <button
                   type="button"
+                  className="btn-alivio-acao"
                   onClick={() => onSelectPoint(sombraMaisProxima)}
-                  style={{
-                    background: 'var(--mangue)',
-                    color: '#ffffff',
-                    padding: '8px 14px',
-                    minHeight: '40px',
-                    fontSize: '0.85rem'
-                  }}
                 >
                   <span>Ver sombra</span>
-                  <ChevronRight size={16} />
+                  <ChevronRight size={14} />
                 </button>
               )}
             </div>

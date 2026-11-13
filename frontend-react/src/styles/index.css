@@ -1,57 +1,63 @@
 /* ==========================================================================
-   SOMBRINHA RECIFE — DESIGN SYSTEM DE RESILIÊNCIA CLIMÁTICA URBANA
-   Inspirado no ecossistema mangue-cidade, pontes e calor equatorial do Recife.
+   SOMBRINHA RECIFE — DESIGN CÍVICO DE RESILIÊNCIA CLIMÁTICA URBANA
+   Estética editorial, humana e calorosa, inspirada no Recife, manguezais e pontes.
+   Livre de clichês visuais de IA (sem néons, sem gradientes artificiais, tipografia limpa).
    ========================================================================== */
 
 :root {
-  /* Paleta Raiz: Mangue Profundo, Rio Capibaribe, Sol Equatorial e Asfalto */
-  --mangue: #0f3930;
-  --mangue-dark: #071f19;
-  --mangue-light: #e6f3ee;
-  --rio-azul: #0284c7;
-  --rio-light: #e0f2fe;
-  --sol-alerta: #d97706;
-  --sol-light: #fef3c7;
-  --calor-asfalto: #be123c;
-  --calor-light: #ffe4e6;
+  /* Cores Naturais: Mangue Verde Profundo, Terracota/Barro, Águas do Capibaribe */
+  --mangue: #143d34;
+  --mangue-dark: #0c2822;
+  --mangue-light: #edf5f2;
+  --terracota: #b45309;
+  --terracota-dark: #92400e;
+  --terracota-light: #fef3c7;
+  --capibaribe: #1b6278;
+  --capibaribe-light: #e6f1f5;
+  --alerta-calor: #b91c1c;
+  --alerta-calor-light: #fef2f2;
   
   /* Superfícies & Tipografia */
-  --bg-terreno: #f3f6f4;
+  --bg-terreno: #f7f6f2; /* Fundo papel linho acolhedor */
   --bg-card: #ffffff;
-  --ink-principal: #0b1d18;
-  --ink-secundario: #4b635c;
-  --linha-divisoria: #d5e2dc;
+  --ink-principal: #1a2723;
+  --ink-secundario: #50645e;
+  --ink-suave: #738781;
+  --linha-divisoria: #e2ded4;
+  --linha-suave: #eae7df;
   
-  /* Elevação táctil */
-  --sombra-terreno: 0 2px 8px rgba(11, 29, 24, 0.06);
-  --sombra-destaque: 0 8px 24px rgba(11, 29, 24, 0.12);
+  /* Sombras Naturais & Formas */
+  --sombra-card: 0 1px 3px rgba(20, 61, 52, 0.05), 0 4px 14px -2px rgba(20, 61, 52, 0.04);
+  --sombra-flutuante: 0 8px 24px -4px rgba(20, 61, 52, 0.10);
   
-  --raio-borda: 14px;
-  --fonte: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+  --raio-card: 12px;
+  --raio-pill: 24px;
+  --fonte: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 
 /* ==========================================================================
-   MODO SOL FORTE (Legibilidade Tática ao Ar Livre / Meio-dia em Recife)
-   Contraste máximo projetado para telas de celular sob luz solar direta.
+   MODO SOL FORTE (Acessibilidade Tática sob Luz Solar Direta nas Ruas)
    ========================================================================== */
 body.sol-forte {
   --bg-terreno: #000000;
-  --bg-card: #111111;
+  --bg-card: #0d0d0d;
   --ink-principal: #ffffff;
   --ink-secundario: #fef08a;
+  --ink-suave: #eab308;
   --linha-divisoria: #facc15;
-  --mangue: #22c55e;
+  --linha-suave: #854d0e;
+  --mangue: #15803d;
   --mangue-dark: #000000;
   --mangue-light: #052e16;
-  --rio-azul: #38bdf8;
-  --rio-light: #082f49;
-  --calor-asfalto: #fb7185;
-  --calor-light: #4c0519;
-  --sombra-terreno: 0 0 0 2px #facc15;
-  --sombra-destaque: 0 0 0 3px #facc15;
+  --capibaribe: #38bdf8;
+  --capibaribe-light: #082f49;
+  --alerta-calor: #f87171;
+  --alerta-calor-light: #450a0a;
+  --sombra-card: 0 0 0 2px #facc15;
+  --sombra-flutuante: 0 0 0 3px #facc15;
 }
 
-/* Reset Universal & Acessibilidade */
+/* Reset & Estrutura */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -62,27 +68,27 @@ body {
   font-family: var(--fonte);
   background-color: var(--bg-terreno);
   color: var(--ink-principal);
-  line-height: 1.5;
+  line-height: 1.55;
   -webkit-font-smoothing: antialiased;
-  transition: background-color 0.25s ease, color 0.25s ease;
+  transition: background-color 0.2s ease, color 0.2s ease;
   overflow-x: hidden;
 }
 
-/* Botões Tácteis com alvo mínimo de 48px para uso móvel em trânsito */
+/* Botões Tácteis Acessíveis */
 button {
   cursor: pointer;
   font-family: inherit;
   border: none;
-  border-radius: 12px;
-  min-height: 48px;
-  padding: 10px 18px;
-  font-size: 0.95rem;
-  font-weight: 700;
+  border-radius: 8px;
+  min-height: 44px;
+  padding: 9px 16px;
+  font-size: 0.92rem;
+  font-weight: 600;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
-  transition: transform 0.1s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+  gap: 7px;
+  transition: background-color 0.15s ease, border-color 0.15s ease, transform 0.1s ease;
 }
 
 button:active {
@@ -90,46 +96,47 @@ button:active {
 }
 
 button:focus-visible {
-  outline: 3px solid var(--sol-alerta);
-  outline-offset: 3px;
+  outline: 2px solid var(--mangue);
+  outline-offset: 2px;
 }
 
-/* Container Responsivo: Preenche a tela toda em computadores e se adapta perfeitamente ao celular */
+/* Container Responsivo */
 .container,
 .container-adaptativo {
   width: 100%;
   max-width: 100%;
   margin: 0;
-  padding: 18px 32px;
+  padding: 20px 32px;
   box-sizing: border-box;
 }
 
-/* Cabeçalho da Aplicação com Auto-Hide Inteligente */
+/* ==========================================================================
+   CABEÇALHO CÍVICO & AUTÊNTICO
+   ========================================================================== */
 .app-header {
   background: var(--mangue);
   color: #ffffff;
-  padding: 12px 0;
+  padding: 14px 0;
   position: sticky;
   top: 0;
   z-index: 100;
-  box-shadow: var(--sombra-terreno);
-  transition: transform 0.32s cubic-bezier(0.2, 0.9, 0.3, 1), box-shadow 0.25s ease;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 2px 10px rgba(12, 40, 34, 0.14);
+  transition: transform 0.28s ease, box-shadow 0.25s ease;
   will-change: transform;
 }
 
-/* Esconde o cabeçalho ao rolar para baixo para liberar 100% da tela */
 .app-header.header-hidden {
   transform: translateY(-100%);
   box-shadow: none;
 }
 
-/* Header Centralizado no Celular e Horizontal Amplo no Computador */
 .header-container-centered {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 12px;
+  gap: 14px;
 }
 
 @media (min-width: 768px) {
@@ -141,57 +148,37 @@ button:focus-visible {
   }
 }
 
-.brand-lockup-centered {
+.brand-lockup {
   display: flex;
   align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
   gap: 14px;
 }
 
-.brand-emblem-wrapper {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.brand-logo-image {
-  width: 58px;
-  height: 58px;
+.brand-logo-img {
+  width: 52px;
+  height: 52px;
   border-radius: 50%;
   object-fit: cover;
   background: #ffffff;
-  border: 2.5px solid #facc15;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.28);
+  border: 2px solid rgba(255, 255, 255, 0.7);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.18);
 }
 
-.brand-frevo-badge {
-  position: absolute;
-  bottom: -4px;
-  right: -6px;
-  background: #ffffff;
-  border-radius: 50%;
-  width: 24px;
-  height: 24px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 1.5px solid #0f3930;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
-}
-
-.brand-text-centered {
+.brand-text {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  text-align: left;
+}
+
+.brand-title-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .brand-title {
-  font-size: 1.85rem;
-  font-weight: 900;
-  letter-spacing: -0.6px;
+  font-size: 1.65rem;
+  font-weight: 800;
+  letter-spacing: -0.4px;
   line-height: 1.1;
   color: #ffffff;
 }
@@ -200,70 +187,77 @@ body.sol-forte .brand-title {
   color: #facc15;
 }
 
+.brand-tag-cidade {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: #ffffff;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 12px;
+  letter-spacing: 0.2px;
+}
+
 .brand-slogan {
-  font-size: 0.84rem;
-  font-weight: 600;
-  opacity: 0.95;
-  color: #e6f3ee;
-  letter-spacing: -0.2px;
+  font-size: 0.83rem;
+  font-weight: 500;
+  color: #d1e3dd;
+  margin-top: 2px;
 }
 
 body.sol-forte .brand-slogan {
-  color: #ffffff;
+  color: #fef08a;
 }
 
-.header-buttons-centered {
+.header-actions {
   display: flex;
   align-items: center;
-  justify-content: center;
   flex-wrap: wrap;
   gap: 10px;
 }
 
-.status-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 0.75rem;
-  font-weight: 700;
-  padding: 3px 8px;
-  border-radius: 20px;
-  background: rgba(255, 255, 255, 0.15);
-  margin-top: 4px;
+.btn-header {
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  font-size: 0.88rem;
+  font-weight: 600;
+  padding: 8px 14px;
+  border-radius: 8px;
 }
 
-.status-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: #22c55e;
+.btn-header:hover {
+  background: rgba(255, 255, 255, 0.2);
 }
 
-.status-dot.offline {
-  background: #f59e0b;
+.btn-header-destaque {
+  background: #c05621;
+  color: #ffffff;
+  border: 1px solid #9c4217;
 }
 
-.header-buttons {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
+.btn-header-destaque:hover {
+  background: #a84717;
 }
 
-.btn-sol-forte {
+.btn-header-sol-forte {
   background: #facc15;
-  color: #000000;
-  font-weight: 800;
-  border: 2px solid #ca8a04;
+  color: #1a2723;
+  font-weight: 750;
+  border: 1px solid #eab308;
 }
 
-body.sol-forte .btn-sol-forte {
+body.sol-forte .btn-header-sol-forte {
   background: #ffffff;
   color: #000000;
   border-color: #facc15;
 }
 
 /* ==========================================================================
-   LAYOUT RESPONSIVO (PADRÃO DESKTOP TELA CHEIA EM 2 COLUNAS)
+   LAYOUT ADAPTATIVO EM 2 COLUNAS (DESKTOP) E 1 COLUNA (MOBILE)
    ========================================================================== */
 .layout-adaptativo {
   display: grid;
@@ -272,7 +266,7 @@ body.sol-forte .btn-sol-forte {
     "radar mapa"
     "clima mapa"
     "voz reciclagem";
-  gap: 24px;
+  gap: 22px;
   align-items: start;
   width: 100%;
 }
@@ -304,14 +298,17 @@ body.sol-forte .btn-sol-forte {
 
 #map-container {
   height: 440px !important;
+  width: 100%;
+  border-radius: var(--raio-card);
+  border: 1px solid var(--linha-divisoria);
+  margin-top: 12px;
+  z-index: 1;
 }
 
-/* NO CELULAR / SMARTPHONES (Telas < 768px):
-   Adaptação vertical nativa em coluna única para telas de toque */
 @media (max-width: 767px) {
   .container,
   .container-adaptativo {
-    padding: 10px 12px;
+    padding: 12px 14px;
   }
 
   .layout-adaptativo {
@@ -334,149 +331,353 @@ body.sol-forte .btn-sol-forte {
     height: 380px !important;
   }
 
-  .header-buttons {
+  .header-actions {
     width: 100%;
     display: grid;
     grid-template-columns: 1fr 1fr;
   }
 
-  .btn-sol-forte {
+  .btn-header-sol-forte {
     grid-column: span 2;
   }
 }
 
-/* Hero: Radar de Calor & Notificação Proativa */
-.hero-radar {
-  background: var(--bg-card);
-  border: 2px solid var(--calor-asfalto);
-  border-radius: var(--raio-borda);
-  padding: 20px;
-  box-shadow: var(--sombra-destaque);
-  position: relative;
-  overflow: hidden;
-}
-
-.radar-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 12px;
-  margin-bottom: 12px;
-}
-
-.radar-alerta-tag {
-  background: var(--calor-light);
-  color: var(--calor-asfalto);
-  font-weight: 800;
-  font-size: 0.78rem;
-  padding: 4px 10px;
-  border-radius: 8px;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-}
-
-body.sol-forte .radar-alerta-tag {
-  background: #4c0519;
-  color: #fca5a5;
-  border: 1px solid #f87171;
-}
-
-.destaque-agua-proxima {
-  background: var(--rio-light);
-  border-left: 5px solid var(--rio-azul);
-  border-radius: 8px;
-  padding: 14px 16px;
-  margin-top: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 12px;
-}
-
-body.sol-forte .destaque-agua-proxima {
-  background: #082f49;
-  border-left-color: #38bdf8;
-  color: #ffffff;
-}
-
-/* Seções e Cartões */
+/* ==========================================================================
+   CARTÕES & COMPONENTES VISUAIS SÓBRIOS
+   ========================================================================== */
 .painel-secao {
   background: var(--bg-card);
   border: 1px solid var(--linha-divisoria);
-  border-radius: var(--raio-borda);
+  border-radius: var(--raio-card);
   padding: 20px;
-  box-shadow: var(--sombra-terreno);
+  box-shadow: var(--sombra-card);
+}
+
+.painel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+  gap: 8px;
 }
 
 .painel-titulo {
-  font-size: 1.25rem;
-  font-weight: 800;
+  font-size: 1.15rem;
+  font-weight: 750;
+  letter-spacing: -0.2px;
   display: flex;
   align-items: center;
   gap: 8px;
-  margin-bottom: 6px;
-  letter-spacing: -0.3px;
+  color: var(--ink-principal);
 }
 
-/* Grid de Sensores Climáticos */
-.grid-sensores {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-  gap: 10px;
-  margin-top: 14px;
-}
-
-.sensor-box {
-  background: var(--bg-terreno);
-  border: 1px solid var(--linha-divisoria);
-  border-radius: 10px;
-  padding: 12px 14px;
-  text-align: center;
-}
-
-.sensor-valor {
-  font-size: 1.45rem;
-  font-weight: 850;
-  line-height: 1.1;
-  margin-top: 4px;
-}
-
-.sensor-label {
-  font-size: 0.78rem;
+.painel-subtitulo {
+  font-size: 0.88rem;
   color: var(--ink-secundario);
   margin-top: 2px;
 }
 
-/* Mapa Leaflet Container */
-#map-container {
-  height: 440px;
-  width: 100%;
-  border-radius: var(--raio-borda);
-  border: 2px solid var(--linha-divisoria);
-  margin-top: 14px;
-  z-index: 1;
+/* 1. Alerta / Notificação de Alívio Térmico */
+.alerta-resiliencia {
+  background: var(--bg-card);
+  border: 1px solid var(--linha-destaque);
+  border-left: 4px solid var(--terracota);
+  border-radius: var(--raio-card);
+  padding: 18px 20px;
+  box-shadow: var(--sombra-card);
 }
 
-/* Pílulas de Filtros do Mapa */
-.filtros-mapa {
+.alerta-badge-origem {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.76rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  color: var(--terracota);
+  background: var(--terracota-light);
+  padding: 3px 8px;
+  border-radius: 6px;
+  margin-bottom: 8px;
+}
+
+body.sol-forte .alerta-badge-origem {
+  background: #78350f;
+  color: #fef08a;
+}
+
+.cartoes-duplos-alivio {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+@media (min-width: 500px) {
+  .cartoes-duplos-alivio {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.cartao-alivio-item {
+  background: var(--bg-terreno);
+  border: 1px solid var(--linha-divisoria);
+  border-radius: 10px;
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.cartao-alivio-topo {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.cartao-alivio-icone {
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.btn-alivio-acao {
+  align-self: flex-start;
+  background: #ffffff;
+  color: var(--ink-principal);
+  border: 1px solid var(--linha-destaque);
+  font-size: 0.8rem;
+  padding: 6px 12px;
+  min-height: 32px;
+  border-radius: 6px;
+}
+
+.btn-alivio-acao:hover {
+  background: var(--mangue);
+  color: #ffffff;
+  border-color: var(--mangue);
+}
+
+/* 2. Monitor Climático Editorial */
+.clima-editorial-box {
+  background: var(--bg-card);
+  border: 1px solid var(--linha-divisoria);
+  border-radius: var(--raio-card);
+  padding: 20px;
+  box-shadow: var(--sombra-card);
+}
+
+.clima-destaque-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--linha-suave);
+}
+
+.clima-temp-principal {
+  font-size: 2.8rem;
+  font-weight: 800;
+  letter-spacing: -1px;
+  line-height: 1;
+  color: var(--ink-principal);
+}
+
+.clima-detalhes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.clima-metrica-bloco {
+  background: var(--bg-terreno);
+  border: 1px solid var(--linha-divisoria);
+  border-radius: 8px;
+  padding: 10px 12px;
+}
+
+.clima-metrica-label {
+  font-size: 0.75rem;
+  color: var(--ink-secundario);
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  font-weight: 600;
+}
+
+.clima-metrica-valor {
+  font-size: 1.25rem;
+  font-weight: 750;
+  color: var(--ink-principal);
+  margin-top: 2px;
+}
+
+.aviso-saude-card {
+  margin-top: 14px;
+  padding: 12px 14px;
+  background: var(--mangue-light);
+  border: 1px solid #c2dbd1;
+  border-radius: 8px;
+  font-size: 0.88rem;
+  color: var(--mangue-dark);
+}
+
+body.sol-forte .aviso-saude-card {
+  background: #052e16;
+  border-color: #22c55e;
+  color: #ffffff;
+}
+
+/* 3. Assistente de Voz & Perguntas Rápidas */
+.campo-busca-voz {
   display: flex;
   gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 12px;
+}
+
+.input-voz-texto {
+  flex: 1;
+  min-width: 220px;
+  padding: 11px 14px;
+  border-radius: 8px;
+  border: 1px solid var(--linha-destaque);
+  background: var(--bg-card);
+  color: var(--ink-principal);
+  font-size: 0.92rem;
+  outline: none;
+}
+
+.input-voz-texto:focus {
+  border-color: var(--mangue);
+}
+
+.btn-voz-mic {
+  background: var(--capibaribe);
+  color: #ffffff;
+}
+
+.btn-voz-mic.ouvindo {
+  background: var(--alerta-calor);
+  animation: pulse-audio 1.4s infinite;
+}
+
+@keyframes pulse-audio {
+  0% { opacity: 1; }
+  50% { opacity: 0.6; }
+  100% { opacity: 1; }
+}
+
+.btn-voz-enviar {
+  background: var(--mangue);
+  color: #ffffff;
+}
+
+.chips-perguntas-rapidas {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+
+.chip-pergunta {
+  background: var(--bg-terreno);
+  border: 1px solid var(--linha-divisoria);
+  color: var(--ink-principal);
+  font-size: 0.82rem;
+  font-weight: 500;
+  padding: 6px 12px;
+  border-radius: 16px;
+  min-height: 32px;
+}
+
+.chip-pergunta:hover {
+  background: var(--mangue-light);
+  border-color: var(--mangue);
+}
+
+.resposta-voz-container {
+  margin-top: 14px;
+  padding: 14px 16px;
+  background: var(--bg-terreno);
+  border-left: 3px solid var(--mangue);
+  border-radius: 6px;
+}
+
+/* 4. Módulo de Reciclagem Comunitária */
+.grid-reciclagem-contadores {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.contador-item {
+  background: var(--bg-terreno);
+  border: 1px solid var(--linha-divisoria);
+  border-radius: 8px;
+  padding: 12px;
+  text-align: center;
+}
+
+.grid-recompensas {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.card-recompensa {
+  background: var(--bg-terreno);
+  border: 1px solid var(--linha-divisoria);
+  border-radius: 8px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+/* 5. Filtros e Legenda do Mapa */
+.filtros-mapa-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.scroll-filtros {
+  display: flex;
+  gap: 6px;
   overflow-x: auto;
-  padding: 4px 0 10px 0;
+  padding: 2px 0 6px 0;
   -webkit-overflow-scrolling: touch;
 }
 
 .pilula-filtro {
   background: var(--bg-card);
-  border: 1.5px solid var(--linha-divisoria);
-  color: var(--ink-principal);
+  border: 1px solid var(--linha-divisoria);
+  color: var(--ink-secundario);
   white-space: nowrap;
-  font-size: 0.88rem;
-  padding: 8px 16px;
-  border-radius: 24px;
-  min-height: 42px;
+  font-size: 0.84rem;
+  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: var(--raio-pill);
+  min-height: 36px;
+}
+
+.pilula-filtro:hover {
+  border-color: var(--linha-destaque);
+  color: var(--ink-principal);
 }
 
 .pilula-filtro.ativa {
@@ -489,15 +690,35 @@ body.sol-forte .pilula-filtro.ativa {
   background: #facc15;
   color: #000000;
   border-color: #facc15;
-  font-weight: 850;
+}
+
+.legenda-mapa {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 10px;
+  font-size: 0.82rem;
+  color: var(--ink-secundario);
+}
+
+.legenda-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.legenda-ponto {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
 }
 
 /* Modais */
 .modal-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.75);
-  backdrop-filter: blur(2px);
+  background: rgba(12, 30, 24, 0.65);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -507,49 +728,31 @@ body.sol-forte .pilula-filtro.ativa {
 
 .modal-dialog {
   background: var(--bg-card);
-  border: 2px solid var(--linha-divisoria);
-  border-radius: 18px;
+  border: 1px solid var(--linha-destaque);
+  border-radius: 14px;
   max-width: 540px;
   width: 100%;
   padding: 24px;
   max-height: 90vh;
   overflow-y: auto;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.22);
 }
 
-/* Corredores de Calor no Modal */
 .corridor-item {
-  border-left: 4px solid var(--calor-asfalto);
-  background: var(--calor-light);
-  border-radius: 8px;
-  padding: 12px 16px;
-  margin-top: 10px;
+  border-left: 3px solid var(--alerta-calor);
+  background: var(--bg-terreno);
+  border-radius: 6px;
+  padding: 12px 14px;
+  margin-top: 8px;
 }
 
-body.sol-forte .corridor-item {
-  background: #330505;
-  border-color: #fb7185;
-}
-
-/* Marcador Cultural: Sombrinha de Frevo de Pernambuco */
+/* Marcador Sombrinha de Frevo */
 .custom-frevo-marker {
   background: transparent !important;
   border: none !important;
 }
 
 .custom-frevo-marker:hover svg {
-  transform: scale(1.18) rotate(5deg);
-  transition: transform 0.22s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-@keyframes pulse-frevo {
-  0% {
-    box-shadow: 0 0 0 0 rgba(22, 163, 74, 0.6);
-  }
-  70% {
-    box-shadow: 0 0 0 8px rgba(22, 163, 74, 0);
-  }
-  100% {
-    box-shadow: 0 0 0 0 rgba(22, 163, 74, 0);
-  }
+  transform: scale(1.15);
+  transition: transform 0.18s ease;
 }

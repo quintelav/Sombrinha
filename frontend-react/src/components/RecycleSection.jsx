@@ -1,22 +1,21 @@
 import React, { useState } from 'react';
-import { Recycle, Award, Droplet, Sun, CheckCircle, Sparkles } from 'lucide-react';
+import { Recycle, Award, Droplet, Sun, CheckCircle, ShieldCheck } from 'lucide-react';
 import { api } from '../services/api';
 
 export default function RecycleSection() {
   const [garrafas, setGarrafas] = useState(0);
   const [latas, setLatas] = useState(0);
-  const [saldo, setSaldo] = useState(15); // Saldo inicial demonstrativo
+  const [saldo, setSaldo] = useState(15);
   const [mensagemSucesso, setMensagemSucesso] = useState('');
   const [carregando, setCarregando] = useState(false);
 
-  // Cada garrafa vale 2 pontos, cada lata vale 3 pontos
   const pontosCalculados = garrafas * 2 + latas * 3;
 
   const recompensas = [
-    { id: 'agua', nome: 'Água Mineral Gelada 500ml', custo: 5, icon: '💧' },
-    { id: 'protetor', nome: 'Sachê Protetor Solar FPS 50', custo: 10, icon: '🧴' },
-    { id: 'muda', nome: 'Muda Nativa para Plantio Urbano', custo: 20, icon: '🌱' },
-    { id: 'sombrinha', nome: 'Sombrinha Térmica com Proteção UV', custo: 40, icon: '☂️' }
+    { id: 'agua', nome: 'Água Mineral Gelada 500ml', custo: 5, detalhe: 'Disponível nos ecopontos do Centro' },
+    { id: 'protetor', nome: 'Sachê Protetor Solar FPS 50', custo: 10, detalhe: 'Proteção para ambulantes e pedestres' },
+    { id: 'muda', nome: 'Muda de Árvore Nativa', custo: 20, detalhe: 'Para arborização comunitária' },
+    { id: 'sombrinha', nome: 'Sombrinha Térmica com Proteção UV', custo: 40, detalhe: 'Bloqueio de radiação solar direta' }
   ];
 
   const handleEntregarReciclaveis = async (e) => {
@@ -25,7 +24,6 @@ export default function RecycleSection() {
 
     setCarregando(true);
     try {
-      // Chama API de trocas no backend se disponível
       await api.registrarTroca({
         garrafas,
         latas,
@@ -34,7 +32,7 @@ export default function RecycleSection() {
       }).catch(() => null);
 
       setSaldo((prev) => prev + pontosCalculados);
-      setMensagemSucesso(`Parabéns! Você entregou ${garrafas} garrafas e ${latas} latas, ganhando +${pontosCalculados} Gotas de Frescor!`);
+      setMensagemSucesso(`Entrega registrada: ${garrafas} garrafas e ${latas} latas (+${pontosCalculados} pontos adicionados ao seu saldo).`);
       setGarrafas(0);
       setLatas(0);
       setTimeout(() => setMensagemSucesso(''), 6000);
@@ -45,85 +43,86 @@ export default function RecycleSection() {
 
   const handleResgatar = (recompensa) => {
     if (saldo < recompensa.custo) {
-      alert(`Saldo insuficiente! Você tem ${saldo} Gotas e precisa de ${recompensa.custo}.`);
+      alert(`Saldo insuficiente. Você tem ${saldo} pontos e precisa de ${recompensa.custo} pontos.`);
       return;
     }
     setSaldo((prev) => prev - recompensa.custo);
-    setMensagemSucesso(`Resgate confirmado: 1x ${recompensa.nome}! Retire em qualquer Ecoponto credenciado do Centro.`);
+    setMensagemSucesso(`Resgate confirmado: 1x ${recompensa.nome}. Apresente seu comprovante em qualquer ecoponto credenciado.`);
     setTimeout(() => setMensagemSucesso(''), 6000);
   };
 
   return (
     <section className="painel-secao" aria-labelledby="recycle-heading">
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '10px', marginBottom: '14px' }}>
+      <div className="painel-header">
         <div>
-          <h2 id="recycle-heading" className="painel-titulo" style={{ margin: 0 }}>
-            <Recycle size={22} color="var(--mangue)" />
-            Moeda Verde & Reciclagem por Frescor
+          <h2 id="recycle-heading" className="painel-titulo">
+            <Recycle size={20} color="var(--mangue)" />
+            <span>Coleta Seletiva & Ecopontos Comunitários</span>
           </h2>
-          <p style={{ fontSize: '0.88rem', color: 'var(--ink-secundario)', marginTop: '4px' }}>
-            Troque resíduos plásticos e latas por água mineral gelada, mudas e protetor solar nos ecopontos do Centro.
+          <p className="painel-subtitulo">
+            Apoio ao Movimento Pró-Criança e cooperativas de catadores. Entregue recicláveis e retire itens de hidratação e proteção solar:
           </p>
         </div>
 
         <div
           style={{
             background: 'var(--mangue-light)',
-            border: '2px solid var(--mangue)',
-            borderRadius: '12px',
-            padding: '8px 14px',
+            border: '1px solid #c2dbd1',
+            borderRadius: '8px',
+            padding: '6px 12px',
             display: 'flex',
             alignItems: 'center',
             gap: '8px',
-            fontWeight: 800
+            fontSize: '0.86rem',
+            color: 'var(--mangue-dark)',
+            fontWeight: 700
           }}
         >
-          <Award size={20} color="var(--mangue)" />
-          <span>Seu Saldo: <strong style={{ color: 'var(--mangue-dark)', fontSize: '1.15rem' }}>{saldo}</strong> Gotas</span>
+          <Award size={18} color="var(--mangue)" />
+          <span>Saldo Comunitário: <strong style={{ fontSize: '1.05rem' }}>{saldo}</strong> pts</span>
         </div>
       </div>
 
       {mensagemSucesso && (
         <div
           style={{
-            background: '#dcfce7',
-            border: '2px solid #22c55e',
+            background: 'var(--mangue-light)',
+            border: '1px solid #86efac',
             color: '#14532d',
-            borderRadius: '10px',
-            padding: '12px 14px',
-            marginBottom: '14px',
+            borderRadius: '8px',
+            padding: '10px 14px',
+            marginBottom: '12px',
             display: 'flex',
             alignItems: 'center',
             gap: '8px',
             fontWeight: 600,
-            fontSize: '0.9rem'
+            fontSize: '0.88rem'
           }}
         >
-          <CheckCircle size={20} color="#16a34a" />
-          {mensagemSucesso}
+          <CheckCircle size={18} color="#16a34a" />
+          <span>{mensagemSucesso}</span>
         </div>
       )}
 
-      {/* Formulário de entrega de resíduos */}
+      {/* Registro de entrega de resíduos */}
       <form
         onSubmit={handleEntregarReciclaveis}
         style={{
           background: 'var(--bg-terreno)',
           border: '1px solid var(--linha-divisoria)',
-          borderRadius: '12px',
-          padding: '16px',
-          marginBottom: '18px'
+          borderRadius: '10px',
+          padding: '14px',
+          marginBottom: '16px'
         }}
       >
-        <div style={{ fontSize: '0.92rem', fontWeight: 700, marginBottom: '10px', display: 'flex', alignItems: 'center', gap: '6px' }}>
-          <Sparkles size={16} color="var(--accent)" />
-          Simular Entrega de Recicláveis no Ecoponto:
+        <div style={{ fontSize: '0.88rem', fontWeight: 700, color: 'var(--ink-principal)', marginBottom: '8px' }}>
+          Registrar Entrega de Materiais:
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: '12px' }}>
-          <div>
-            <label style={{ fontSize: '0.82rem', fontWeight: 600, display: 'block', marginBottom: '4px' }}>
-              🧴 Garrafas PET (2 pts cada)
+        <div className="grid-reciclagem-contadores">
+          <div className="contador-item">
+            <label style={{ fontSize: '0.78rem', fontWeight: 600, color: 'var(--ink-secundario)', display: 'block', marginBottom: '4px' }}>
+              Garrafas PET (+2 pts cada)
             </label>
             <input
               type="number"
@@ -132,20 +131,21 @@ export default function RecycleSection() {
               onChange={(e) => setGarrafas(Math.max(0, parseInt(e.target.value) || 0))}
               style={{
                 width: '100%',
-                padding: '10px',
-                borderRadius: '8px',
-                border: '1px solid var(--border)',
-                fontSize: '1rem',
-                fontWeight: 700,
-                background: 'var(--bg-card)',
-                color: 'var(--text-main)'
+                padding: '8px',
+                borderRadius: '6px',
+                border: '1px solid var(--linha-destaque)',
+                fontSize: '1.05rem',
+                fontWeight: 750,
+                textAlign: 'center',
+                background: '#ffffff',
+                color: 'var(--ink-principal)'
               }}
             />
           </div>
 
-          <div>
-            <label style={{ fontSize: '0.82rem', fontWeight: 600, display: 'block', marginBottom: '4px' }}>
-              🥫 Latinhas Alumínio (3 pts cada)
+          <div className="contador-item">
+            <label style={{ fontSize: '0.78rem', fontWeight: 600, color: 'var(--ink-secundario)', display: 'block', marginBottom: '4px' }}>
+              Latinhas de Alumínio (+3 pts cada)
             </label>
             <input
               type="number"
@@ -154,84 +154,81 @@ export default function RecycleSection() {
               onChange={(e) => setLatas(Math.max(0, parseInt(e.target.value) || 0))}
               style={{
                 width: '100%',
-                padding: '10px',
-                borderRadius: '8px',
-                border: '1px solid var(--border)',
-                fontSize: '1rem',
-                fontWeight: 700,
-                background: 'var(--bg-card)',
-                color: 'var(--text-main)'
+                padding: '8px',
+                borderRadius: '6px',
+                border: '1px solid var(--linha-destaque)',
+                fontSize: '1.05rem',
+                fontWeight: 750,
+                textAlign: 'center',
+                background: '#ffffff',
+                color: 'var(--ink-principal)'
               }}
             />
           </div>
         </div>
 
-        <div style={{ marginTop: '14px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '10px' }}>
-          <div style={{ fontSize: '0.9rem', color: 'var(--text-muted)' }}>
-            Pontos a receber: <strong style={{ color: 'var(--primary)', fontSize: '1.05rem' }}>+{pontosCalculados} Gotas</strong>
+        <div style={{ marginTop: '12px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '8px' }}>
+          <div style={{ fontSize: '0.84rem', color: 'var(--ink-secundario)' }}>
+            Total a creditar: <strong style={{ color: 'var(--mangue)', fontSize: '0.98rem' }}>+{pontosCalculados} pontos</strong>
           </div>
           <button
             type="submit"
             disabled={pontosCalculados <= 0 || carregando}
             style={{
-              background: pontosCalculados > 0 ? 'var(--primary)' : 'var(--border)',
-              color: pontosCalculados > 0 ? 'white' : 'var(--text-muted)',
+              background: pontosCalculados > 0 ? 'var(--mangue)' : 'var(--linha-divisoria)',
+              color: pontosCalculados > 0 ? '#ffffff' : 'var(--ink-suave)',
+              fontSize: '0.85rem',
+              padding: '8px 14px',
+              minHeight: '38px',
               cursor: pontosCalculados > 0 ? 'pointer' : 'not-allowed'
             }}
           >
-            {carregando ? 'Registrando...' : 'Depositar e Ganhar Gotas'}
+            Confirmar Entrega
           </button>
         </div>
       </form>
 
-      {/* Catálogo de Recompensas */}
-      <h3 style={{ fontSize: '1rem', fontWeight: 750, marginBottom: '10px' }}>
-        Resgate de Frescor Disponível:
-      </h3>
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '10px' }}>
-        {recompensas.map((rec) => {
-          const podeResgatar = saldo >= rec.custo;
-          return (
-            <div
-              key={rec.id}
-              style={{
-                border: '1px solid var(--border)',
-                borderRadius: '10px',
-                padding: '12px',
-                background: 'var(--bg-card)',
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'space-between',
-                boxShadow: 'var(--shadow-sm)'
-              }}
-            >
+      {/* Itens para Resgate */}
+      <div>
+        <div style={{ fontSize: '0.88rem', fontWeight: 700, color: 'var(--ink-principal)', marginBottom: '8px' }}>
+          Itens de Hidratação e Proteção Disponíveis:
+        </div>
+
+        <div className="grid-recompensas">
+          {recompensas.map((rec) => (
+            <div key={rec.id} className="card-recompensa">
               <div>
-                <div style={{ fontSize: '1.8rem', marginBottom: '6px' }}>{rec.icon}</div>
-                <div style={{ fontWeight: 700, fontSize: '0.92rem' }}>{rec.nome}</div>
-                <div style={{ fontSize: '0.82rem', color: 'var(--text-muted)', marginTop: '2px' }}>
-                  Custo: <strong>{rec.custo} Gotas</strong>
-                </div>
+                <strong style={{ fontSize: '0.88rem', color: 'var(--ink-principal)' }}>{rec.nome}</strong>
+                <p style={{ fontSize: '0.78rem', color: 'var(--ink-secundario)', marginTop: '2px' }}>
+                  {rec.detalhe}
+                </p>
               </div>
 
-              <button
-                type="button"
-                onClick={() => handleResgatar(rec)}
-                disabled={!podeResgatar}
-                style={{
-                  marginTop: '10px',
-                  background: podeResgatar ? 'var(--blue)' : 'var(--border)',
-                  color: podeResgatar ? 'white' : 'var(--text-muted)',
-                  cursor: podeResgatar ? 'pointer' : 'not-allowed',
-                  fontSize: '0.82rem',
-                  padding: '8px 12px',
-                  minHeight: '38px'
-                }}
-              >
-                {podeResgatar ? 'Resgatar' : `Faltam ${rec.custo - saldo} pts`}
-              </button>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '6px', paddingTop: '6px', borderTop: '1px solid var(--linha-suave)' }}>
+                <span style={{ fontSize: '0.82rem', fontWeight: 750, color: 'var(--terracota)' }}>
+                  {rec.custo} pts
+                </span>
+                <button
+                  type="button"
+                  onClick={() => handleResgatar(rec)}
+                  disabled={saldo < rec.custo}
+                  style={{
+                    background: saldo >= rec.custo ? '#ffffff' : 'transparent',
+                    border: '1px solid var(--linha-destaque)',
+                    color: saldo >= rec.custo ? 'var(--ink-principal)' : 'var(--ink-suave)',
+                    fontSize: '0.76rem',
+                    padding: '4px 10px',
+                    minHeight: '28px',
+                    borderRadius: '6px',
+                    cursor: saldo >= rec.custo ? 'pointer' : 'not-allowed'
+                  }}
+                >
+                  Resgatar
+                </button>
+              </div>
             </div>
-          );
-        })}
+          ))}
+        </div>
       </div>
     </section>
   );

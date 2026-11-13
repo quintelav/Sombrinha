@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Mic, Volume2, Sparkles, Send, Loader2 } from 'lucide-react';
+import { Mic, Volume2, Send, Loader2 } from 'lucide-react';
 import { api } from '../services/api';
 
 export default function VoiceAssistant({ onVoiceResponse, userLocation }) {
@@ -45,7 +45,7 @@ export default function VoiceAssistant({ onVoiceResponse, userLocation }) {
   const alternarMicrofone = () => {
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
     if (!SpeechRecognition) {
-      simularVoz('Tô na Conde da Boa Vista procurando ponto de água gelada');
+      simularVoz('Onde tem bebedouro público na Conde da Boa Vista?');
       return;
     }
 
@@ -74,41 +74,37 @@ export default function VoiceAssistant({ onVoiceResponse, userLocation }) {
   };
 
   return (
-    <section className="painel-secao" aria-label="Assistente Acessível por Voz">
-      <div className="painel-titulo">
-        <Sparkles size={22} color="var(--mangue)" />
-        <h2>Assistente por Voz & Perguntas Rápidas</h2>
+    <section className="painel-secao" aria-label="Orientação Acessível por Voz">
+      <div className="painel-header">
+        <div>
+          <h2 className="painel-titulo">
+            <Mic size={20} color="var(--capibaribe)" />
+            <span>Orientação por Voz & Dúvidas Rápidas</span>
+          </h2>
+          <p className="painel-subtitulo">
+            Acessibilidade para quem está caminhando nas ruas. Fale ou digite sua pergunta:
+          </p>
+        </div>
       </div>
-      <p style={{ color: 'var(--ink-secundario)', fontSize: '0.92rem', marginBottom: '12px' }}>
-        Acessibilidade para quem está caminhando no asfalto quente: fale com o app para encontrar o ponto de água mais próximo.
-      </p>
 
-      <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+      <div className="campo-busca-voz">
         <input
           type="text"
+          className="input-voz-texto"
           value={texto}
           onChange={(e) => setTexto(e.target.value)}
-          placeholder="Ex: 'Onde tem água gelada na Boa Vista?' ou 'Tô com sede'"
-          style={{
-            flex: 1,
-            minWidth: '220px',
-            padding: '12px 14px',
-            borderRadius: '10px',
-            border: '2px solid var(--linha-divisoria)',
-            background: 'var(--bg-card)',
-            color: 'var(--ink-principal)',
-            fontSize: '0.95rem'
-          }}
+          placeholder="Ex: Onde tem água na Boa Vista? ou Sombra perto do Pátio"
           onKeyDown={(e) => e.key === 'Enter' && handleConsultar()}
         />
 
         <button
           type="button"
           onClick={alternarMicrofone}
-          style={{ background: ouvindo ? '#be123c' : 'var(--rio-azul)', color: 'white' }}
+          className={`btn-voz-mic ${ouvindo ? 'ouvindo' : ''}`}
           aria-label={ouvindo ? 'Ouvindo...' : 'Falar pelo microfone'}
+          title="Falar pelo microfone"
         >
-          <Mic size={18} />
+          <Mic size={17} />
           <span>{ouvindo ? 'Ouvindo...' : 'Falar'}</span>
         </button>
 
@@ -116,68 +112,59 @@ export default function VoiceAssistant({ onVoiceResponse, userLocation }) {
           type="button"
           onClick={() => handleConsultar()}
           disabled={carregando}
-          style={{ background: 'var(--mangue)', color: 'white' }}
+          className="btn-voz-enviar"
+          title="Consultar pergunta"
         >
-          {carregando ? <Loader2 size={18} className="animate-spin" /> : <Send size={18} />}
-          <span>Consultar</span>
+          {carregando ? <Loader2 size={17} className="animate-spin" /> : <Send size={17} />}
+          <span>Buscar</span>
         </button>
       </div>
 
-      {/* Sugestões rápidas */}
-      <div style={{ marginTop: '10px', display: 'flex', gap: '6px', flexWrap: 'wrap' }}>
+      {/* Sugestões de perguntas frequentes sem emojis infantis */}
+      <div className="chips-perguntas-rapidas">
         <button
           type="button"
-          className="pilula-filtro"
-          onClick={() => simularVoz('Onde tem água gelada gratuita na Conde da Boa Vista?')}
-          style={{ fontSize: '0.82rem', padding: '6px 12px', minHeight: '36px' }}
+          className="chip-pergunta"
+          onClick={() => simularVoz('Onde tem água gelada na Conde da Boa Vista?')}
         >
-          💧 "Água na Boa Vista"
+          Água na Boa Vista
         </button>
         <button
           type="button"
-          className="pilula-filtro"
-          onClick={() => simularVoz('Tô no Pátio de São José com muito calor')}
-          style={{ fontSize: '0.82rem', padding: '6px 12px', minHeight: '36px' }}
+          className="chip-pergunta"
+          onClick={() => simularVoz('Onde encontrar sombra perto do Pátio de São José?')}
         >
-          🔥 "Calor em São José"
+          Sombra em São José
         </button>
         <button
           type="button"
-          className="pilula-filtro"
-          onClick={() => simularVoz('Como trocar garrafa PET por água mineral?')}
-          style={{ fontSize: '0.82rem', padding: '6px 12px', minHeight: '36px' }}
+          className="chip-pergunta"
+          onClick={() => simularVoz('Como trocar garrafa PET por água mineral nos ecopontos?')}
         >
-          ♻️ "Trocar PET por Água"
+          Troca de recicláveis
         </button>
       </div>
 
       {resposta && (
-        <div
-          style={{
-            marginTop: '14px',
-            padding: '14px 16px',
-            borderRadius: '10px',
-            background: 'var(--rio-light)',
-            border: '2px solid var(--rio-azul)'
-          }}
-          role="status"
-        >
+        <div className="resposta-voz-container" role="status">
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <strong style={{ color: 'var(--rio-azul)', fontSize: '0.98rem' }}>Orientação do Sombrinha:</strong>
+            <span style={{ fontSize: '0.82rem', fontWeight: 700, color: 'var(--mangue)', textTransform: 'uppercase' }}>
+              Resposta do Sombrinha
+            </span>
             <button
               type="button"
               onClick={() => falarTexto(resposta.resposta_voz)}
-              style={{ background: 'var(--rio-azul)', color: 'white', fontSize: '0.8rem', padding: '4px 10px', minHeight: '32px' }}
+              style={{ background: '#ffffff', color: 'var(--ink-principal)', border: '1px solid var(--linha-destaque)', fontSize: '0.78rem', padding: '4px 10px', minHeight: '30px' }}
             >
-              <Volume2 size={14} /> Ouvir Novamente
+              <Volume2 size={13} /> Ouvir Áudio
             </button>
           </div>
-          <p style={{ marginTop: '6px', fontSize: '0.95rem', fontWeight: 650 }}>
+          <p style={{ marginTop: '8px', fontSize: '0.94rem', fontWeight: 600, color: 'var(--ink-principal)', lineHeight: 1.45 }}>
             {resposta.resposta_voz}
           </p>
           {resposta.recomendacao && (
-            <p style={{ marginTop: '4px', fontSize: '0.85rem', color: 'var(--ink-secundario)' }}>
-              💡 <em>{resposta.recomendacao}</em>
+            <p style={{ marginTop: '6px', fontSize: '0.84rem', color: 'var(--ink-secundario)' }}>
+              Orientações de apoio: {resposta.recomendacao}
             </p>
           )}
         </div>
