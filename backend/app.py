@@ -29,7 +29,8 @@ def create_app() -> Flask:
     app = Flask(
         __name__,
         template_folder="views/templates",
-        static_folder="frontend/dist",
+        # The compiled frontend lives beside this backend directory.
+        static_folder="../frontend/dist",
         static_url_path="/static",
     )
     app.config["MAX_CONTENT_LENGTH"] = 50_000

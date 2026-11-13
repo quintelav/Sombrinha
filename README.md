@@ -49,12 +49,12 @@ Requisitos: Python 3.12+, Node.js 22.12+ e npm.
 ```powershell
 py -3.12 -m venv .venv
 Copy-Item .env.example .env
-.\.venv\Scripts\python.exe -m pip install -r requirements.txt
+.\.venv\Scripts\python.exe -m pip install -r backend\requirements.txt
 Set-Location frontend
 npm ci
 npm run build
 Set-Location ..
-.\.venv\Scripts\python.exe app.py
+.\.venv\Scripts\python.exe backend\app.py
 ```
 
 Abra `.env` no VS Code e preencha `GOOGLE_WEATHER_API_KEY` com uma chave de prototipagem do Google. A aplicação carrega esse arquivo ao iniciar. Nunca envie a chave ao GitHub nem a coloque no JavaScript. Você também pode iniciar sem a chave; o restante do protótipo funciona e a área do clima informa que a integração está desativada.
@@ -86,11 +86,12 @@ A validação prevista para esta etapa é feita com a equipe e o(a) participante
 
 ## Arquitetura
 
-- `frontend/src/`: interface Svelte/TypeScript, componentes e cliente tipado da API.
-- `models/`: validação, agregação e persistência dos relatos e propostas.
-- `controllers/`: rotas HTTP e coordenação entre Model e View.
-- `views/`: entrega da página compilada pelo Flask e tela de orientação se o frontend ainda não foi compilado.
-- `app.py`: configuração e inicialização da aplicação Flask.
+- `frontend/`: interface Svelte/TypeScript, componentes, cliente tipado da API e build com Vite.
+- `backend/app.py`: configuração e inicialização da aplicação Flask.
+- `backend/models/`: validação, agregação e persistência dos relatos e propostas.
+- `backend/controllers/`: rotas HTTP e coordenação entre Model e View.
+- `backend/views/`: entrega da página compilada pelo Flask e tela de orientação se o frontend ainda não foi compilado.
+- `backend/requirements.txt`: dependências Python do backend.
 
 ## Limites e cuidados
 

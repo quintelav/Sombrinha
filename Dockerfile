@@ -13,14 +13,12 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1
 WORKDIR /app
 
-COPY requirements.txt ./
+COPY backend/requirements.txt ./requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
-COPY app.py ./
-COPY controllers/ ./controllers/
-COPY models/ ./models/
-COPY views/ ./views/
+COPY backend/ ./backend/
 COPY --from=frontend-build /workspace/frontend/dist/ ./frontend/dist/
 
 EXPOSE 10000
+WORKDIR /app/backend
 CMD ["sh", "-c", "gunicorn --workers 1 --threads 4 --timeout 60 --bind 0.0.0.0:${PORT:-10000} app:app"]

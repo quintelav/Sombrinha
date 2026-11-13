@@ -8,10 +8,7 @@ __pycache__/
 .venv/
 venv/
 
-data/*.json
-data/relatos.json
-data/adocoes.json
-data/trocas.json
+backend/data/*.json
 
 .DS_Store
 

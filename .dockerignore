@@ -8,4 +8,4 @@ __pycache__
 !.env.example
 frontend/node_modules
 static/app
-data/*.json
+backend/data/*.json
