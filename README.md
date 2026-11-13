@@ -82,7 +82,16 @@ No Render, configure `GOOGLE_WEATHER_API_KEY` nas variáveis de ambiente do serv
 
 ## Testes e validação
 
-A validação prevista para esta etapa é feita com a equipe e o(a) participante do Movimento Pró-Criança, usando tarefas simples no celular: registrar um ponto, localizar uma demanda no mapa e cadastrar uma proposta. **Testes automatizados ainda não estão configurados neste repositório.** Registrem os resultados do teste com o(a) validador(a) antes da entrega.
+Instale as dependências de desenvolvimento e execute os testes do backend a partir da raiz do repositório:
+
+```powershell
+.\.venv\Scripts\python.exe -m pip install -r backend\requirements-dev.txt
+.\.venv\Scripts\python.exe -m pytest backend\tests
+```
+
+Os testes cobrem as respostas das rotas de criação de relatos e simulações de reciclagem, incluindo validação, pontos simulados e aviso de que não há entrega ou resgate real. Eles usam arquivos temporários e não acessam os dados JSON da demonstração. O GitHub Actions executa os mesmos testes automaticamente a cada `push` e `pull_request`. Essas verificações cobrem apenas os comportamentos automatizados do backend; não validam o deploy, o uso no celular nem a validação comunitária.
+
+A validação com a equipe e o(a) participante do Movimento Pró-Criança continua sendo feita separadamente, usando tarefas simples no celular: registrar um ponto, localizar uma demanda no mapa e cadastrar uma proposta. Registrem os resultados desse teste antes da entrega.
 
 ## Arquitetura
 
