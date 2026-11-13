@@ -1,38 +1,57 @@
+/* ==========================================================================
+   SOMBRINHA RECIFE — DESIGN SYSTEM DE RESILIÊNCIA CLIMÁTICA URBANA
+   Inspirado no ecossistema mangue-cidade, pontes e calor equatorial do Recife.
+   ========================================================================== */
+
 :root {
-  --primary: #145b4b;
-  --primary-light: #e1f2eb;
-  --primary-dark: #0d3d32;
-  --blue: #0284c7;
-  --blue-light: #e0f2fe;
-  --accent: #f59e0b;
-  --danger: #dc2626;
-  --danger-light: #fee2e2;
-  --bg-main: #f2f7f4;
+  /* Paleta Raiz: Mangue Profundo, Rio Capibaribe, Sol Equatorial e Asfalto */
+  --mangue: #0f3930;
+  --mangue-dark: #071f19;
+  --mangue-light: #e6f3ee;
+  --rio-azul: #0284c7;
+  --rio-light: #e0f2fe;
+  --sol-alerta: #d97706;
+  --sol-light: #fef3c7;
+  --calor-asfalto: #be123c;
+  --calor-light: #ffe4e6;
+  
+  /* Superfícies & Tipografia */
+  --bg-terreno: #f3f6f4;
   --bg-card: #ffffff;
-  --text-main: #17332d;
-  --text-muted: #55706a;
-  --border: #d8e5df;
-  --shadow-sm: 0 1px 3px rgba(0,0,0,0.05);
-  --shadow-md: 0 4px 12px rgba(23, 51, 45, 0.08);
-  --shadow-lg: 0 10px 25px rgba(0,0,0,0.12);
-  --font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --ink-principal: #0b1d18;
+  --ink-secundario: #4b635c;
+  --linha-divisoria: #d5e2dc;
+  
+  /* Elevação táctil */
+  --sombra-terreno: 0 2px 8px rgba(11, 29, 24, 0.06);
+  --sombra-destaque: 0 8px 24px rgba(11, 29, 24, 0.12);
+  
+  --raio-borda: 14px;
+  --fonte: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
 }
 
-/* Modo Sol Forte (Alto contraste para legibilidade máxima ao ar livre) */
+/* ==========================================================================
+   MODO SOL FORTE (Legibilidade Tática ao Ar Livre / Meio-dia em Recife)
+   Contraste máximo projetado para telas de celular sob luz solar direta.
+   ========================================================================== */
 body.sol-forte {
-  --bg-main: #000000;
-  --bg-card: #141414;
-  --text-main: #ffffff;
-  --text-muted: #fef08a;
-  --border: #facc15;
-  --primary: #22c55e;
-  --primary-light: #064e3b;
-  --blue: #38bdf8;
-  --blue-light: #082f49;
-  --danger-light: #450a0a;
-  --shadow-md: 0 0 0 2px #facc15;
+  --bg-terreno: #000000;
+  --bg-card: #111111;
+  --ink-principal: #ffffff;
+  --ink-secundario: #fef08a;
+  --linha-divisoria: #facc15;
+  --mangue: #22c55e;
+  --mangue-dark: #000000;
+  --mangue-light: #052e16;
+  --rio-azul: #38bdf8;
+  --rio-light: #082f49;
+  --calor-asfalto: #fb7185;
+  --calor-light: #4c0519;
+  --sombra-terreno: 0 0 0 2px #facc15;
+  --sombra-destaque: 0 0 0 3px #facc15;
 }
 
+/* Reset Universal & Acessibilidade */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -40,19 +59,21 @@ body.sol-forte {
 }
 
 body {
-  font-family: var(--font-family);
-  background-color: var(--bg-main);
-  color: var(--text-main);
+  font-family: var(--fonte);
+  background-color: var(--bg-terreno);
+  color: var(--ink-principal);
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
-  transition: background-color 0.2s, color 0.2s;
+  transition: background-color 0.25s ease, color 0.25s ease;
+  overflow-x: hidden;
 }
 
+/* Botões Tácteis com alvo mínimo de 48px para uso móvel em trânsito */
 button {
   cursor: pointer;
   font-family: inherit;
   border: none;
-  border-radius: 10px;
+  border-radius: 12px;
   min-height: 48px;
   padding: 10px 18px;
   font-size: 0.95rem;
@@ -61,60 +82,156 @@ button {
   align-items: center;
   justify-content: center;
   gap: 8px;
-  transition: all 0.2s;
+  transition: transform 0.1s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+button:active {
+  transform: scale(0.98);
 }
 
 button:focus-visible {
-  outline: 3px solid var(--accent);
-  outline-offset: 2px;
+  outline: 3px solid var(--sol-alerta);
+  outline-offset: 3px;
 }
 
-.container {
-  max-width: 920px;
+/* Container Responsivo: Preenche a tela em monitores e se adapta ao celular */
+.container,
+.container-adaptativo {
+  width: 100%;
+  max-width: 1680px;
   margin: 0 auto;
-  padding: 16px;
+  padding: 16px 24px;
+  box-sizing: border-box;
 }
 
-/* Header */
+/* Cabeçalho da Aplicação com Auto-Hide Inteligente */
 .app-header {
-  background: var(--primary);
-  color: white;
-  padding: 16px 0;
+  background: var(--mangue);
+  color: #ffffff;
+  padding: 12px 0;
   position: sticky;
   top: 0;
-  z-index: 50;
-  box-shadow: var(--shadow-sm);
+  z-index: 100;
+  box-shadow: var(--sombra-terreno);
+  transition: transform 0.32s cubic-bezier(0.2, 0.9, 0.3, 1), box-shadow 0.25s ease;
+  will-change: transform;
 }
 
-.header-inner {
+/* Esconde o cabeçalho ao rolar para baixo para liberar 100% da tela */
+.app-header.header-hidden {
+  transform: translateY(-100%);
+  box-shadow: none;
+}
+
+/* Header Centralizado com Logo e Sombrinha de Frevo */
+.header-container-centered {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   align-items: center;
-  flex-wrap: wrap;
+  justify-content: center;
   gap: 12px;
 }
 
-.brand-wrapper {
+.brand-lockup-centered {
   display: flex;
   align-items: center;
-  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 14px;
 }
 
-.brand-icon {
-  font-size: 2.2rem;
-  line-height: 1;
+.brand-emblem-wrapper {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.brand-logo-image {
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: #ffffff;
+  border: 2.5px solid #facc15;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.28);
+}
+
+.brand-frevo-badge {
+  position: absolute;
+  bottom: -4px;
+  right: -6px;
+  background: #ffffff;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1.5px solid #0f3930;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
+}
+
+.brand-text-centered {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
 }
 
 .brand-title {
-  font-size: 1.45rem;
-  font-weight: 800;
-  letter-spacing: -0.5px;
+  font-size: 1.85rem;
+  font-weight: 900;
+  letter-spacing: -0.6px;
+  line-height: 1.1;
+  color: #ffffff;
 }
 
-.brand-subtitle {
-  font-size: 0.8rem;
-  opacity: 0.9;
-  display: block;
+body.sol-forte .brand-title {
+  color: #facc15;
+}
+
+.brand-slogan {
+  font-size: 0.84rem;
+  font-weight: 600;
+  opacity: 0.95;
+  color: #e6f3ee;
+  letter-spacing: -0.2px;
+}
+
+body.sol-forte .brand-slogan {
+  color: #ffffff;
+}
+
+.header-buttons-centered {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.15);
+  margin-top: 4px;
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #22c55e;
+}
+
+.status-dot.offline {
+  background: #f59e0b;
 }
 
 .header-buttons {
@@ -123,107 +240,241 @@ button:focus-visible {
   flex-wrap: wrap;
 }
 
-.btn-contrast {
+.btn-sol-forte {
   background: #facc15;
-  color: #000;
+  color: #000000;
+  font-weight: 800;
   border: 2px solid #ca8a04;
 }
 
-.btn-blue {
-  background: var(--blue);
-  color: white;
+body.sol-forte .btn-sol-forte {
+  background: #ffffff;
+  color: #000000;
+  border-color: #facc15;
 }
 
-/* Card Proativo de Notificação */
-.proactive-alert {
-  background: linear-gradient(135deg, #ea580c, #dc2626);
-  color: white;
-  border-radius: 14px;
-  padding: 18px;
-  margin-top: 14px;
-  box-shadow: var(--shadow-lg);
-  animation: pulse-border 2s infinite;
+/* ==========================================================================
+   LAYOUT ADAPTATIVO: DESKTOP (TELA TODA) VS CELULAR (MOBILE-FIRST)
+   ========================================================================== */
+.layout-adaptativo {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
 }
 
-@keyframes pulse-border {
-  0% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.4); }
-  70% { box-shadow: 0 0 0 10px rgba(220, 38, 38, 0); }
-  100% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0); }
+/* NO COMPUTADOR / DESKTOP (Telas >= 1024px):
+   A tela se expande preenchendo o monitor em 2 colunas amplas:
+   - Coluna 1: Alertas climáticos, sensores, assistente de voz e reciclagem.
+   - Coluna 2: Mapa territorial interativo em visão panorâmica e sticky. */
+@media (min-width: 1024px) {
+  .layout-adaptativo {
+    display: grid;
+    grid-template-columns: 1fr 1.3fr;
+    gap: 24px;
+    align-items: start;
+  }
+
+  .coluna-painel {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .coluna-mapa {
+    position: sticky;
+    top: 20px;
+  }
+
+  #map-container {
+    height: 620px !important; /* Mapa grande no monitor */
+  }
 }
 
-body.sol-forte .proactive-alert {
-  background: #000;
-  border: 3px solid #ef4444;
-  color: #fef08a;
+/* NO CELULAR (Telas < 1024px):
+   Se adapta fluidamente à tela pequena em coluna única, sem quebra lateral. */
+@media (max-width: 1023px) {
+  .container,
+  .container-adaptativo {
+    padding: 10px 12px;
+  }
+
+  .layout-adaptativo {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .coluna-painel {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .coluna-mapa {
+    width: 100%;
+  }
+
+  #map-container {
+    height: 380px !important; /* Altura confortável para toque no celular */
+  }
+
+  .header-buttons {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .btn-sol-forte {
+    grid-column: span 2;
+  }
 }
 
-/* Cards principais */
-.card-section {
+/* Hero: Radar de Calor & Notificação Proativa */
+.hero-radar {
   background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: 16px;
+  border: 2px solid var(--calor-asfalto);
+  border-radius: var(--raio-borda);
   padding: 20px;
-  margin-top: 18px;
-  box-shadow: var(--shadow-md);
+  box-shadow: var(--sombra-destaque);
+  position: relative;
+  overflow: hidden;
 }
 
-.card-title {
+.radar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.radar-alerta-tag {
+  background: var(--calor-light);
+  color: var(--calor-asfalto);
+  font-weight: 800;
+  font-size: 0.78rem;
+  padding: 4px 10px;
+  border-radius: 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+body.sol-forte .radar-alerta-tag {
+  background: #4c0519;
+  color: #fca5a5;
+  border: 1px solid #f87171;
+}
+
+.destaque-agua-proxima {
+  background: var(--rio-light);
+  border-left: 5px solid var(--rio-azul);
+  border-radius: 8px;
+  padding: 14px 16px;
+  margin-top: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+body.sol-forte .destaque-agua-proxima {
+  background: #082f49;
+  border-left-color: #38bdf8;
+  color: #ffffff;
+}
+
+/* Seções e Cartões */
+.painel-secao {
+  background: var(--bg-card);
+  border: 1px solid var(--linha-divisoria);
+  border-radius: var(--raio-borda);
+  padding: 20px;
+  box-shadow: var(--sombra-terreno);
+}
+
+.painel-titulo {
   font-size: 1.25rem;
-  font-weight: 750;
+  font-weight: 800;
   display: flex;
   align-items: center;
   gap: 8px;
-  margin-bottom: 8px;
+  margin-bottom: 6px;
+  letter-spacing: -0.3px;
 }
 
-/* Mapa */
+/* Grid de Sensores Climáticos */
+.grid-sensores {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.sensor-box {
+  background: var(--bg-terreno);
+  border: 1px solid var(--linha-divisoria);
+  border-radius: 10px;
+  padding: 12px 14px;
+  text-align: center;
+}
+
+.sensor-valor {
+  font-size: 1.45rem;
+  font-weight: 850;
+  line-height: 1.1;
+  margin-top: 4px;
+}
+
+.sensor-label {
+  font-size: 0.78rem;
+  color: var(--ink-secundario);
+  margin-top: 2px;
+}
+
+/* Mapa Leaflet Container */
 #map-container {
-  height: 420px;
+  height: 440px;
   width: 100%;
-  border-radius: 14px;
-  border: 2px solid var(--border);
-  margin-top: 12px;
+  border-radius: var(--raio-borda);
+  border: 2px solid var(--linha-divisoria);
+  margin-top: 14px;
   z-index: 1;
 }
 
-/* Tabs */
-.tabs-scroll {
+/* Pílulas de Filtros do Mapa */
+.filtros-mapa {
   display: flex;
   gap: 8px;
   overflow-x: auto;
-  padding-bottom: 8px;
-  margin-top: 12px;
+  padding: 4px 0 10px 0;
+  -webkit-overflow-scrolling: touch;
 }
 
-.tab-pill {
+.pilula-filtro {
   background: var(--bg-card);
-  border: 2px solid var(--border);
-  color: var(--text-main);
+  border: 1.5px solid var(--linha-divisoria);
+  color: var(--ink-principal);
   white-space: nowrap;
   font-size: 0.88rem;
-  padding: 8px 14px;
-  border-radius: 20px;
-  min-height: 40px;
+  padding: 8px 16px;
+  border-radius: 24px;
+  min-height: 42px;
 }
 
-.tab-pill.active {
-  background: var(--primary);
-  color: white;
-  border-color: var(--primary);
+.pilula-filtro.ativa {
+  background: var(--mangue);
+  color: #ffffff;
+  border-color: var(--mangue);
 }
 
-/* Lista de Ruas Quentes */
-.corridor-item {
-  border-left: 4px solid var(--danger);
-  background: var(--danger-light);
-  border-radius: 8px;
-  padding: 12px 16px;
-  margin-top: 10px;
-}
-
-body.sol-forte .corridor-item {
-  background: #330505;
-  border-color: #f87171;
+body.sol-forte .pilula-filtro.ativa {
+  background: #facc15;
+  color: #000000;
+  border-color: #facc15;
+  font-weight: 850;
 }
 
 /* Modais */
@@ -231,6 +482,7 @@ body.sol-forte .corridor-item {
   position: fixed;
   inset: 0;
   background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(2px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -240,11 +492,49 @@ body.sol-forte .corridor-item {
 
 .modal-dialog {
   background: var(--bg-card);
-  border: 2px solid var(--border);
-  border-radius: 16px;
-  max-width: 520px;
+  border: 2px solid var(--linha-divisoria);
+  border-radius: 18px;
+  max-width: 540px;
   width: 100%;
   padding: 24px;
   max-height: 90vh;
   overflow-y: auto;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+/* Corredores de Calor no Modal */
+.corridor-item {
+  border-left: 4px solid var(--calor-asfalto);
+  background: var(--calor-light);
+  border-radius: 8px;
+  padding: 12px 16px;
+  margin-top: 10px;
+}
+
+body.sol-forte .corridor-item {
+  background: #330505;
+  border-color: #fb7185;
+}
+
+/* Marcador Cultural: Sombrinha de Frevo de Pernambuco */
+.custom-frevo-marker {
+  background: transparent !important;
+  border: none !important;
+}
+
+.custom-frevo-marker:hover svg {
+  transform: scale(1.18) rotate(5deg);
+  transition: transform 0.22s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes pulse-frevo {
+  0% {
+    box-shadow: 0 0 0 0 rgba(22, 163, 74, 0.6);
+  }
+  70% {
+    box-shadow: 0 0 0 8px rgba(22, 163, 74, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(22, 163, 74, 0);
+  }
 }

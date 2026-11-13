@@ -24,7 +24,7 @@ export default function CitizenCardModal({ isOpen, onClose }) {
       <div className="modal-dialog" onClick={(e) => e.stopPropagation()}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
           <h2 id="card-title" style={{ fontSize: '1.25rem', fontWeight: 800, display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <CreditCard size={22} color="var(--primary)" />
+            <CreditCard size={22} color="var(--rio-azul)" />
             Cartão Cidadão Sombrinha
           </h2>
           <button
@@ -36,7 +36,7 @@ export default function CitizenCardModal({ isOpen, onClose }) {
           </button>
         </div>
 
-        <p style={{ fontSize: '0.9rem', color: 'var(--text-muted)', marginBottom: '16px' }}>
+        <p style={{ fontSize: '0.9rem', color: 'var(--ink-secundario)', marginBottom: '16px' }}>
           Para quem não tem smartphone ou internet: cartão físico impresso com QR Code para coletar água mineral e acessar pontos de frescor credenciados no Centro do Recife.
         </p>
 

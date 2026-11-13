@@ -54,22 +54,22 @@ export default function RecycleSection() {
   };
 
   return (
-    <section className="card-section" aria-labelledby="recycle-heading">
+    <section className="painel-secao" aria-labelledby="recycle-heading">
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '10px', marginBottom: '14px' }}>
         <div>
-          <h2 id="recycle-heading" className="card-title" style={{ margin: 0 }}>
-            <Recycle size={22} color="var(--primary)" />
+          <h2 id="recycle-heading" className="painel-titulo" style={{ margin: 0 }}>
+            <Recycle size={22} color="var(--mangue)" />
             Moeda Verde & Reciclagem por Frescor
           </h2>
-          <p style={{ fontSize: '0.88rem', color: 'var(--text-muted)', marginTop: '4px' }}>
+          <p style={{ fontSize: '0.88rem', color: 'var(--ink-secundario)', marginTop: '4px' }}>
             Troque resíduos plásticos e latas por água mineral gelada, mudas e protetor solar nos ecopontos do Centro.
           </p>
         </div>
 
         <div
           style={{
-            background: 'var(--primary-light)',
-            border: '2px solid var(--primary)',
+            background: 'var(--mangue-light)',
+            border: '2px solid var(--mangue)',
             borderRadius: '12px',
             padding: '8px 14px',
             display: 'flex',
@@ -78,8 +78,8 @@ export default function RecycleSection() {
             fontWeight: 800
           }}
         >
-          <Award size={20} color="var(--primary)" />
-          <span>Seu Saldo: <strong style={{ color: 'var(--primary-dark)', fontSize: '1.15rem' }}>{saldo}</strong> Gotas</span>
+          <Award size={20} color="var(--mangue)" />
+          <span>Seu Saldo: <strong style={{ color: 'var(--mangue-dark)', fontSize: '1.15rem' }}>{saldo}</strong> Gotas</span>
         </div>
       </div>
 
@@ -108,8 +108,8 @@ export default function RecycleSection() {
       <form
         onSubmit={handleEntregarReciclaveis}
         style={{
-          background: 'var(--bg-main)',
-          border: '1px solid var(--border)',
+          background: 'var(--bg-terreno)',
+          border: '1px solid var(--linha-divisoria)',
           borderRadius: '12px',
           padding: '16px',
           marginBottom: '18px'

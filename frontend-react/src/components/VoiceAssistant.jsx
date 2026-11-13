@@ -74,12 +74,12 @@ export default function VoiceAssistant({ onVoiceResponse, userLocation }) {
   };
 
   return (
-    <section className="card-section" aria-label="Assistente Acessível por Voz">
-      <div className="card-title">
-        <Sparkles size={22} color="var(--primary)" />
+    <section className="painel-secao" aria-label="Assistente Acessível por Voz">
+      <div className="painel-titulo">
+        <Sparkles size={22} color="var(--mangue)" />
         <h2>Assistente por Voz & Perguntas Rápidas</h2>
       </div>
-      <p style={{ color: 'var(--text-muted)', fontSize: '0.92rem', marginBottom: '12px' }}>
+      <p style={{ color: 'var(--ink-secundario)', fontSize: '0.92rem', marginBottom: '12px' }}>
         Acessibilidade para quem está caminhando no asfalto quente: fale com o app para encontrar o ponto de água mais próximo.
       </p>
 
@@ -94,9 +94,9 @@ export default function VoiceAssistant({ onVoiceResponse, userLocation }) {
             minWidth: '220px',
             padding: '12px 14px',
             borderRadius: '10px',
-            border: '2px solid var(--border)',
+            border: '2px solid var(--linha-divisoria)',
             background: 'var(--bg-card)',
-            color: 'var(--text-main)',
+            color: 'var(--ink-principal)',
             fontSize: '0.95rem'
           }}
           onKeyDown={(e) => e.key === 'Enter' && handleConsultar()}
@@ -105,7 +105,7 @@ export default function VoiceAssistant({ onVoiceResponse, userLocation }) {
         <button
           type="button"
           onClick={alternarMicrofone}
-          style={{ background: ouvindo ? '#dc2626' : 'var(--blue)', color: 'white' }}
+          style={{ background: ouvindo ? '#be123c' : 'var(--rio-azul)', color: 'white' }}
           aria-label={ouvindo ? 'Ouvindo...' : 'Falar pelo microfone'}
         >
           <Mic size={18} />
@@ -116,7 +116,7 @@ export default function VoiceAssistant({ onVoiceResponse, userLocation }) {
           type="button"
           onClick={() => handleConsultar()}
           disabled={carregando}
-          style={{ background: 'var(--primary)', color: 'white' }}
+          style={{ background: 'var(--mangue)', color: 'white' }}
         >
           {carregando ? <Loader2 size={18} className="animate-spin" /> : <Send size={18} />}
           <span>Consultar</span>
@@ -127,25 +127,25 @@ export default function VoiceAssistant({ onVoiceResponse, userLocation }) {
       <div style={{ marginTop: '10px', display: 'flex', gap: '6px', flexWrap: 'wrap' }}>
         <button
           type="button"
-          className="tab-pill"
+          className="pilula-filtro"
           onClick={() => simularVoz('Onde tem água gelada gratuita na Conde da Boa Vista?')}
-          style={{ fontSize: '0.82rem', padding: '6px 12px', minHeight: '34px' }}
+          style={{ fontSize: '0.82rem', padding: '6px 12px', minHeight: '36px' }}
         >
           💧 "Água na Boa Vista"
         </button>
         <button
           type="button"
-          className="tab-pill"
+          className="pilula-filtro"
           onClick={() => simularVoz('Tô no Pátio de São José com muito calor')}
-          style={{ fontSize: '0.82rem', padding: '6px 12px', minHeight: '34px' }}
+          style={{ fontSize: '0.82rem', padding: '6px 12px', minHeight: '36px' }}
         >
           🔥 "Calor em São José"
         </button>
         <button
           type="button"
-          className="tab-pill"
+          className="pilula-filtro"
           onClick={() => simularVoz('Como trocar garrafa PET por água mineral?')}
-          style={{ fontSize: '0.82rem', padding: '6px 12px', minHeight: '34px' }}
+          style={{ fontSize: '0.82rem', padding: '6px 12px', minHeight: '36px' }}
         >
           ♻️ "Trocar PET por Água"
         </button>
@@ -155,19 +155,19 @@ export default function VoiceAssistant({ onVoiceResponse, userLocation }) {
         <div
           style={{
             marginTop: '14px',
-            padding: '14px',
+            padding: '14px 16px',
             borderRadius: '10px',
-            background: 'var(--blue-light)',
-            border: '2px solid var(--blue)'
+            background: 'var(--rio-light)',
+            border: '2px solid var(--rio-azul)'
           }}
           role="status"
         >
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <strong style={{ color: 'var(--blue)', fontSize: '0.98rem' }}>Orientação do Sombrinha:</strong>
+            <strong style={{ color: 'var(--rio-azul)', fontSize: '0.98rem' }}>Orientação do Sombrinha:</strong>
             <button
               type="button"
               onClick={() => falarTexto(resposta.resposta_voz)}
-              style={{ background: 'var(--blue)', color: 'white', fontSize: '0.8rem', padding: '4px 10px', minHeight: '32px' }}
+              style={{ background: 'var(--rio-azul)', color: 'white', fontSize: '0.8rem', padding: '4px 10px', minHeight: '32px' }}
             >
               <Volume2 size={14} /> Ouvir Novamente
             </button>
@@ -176,7 +176,7 @@ export default function VoiceAssistant({ onVoiceResponse, userLocation }) {
             {resposta.resposta_voz}
           </p>
           {resposta.recomendacao && (
-            <p style={{ marginTop: '4px', fontSize: '0.85rem', color: 'var(--text-muted)' }}>
+            <p style={{ marginTop: '4px', fontSize: '0.85rem', color: 'var(--ink-secundario)' }}>
               💡 <em>{resposta.recomendacao}</em>
             </p>
           )}
