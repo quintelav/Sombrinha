@@ -7,5 +7,7 @@ __pycache__
 .env.*
 !.env.example
 frontend/node_modules
+frontend-react/node_modules
+frontend-react/dist
 static/app
 backend/data/*.json

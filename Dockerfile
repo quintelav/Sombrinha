@@ -1,10 +1,9 @@
 FROM node:22-alpine AS frontend-build
 
-WORKDIR /workspace
-COPY frontend/package.json frontend/package-lock.json ./
+WORKDIR /workspace/frontend-react
+COPY frontend-react/package.json frontend-react/package-lock.json ./
 RUN npm ci
-COPY frontend/ ./frontend/
-WORKDIR /workspace/frontend
+COPY frontend-react/ ./
 RUN npm run build
 
 FROM python:3.12-slim
@@ -17,7 +16,7 @@ COPY backend/requirements.txt ./requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
 COPY backend/ ./backend/
-COPY --from=frontend-build /workspace/frontend/dist/ ./frontend/dist/
+COPY --from=frontend-build /workspace/frontend-react/dist/ ./frontend-react/dist/
 
 EXPOSE 10000
 WORKDIR /app/backend

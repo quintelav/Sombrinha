@@ -14,6 +14,21 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v4
 
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: frontend-react/package-lock.json
+
+      - name: Install frontend dependencies
+        run: npm ci
+        working-directory: frontend-react
+
+      - name: Build React frontend
+        run: npm run build
+        working-directory: frontend-react
+
       - name: Set up Python
         uses: actions/setup-python@v5
         with:

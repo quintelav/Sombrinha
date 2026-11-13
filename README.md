@@ -24,7 +24,8 @@ Preencher com os nomes e funções da equipe antes da entrega:
 
 - **Aplicação:** Python e Flask
 - **Arquitetura:** MVC — Models, Controllers e Views separados
-- **Frontend:** TypeScript, Svelte, Vite, CSS, Leaflet e OpenStreetMap
+- **Frontend principal:** React, JavaScript, Vite, CSS, Leaflet e OpenStreetMap
+- **Frontend alternativo:** Svelte e TypeScript em `frontend/`
 - **Persistência:** JSON local para demonstração ou PostgreSQL via `DATABASE_URL`
 - **Clima:** Google Maps Platform Weather API, consulta pelo backend
 - **Servidor de produção:** Gunicorn
@@ -50,7 +51,7 @@ Requisitos: Python 3.12+, Node.js 22.12+ e npm.
 py -3.12 -m venv .venv
 Copy-Item .env.example .env
 .\.venv\Scripts\python.exe -m pip install -r backend\requirements.txt
-Set-Location frontend
+Set-Location frontend-react
 npm ci
 npm run build
 Set-Location ..
@@ -61,11 +62,11 @@ Abra `.env` no VS Code e preencha `GOOGLE_WEATHER_API_KEY` com uma chave de prot
 
 Abra `http://localhost:8000` no computador. Para testar pelo celular na mesma rede Wi-Fi, use o endereço de rede mostrado no terminal, também na porta `8000`.
 
-Para desenvolver a interface com atualização rápida, mantenha o Flask rodando em um terminal e, em outro, execute `Set-Location frontend` e `npm run dev`. Acesse `http://localhost:5173`; o Vite encaminha as chamadas `/api` para o Flask. Para servir a versão compilada pelo Flask, execute `npm run build` dentro da pasta `frontend` antes de iniciar o servidor.
+Para desenvolver a interface principal com atualização rápida, mantenha o Flask rodando em um terminal e, em outro, execute `Set-Location frontend-react` e `npm run dev`. Acesse `http://localhost:5173`; o Vite encaminha as chamadas `/api` para o Flask. Para servir a versão compilada pelo Flask, gere o build em `frontend-react` antes de iniciar o servidor.
 
 ## Deploy público
 
-O `Dockerfile` compila o frontend Svelte e prepara a aplicação Flask com Gunicorn. O `render.yaml` configura esse serviço e o banco PostgreSQL:
+O `Dockerfile` compila o frontend React e prepara a aplicação Flask com Gunicorn. O `render.yaml` configura esse serviço e o banco PostgreSQL:
 
 1. Conecte o repositório Sombrinha ao Render e crie um Blueprint.
 2. Configure `GOOGLE_WEATHER_API_KEY` nas variáveis do serviço.
@@ -82,9 +83,13 @@ No Render, configure `GOOGLE_WEATHER_API_KEY` nas variáveis de ambiente do serv
 
 ## Testes e validação
 
-Instale as dependências de desenvolvimento e execute os testes do backend a partir da raiz do repositório:
+Instale as dependências do frontend React e do backend e execute os testes a partir da raiz do repositório. O build React é necessário para que o Flask sirva a página inicial durante o teste de integração:
 
 ```powershell
+Set-Location frontend-react
+npm ci
+npm run build
+Set-Location ..
 .\.venv\Scripts\python.exe -m pip install -r backend\requirements-dev.txt
 .\.venv\Scripts\python.exe -m pytest backend\tests
 ```
