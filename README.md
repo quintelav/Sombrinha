@@ -15,8 +15,8 @@ Relatos, pontos e propostas são indicações para discussão. O sistema não me
 ## Equipe
 
 - **Desenvolvimento:**
+  - Maria Barreto — Desenvolvedora Principal (Front-end & Full-stack).
   - Vitor Quintela — Back-end.
-  - Maria Eduarda — Front-end.
   - Ana Paula — Front-end.
 - **Validador do Movimento Pró-Criança:** Charles Magno.
 - **Retorno da validação:** Charles Magno considerou que a aplicação pode ser útil, principalmente para quem anda muito a pé ou utiliza ônibus. A equipe pode complementar este registro com as tarefas testadas e outros ajustes sugeridos.

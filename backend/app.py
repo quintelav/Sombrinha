@@ -1,8 +1,12 @@
 """Application factory and local entry point for Sombrinha."""
 
 import os
+import sys
 import socket
 from pathlib import Path
+
+# Garante que o diretório backend esteja no sys.path
+sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from flask import Flask, send_from_directory, request
 from dotenv import load_dotenv
@@ -16,9 +20,11 @@ from controllers.recycle_controller import recycle_blueprint
 from controllers.report_controller import reports_blueprint
 from controllers.request_controller import requests_blueprint
 from controllers.shade_controller import shade_blueprint
+from controllers.user_controller import user_blueprint
 from models.adoption_model import AdoptionModel
 from models.report_model import ReportModel
 from models.request_model import RequestModel
+from models.user_model import UserModel
 
 
 load_dotenv()
@@ -41,7 +47,7 @@ def create_app() -> Flask:
         static_folder=str(static_dir),
         static_url_path="",
     )
-    app.config["MAX_CONTENT_LENGTH"] = 50_000
+    app.config["MAX_CONTENT_LENGTH"] = 5_000_000
 
     @app.before_request
     def handle_preflight():
@@ -78,6 +84,7 @@ def create_app() -> Flask:
         ai_blueprint,
         heat_islands_blueprint,
         requests_blueprint,
+        user_blueprint,
     ):
         app.register_blueprint(blueprint)
 
@@ -86,6 +93,7 @@ def create_app() -> Flask:
         ReportModel.initialize_database()
         AdoptionModel.initialize_database()
         RequestModel.initialize_database()
+        UserModel.initialize_database()
 
     return app
 

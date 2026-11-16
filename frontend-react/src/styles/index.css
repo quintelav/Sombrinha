@@ -1,38 +1,66 @@
 /* ==========================================================================
-   SOMBRINHA RECIFE — DESIGN CÍVICO MINIMALISTA
-   Estética limpa, contemporânea, com linhas simples e bordas sóbrias.
-   Cores precisas, tipografia de alta legibilidade, preservando 100% da estrutura.
+   SOMBRINHA RECIFE — DESIGN CÍVICO INSPIRADO NA BANDEIRA DE PERNAMBUCO
+   Cores Oficiais: Azul Cobalto do Céu (#002b7f), Branco da Paz (#ffffff),
+   Arco-Íris Tricolor (Vermelho #dc2626, Amarelo Sol #facc15, Verde Mangue #16a34a)
+   e o Sol Dourado Radiante (#eab308).
+   Preservando 100% da estrutura, componentes e funcionalidades.
    ========================================================================== */
 
 :root {
-  /* Paleta Minimalista — Tons neutros refinados com acentos cívicos sóbrios */
-  --mangue: #0f766e;            /* Verde Esmeralda Cívico (Teal 700) */
-  --mangue-dark: #115e59;       /* Teal 800 */
-  --mangue-light: #f0fdfa;      /* Teal 50 */
-  --terracota: #c2410c;         /* Âmbar / Terracota Refinado (Orange 700) */
-  --terracota-dark: #9a3412;    /* Orange 800 */
-  --terracota-light: #fff7ed;   /* Orange 50 */
-  --capibaribe: #0284c7;        /* Azul Capibaribe / Água (Sky 600) */
-  --capibaribe-light: #f0f9ff;  /* Sky 50 */
-  --alerta-calor: #dc2626;      /* Vermelho Térmico Minimalista (Red 600) */
-  --alerta-calor-light: #fef2f2;/* Red 50 */
+  /* ==========================================================================
+     PALETA OFICIAL DA BANDEIRA DE PERNAMBUCO
+     ========================================================================== */
   
-  /* Superfícies & Tipografia Neutras e Limpas */
-  --bg-terreno: #f8fafc;        /* Fundo neutro suave (Slate 50) */
-  --bg-card: #ffffff;           /* Superfície pura e clara */
-  --bg-subtle: #f1f5f9;         /* Bloco neutro secundário (Slate 100) */
-  --bg-hover: #f1f5f9;
+  /* Azul Cobalto Oficial de Pernambuco (Céu, Mar e Firmeza Cívica) */
+  --pe-azul: #002b7f;
+  --pe-azul-escuro: #001f5c;
+  --pe-azul-medio: #0b3b95;
+  --pe-azul-suave: #eff6ff;
+  --pe-azul-borda: #bfdbfe;
   
-  --ink-principal: #0f172a;     /* Texto de alta legibilidade (Slate 900) */
-  --ink-secundario: #475569;    /* Texto secundário (Slate 600) */
-  --ink-suave: #94a3b8;         /* Texto terciário / metadados (Slate 400) */
-  --linha-divisoria: #e2e8f0;   /* Linhas simples de 1px (Slate 200) */
-  --linha-suave: #f1f5f9;       /* Divisórias sutis 1px (Slate 100) */
-  --linha-destaque: #cbd5e1;    /* Foco sutil 1px (Slate 300) */
+  /* Verde da Bandeira (Canaviais, Mangues e Esperança) */
+  --mangue: #15803d;            /* Verde Canavial / Mata Atlântica da Bandeira (Green 700) */
+  --mangue-dark: #166534;       /* Green 800 */
+  --mangue-light: #f0fdf4;      /* Green 50 */
+  --mangue-border: #bbf7d0;     /* Green 200 */
   
-  /* Sombras & Formas Minimalistas (Linhas e Bordas Simples) */
-  --sombra-card: 0 1px 3px 0 rgba(0, 0, 0, 0.04);
-  --sombra-flutuante: 0 4px 12px 0 rgba(0, 0, 0, 0.05);
+  /* Amarelo Solar da Bandeira (Sol Radiante & Riquezas de Pernambuco) */
+  --terracota: #d97706;         /* Âmbar Dourado Solar de Pernambuco */
+  --terracota-dark: #b45309;    /* Dourado Queimado */
+  --terracota-light: #fefce8;   /* Fundo Solar Suave */
+  --terracota-border: #fef08a;  /* Amarelo Sol 200 */
+  
+  /* Azul Capibaribe & Oceano (Céu de Pernambuco) */
+  --capibaribe: #0055b8;        /* Azul Vibrante da Bandeira */
+  --capibaribe-dark: #002b7f;   /* Azul Cobalto Profundo */
+  --capibaribe-light: #eff6ff;  /* Azul Celestial Suave */
+  
+  /* Vermelho da Cruz e do Arco-Íris (Fé, Frevo e Coragem) */
+  --alerta-calor: #dc2626;      /* Vermelho Rubro da Cruz de Santa Cruz */
+  --alerta-calor-dark: #b91c1c; /* Vermelho Escuro */
+  --alerta-calor-light: #fef2f2;/* Vermelho Suave 50 */
+  --alerta-calor-border: #fecaca;
+  
+  /* Símbolos Especiais da Bandeira de Pernambuco */
+  --pe-arco-iris: linear-gradient(90deg, #dc2626 0%, #dc2626 33.3%, #facc15 33.3%, #facc15 66.6%, #16a34a 66.6%, #16a34a 100%);
+  --pe-sol-ouro: #eab308;
+  
+  /* Superfícies & Tipografia com o Azul Celeste e Branco da Bandeira */
+  --bg-terreno: #e4edf8;        /* Azul-celeste de Pernambuco evidente e agradável (não branco!) */
+  --bg-card: #ffffff;           /* Branco puro da metade inferior da bandeira */
+  --bg-subtle: #dbeafe;         /* Bloco neutro com tom celeste */
+  --bg-hover: #d0e4fa;
+  
+  --ink-principal: #00225c;     /* Azul-marinho oficial escuro */
+  --ink-secundario: #264366;    /* Azul ardósia médio */
+  --ink-suave: #577395;         /* Azul ardósia suave para metadados */
+  --linha-divisoria: #bfd5ed;   /* Linhas bem visíveis no azul da bandeira */
+  --linha-suave: #e4edf8;
+  --linha-destaque: #9ec0e6;
+  
+  /* Sombras & Formas Cívicas */
+  --sombra-card: 0 4px 14px 0 rgba(0, 43, 127, 0.08);
+  --sombra-flutuante: 0 8px 24px 0 rgba(0, 43, 127, 0.12);
   
   --raio-card: 8px;             /* Bordas simples com raio suave */
   --raio-subitem: 6px;
@@ -106,28 +134,31 @@ button:focus-visible {
   outline-offset: 2px;
 }
 
-/* Container Responsivo */
+/* Container Responsivo Perfeitamente Centralizado */
 .container,
 .container-adaptativo {
   width: 100%;
-  max-width: 100%;
-  margin: 0;
+  max-width: 1440px;
+  margin-left: auto;
+  margin-right: auto;
   padding: 20px 32px;
   box-sizing: border-box;
 }
 
 /* ==========================================================================
-   CABEÇALHO MINIMALISTA & SÓBRIO
+   CABEÇALHO INSPIRADO NA BANDEIRA DE PERNAMBUCO
+   Azul Cobalto nobre do céu com acabamento tricolor do arco-íris
    ========================================================================== */
 .app-header {
-  background: #0f172a; /* Slate 900 minimalista */
+  background: linear-gradient(135deg, #001948 0%, #002b7f 55%, #083b96 100%);
   color: #ffffff;
   padding: 12px 0;
   position: sticky;
   top: 0;
   z-index: 100;
-  border-bottom: 1px solid #1e293b;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  border-bottom: 3.5px solid transparent;
+  border-image: linear-gradient(90deg, #dc2626 0%, #dc2626 33.3%, #facc15 33.3%, #facc15 66.6%, #16a34a 66.6%, #16a34a 100%) 1;
+  box-shadow: 0 4px 18px rgba(0, 31, 92, 0.28);
   transition: transform 0.25s ease;
   will-change: transform;
 }
@@ -135,6 +166,16 @@ button:focus-visible {
 .app-header.header-hidden {
   transform: translateY(-100%);
   box-shadow: none;
+}
+
+/* Rodapé Cívico com o Azul Cobalto e Arco-Íris de Pernambuco */
+.app-footer {
+  background: linear-gradient(135deg, #001948 0%, #002b7f 55%, #083b96 100%);
+  color: #ffffff;
+  margin-top: 48px;
+  border-top: 3.5px solid transparent;
+  border-image: linear-gradient(90deg, #dc2626 0%, #dc2626 33.3%, #facc15 33.3%, #facc15 66.6%, #16a34a 66.6%, #16a34a 100%) 1;
+  box-shadow: 0 -4px 18px rgba(0, 31, 92, 0.16);
 }
 
 .header-container-centered {
@@ -166,7 +207,8 @@ button:focus-visible {
   border-radius: 50%;
   object-fit: cover;
   background: #ffffff;
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  border: 2px solid #facc15;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
 }
 
 .brand-text {
@@ -196,20 +238,20 @@ body.sol-forte .brand-title {
   display: inline-flex;
   align-items: center;
   gap: 5px;
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  color: #f1f5f9;
+  background: rgba(250, 204, 21, 0.16);
+  border: 1px solid rgba(250, 204, 21, 0.45);
+  color: #fef08a;
   font-size: 0.74rem;
-  font-weight: 600;
-  padding: 2px 7px;
+  font-weight: 700;
+  padding: 2px 8px;
   border-radius: 4px;
-  letter-spacing: 0.2px;
+  letter-spacing: 0.3px;
 }
 
 .brand-slogan {
   font-size: 0.8rem;
   font-weight: 400;
-  color: #94a3b8;
+  color: #bfdbfe;
   margin-top: 1px;
 }
 
@@ -225,36 +267,46 @@ body.sol-forte .brand-slogan {
 }
 
 .btn-header {
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.12);
   color: #ffffff;
-  border: 1px solid rgba(255, 255, 255, 0.16);
+  border: 1px solid rgba(255, 255, 255, 0.24);
   font-size: 0.84rem;
-  font-weight: 500;
+  font-weight: 550;
   padding: 6px 12px;
   border-radius: var(--raio-subitem);
   min-height: 36px;
+  backdrop-filter: blur(4px);
+  transition: all 0.15s ease;
 }
 
 .btn-header:hover {
-  background: rgba(255, 255, 255, 0.15);
-  border-color: rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.22);
+  border-color: #facc15;
+  color: #ffffff;
 }
 
 .btn-header-destaque {
-  background: #c2410c;
+  background: #dc2626;
   color: #ffffff;
-  border: 1px solid #9a3412;
+  border: 1px solid #b91c1c;
 }
 
 .btn-header-destaque:hover {
-  background: #9a3412;
+  background: #b91c1c;
 }
 
 .btn-header-sol-forte {
   background: #facc15;
-  color: #0f172a;
-  font-weight: 650;
+  color: #001f5c;
+  font-weight: 750;
   border: 1px solid #eab308;
+  box-shadow: 0 2px 6px rgba(250, 204, 21, 0.35);
+}
+
+.btn-header-sol-forte:hover {
+  background: #fde047;
+  color: #001f5c;
+  border-color: #facc15;
 }
 
 body.sol-forte .btn-header-sol-forte {
@@ -271,7 +323,7 @@ body.sol-forte .btn-header-sol-forte {
 /* 1. Grade Superior: Alívio & Clima (Esquerda) + Mapa (Direita) */
 .layout-principal-topo {
   display: grid;
-  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: 20px;
   align-items: stretch;
   width: 100%;
@@ -424,10 +476,17 @@ body.sol-forte .btn-tela-cheia.ativo {
   100% { transform: scale(0.9); opacity: 0.8; }
 }
 
-/* 2. Barra Acessível de Busca e Voz (Totalmente Preenchida, Sem Buracos Brancos) */
+/* 2. Barra Acessível de Busca e Voz (Inspirada no Arco-Íris de Pernambuco) */
 .banner-busca-voz {
   width: 100%;
   margin-top: 20px;
+  background: #ffffff;
+  border: 1.5px solid #bfdbfe;
+  border-top: 4.5px solid transparent;
+  border-image: linear-gradient(90deg, #dc2626 0%, #dc2626 33.3%, #facc15 33.3%, #facc15 66.6%, #16a34a 66.6%, #16a34a 100%) 1;
+  border-radius: var(--raio-card);
+  padding: 16px 20px;
+  box-shadow: 0 4px 14px rgba(0, 43, 127, 0.08);
 }
 
 .busca-voz-topo {
@@ -502,19 +561,29 @@ body.sol-forte .btn-tela-cheia.ativo {
 }
 
 .cartao-feed-item {
-  background: var(--bg-card);
-  border: 1px solid var(--linha-divisoria);
+  background: #fffdf5;
+  border: 1.5px solid #fef08a;
+  border-left: 4px solid #f59e0b;
   border-radius: var(--raio-subitem);
   padding: 12px 14px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   gap: 8px;
-  box-shadow: none;
+  box-shadow: 0 2px 6px rgba(245, 158, 11, 0.06);
 }
 
 .cartao-empresa-item {
-  border: 1px solid var(--linha-divisoria);
+  background: #f0fdf4;
+  border: 1.5px solid #bbf7d0;
+  border-left: 4px solid #16a34a;
+  border-radius: var(--raio-subitem);
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 8px;
+  box-shadow: 0 2px 6px rgba(22, 163, 74, 0.06);
 }
 
 .banner-rodape-painel {
@@ -529,18 +598,21 @@ body.sol-forte .btn-tela-cheia.ativo {
 }
 
 .banner-terracota {
-  background: var(--terracota-light);
-  border: 1px solid #fed7aa;
+  background: #fefce8;
+  border: 1.5px solid #fde047;
+  color: #854d0e;
 }
 
 .banner-alerta {
-  background: var(--alerta-calor-light);
-  border: 1px solid #fecaca;
+  background: #fef2f2;
+  border: 1.5px solid #fecaca;
+  color: #991b1b;
 }
 
 .banner-mangue {
-  background: var(--mangue-light);
-  border: 1px solid #ccfbf1;
+  background: #f0fdf4;
+  border: 1.5px solid #bbf7d0;
+  color: #14532d;
 }
 
 /* Modo Mobile (< 768px): Coluna Única Fluida Sem Quebra */
@@ -581,20 +653,48 @@ body.sol-forte .btn-tela-cheia.ativo {
 }
 
 /* ==========================================================================
-   CARTÕES & COMPONENTES VISUAIS MINIMALISTAS (LINHAS E BORDAS SIMPLES)
+   CARTÕES & COMPONENTES VISUAIS INSPIRADOS NA BANDEIRA DE PERNAMBUCO
+   Bordas temáticas cívicas: Azul Cobalto, Sol Dourado, Verde Canavial e Cruz Rubra
    ========================================================================== */
 .painel-secao {
   background: var(--bg-card);
-  border: 1px solid var(--linha-divisoria);
+  border: 1.5px solid var(--linha-divisoria);
+  border-top: 4px solid var(--pe-azul);
   border-radius: var(--raio-card);
   padding: 18px 20px;
   box-shadow: var(--sombra-card);
 }
 
+/* Faixas Superiores Distintivas da Bandeira de Pernambuco nos Painéis */
+.painel-mapa-principal {
+  border-top: 4.5px solid transparent !important;
+  border-image: linear-gradient(90deg, #dc2626 0%, #dc2626 33.3%, #facc15 33.3%, #facc15 66.6%, #16a34a 66.6%, #16a34a 100%) 1 !important;
+}
+
+.painel-mapa-termico-clima {
+  border-top: 4.5px solid var(--alerta-calor) !important;
+}
+
+.painel-pedidos-comunitarios {
+  border-top: 4.5px solid var(--terracota) !important;
+}
+
+.painel-comentarios-criticos {
+  border-top: 4.5px solid var(--alerta-calor) !important;
+}
+
+.painel-adocao-empresas {
+  border-top: 4.5px solid var(--mangue) !important;
+}
+
+.painel-reciclagem {
+  border-top: 4.5px solid #002b7f !important;
+}
+
 .painel-header {
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
+  align-items: center;
   margin-bottom: 12px;
   flex-wrap: wrap;
   gap: 8px;
@@ -616,13 +716,15 @@ body.sol-forte .btn-tela-cheia.ativo {
   margin-top: 2px;
 }
 
-/* 1. Alerta / Notificação de Alívio Térmico */
+/* 1. Alerta / Notificação de Alívio Térmico com o Sol de Ouro de PE */
 .alerta-resiliencia {
-  background: var(--bg-card);
-  border: 1px solid var(--linha-divisoria);
+  background: #ffffff;
+  border: 1.5px solid #fef08a;
+  border-top: 4.5px solid var(--pe-sol-ouro);
+  border-left: 5px solid var(--terracota);
   border-radius: var(--raio-card);
   padding: 18px 20px;
-  box-shadow: var(--sombra-card);
+  box-shadow: 0 4px 14px rgba(217, 119, 6, 0.1);
   width: 100%;
   max-width: 100%;
   box-sizing: border-box;
@@ -661,8 +763,9 @@ body.sol-forte .alerta-badge-origem {
 }
 
 .cartao-alivio-item {
-  background: var(--bg-subtle);
-  border: 1px solid var(--linha-divisoria);
+  background: #ffffff;
+  border: 1.5px solid #bfd5ed;
+  border-left: 4px solid var(--pe-azul);
   border-radius: var(--raio-subitem);
   padding: 11px 14px;
   display: flex;
@@ -674,11 +777,13 @@ body.sol-forte .alerta-badge-origem {
   max-width: 100%;
   min-width: 0;
   box-sizing: border-box;
-  transition: background-color 0.15s ease;
+  transition: all 0.15s ease;
+  box-shadow: 0 2px 6px rgba(0, 43, 127, 0.05);
 }
 
 .cartao-alivio-item:hover {
-  background: #eef2f6;
+  background: #f0f7ff;
+  border-color: var(--pe-azul);
 }
 
 .cartao-alivio-topo {
@@ -703,8 +808,10 @@ body.sol-forte .alerta-badge-origem {
 .cartao-alivio-lado-direito {
   display: flex;
   align-items: center;
+  justify-content: flex-end;
   gap: 12px;
   flex-shrink: 0;
+  min-width: 170px;
 }
 
 .btn-alivio-acao {
@@ -715,8 +822,13 @@ body.sol-forte .alerta-badge-origem {
   font-weight: 500;
   padding: 5px 12px;
   min-height: 32px;
+  min-width: 100px;
   border-radius: var(--raio-subitem);
   white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
 }
 
 .btn-alivio-acao:hover {
@@ -725,10 +837,11 @@ body.sol-forte .alerta-badge-origem {
   border-color: var(--mangue);
 }
 
-/* 2. Monitor Climático Editorial */
+/* 2. Monitor Climático Editorial com Topo Azul Cobalto */
 .clima-editorial-box {
-  background: var(--bg-card);
-  border: 1px solid var(--linha-divisoria);
+  background: #ffffff;
+  border: 1.5px solid var(--linha-divisoria);
+  border-top: 4.5px solid var(--pe-azul);
   border-radius: var(--raio-card);
   padding: 20px;
   box-shadow: var(--sombra-card);
@@ -760,8 +873,9 @@ body.sol-forte .alerta-badge-origem {
 }
 
 .clima-metrica-bloco {
-  background: var(--bg-terreno);
-  border: 1px solid var(--linha-divisoria);
+  background: #f0f7ff;
+  border: 1.5px solid #bfdbfe;
+  border-left: 3.5px solid var(--pe-azul);
   border-radius: 8px;
   padding: 10px 12px;
 }
@@ -861,15 +975,16 @@ body.sol-forte .aviso-saude-card {
 }
 
 .chip-pergunta:hover {
-  background: var(--mangue-light);
-  border-color: var(--mangue);
+  background: var(--pe-azul-suave);
+  border-color: var(--pe-azul);
+  color: var(--pe-azul);
 }
 
 .resposta-voz-container {
   margin-top: 14px;
   padding: 14px 16px;
   background: var(--bg-terreno);
-  border-left: 3px solid var(--mangue);
+  border-left: 3px solid var(--pe-azul);
   border-radius: 6px;
 }
 
@@ -882,8 +997,9 @@ body.sol-forte .aviso-saude-card {
 }
 
 .contador-item {
-  background: var(--bg-terreno);
-  border: 1px solid var(--linha-divisoria);
+  background: #f0fdf4;
+  border: 1.5px solid #bbf7d0;
+  border-left: 3.5px solid #16a34a;
   border-radius: 8px;
   padding: 12px;
   text-align: center;
@@ -904,8 +1020,9 @@ body.sol-forte .aviso-saude-card {
 }
 
 .card-recompensa {
-  background: var(--bg-terreno);
-  border: 1px solid var(--linha-divisoria);
+  background: #fffdf5;
+  border: 1.5px solid #fef08a;
+  border-left: 3.5px solid #f59e0b;
   border-radius: 8px;
   padding: 12px;
   display: flex;
@@ -915,6 +1032,14 @@ body.sol-forte .aviso-saude-card {
 }
 
 /* 5. Filtros e Legenda do Mapa */
+.filtros-mapa {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 6px 0;
+}
+
 .filtros-mapa-container {
   display: flex;
   flex-direction: column;
@@ -931,27 +1056,30 @@ body.sol-forte .aviso-saude-card {
 }
 
 .pilula-filtro {
-  background: var(--bg-card);
-  border: 1px solid var(--linha-divisoria);
-  color: var(--ink-secundario);
+  background: #ffffff;
+  border: 1.5px solid #bfdbfe;
+  color: var(--pe-azul);
   white-space: nowrap;
   font-size: 0.8rem;
-  font-weight: 500;
+  font-weight: 650;
   padding: 5px 12px;
   border-radius: var(--raio-subitem);
   min-height: 32px;
+  transition: all 0.15s ease;
 }
 
 .pilula-filtro:hover {
-  border-color: var(--linha-destaque);
-  color: var(--ink-principal);
+  background: #eff6ff;
+  border-color: var(--pe-azul);
+  color: var(--pe-azul-escuro);
 }
 
 .pilula-filtro.ativa {
-  background: var(--mangue);
+  background: var(--pe-azul);
   color: #ffffff;
-  border-color: var(--mangue);
-  font-weight: 600;
+  border-color: var(--pe-azul-escuro);
+  font-weight: 700;
+  box-shadow: 0 3px 8px rgba(0, 43, 127, 0.35);
 }
 
 body.sol-forte .pilula-filtro.ativa {
@@ -1090,13 +1218,14 @@ body.sol-forte .btn-modo-mapa.ativo {
 .modal-dialog {
   background: var(--bg-card);
   border: 1px solid var(--linha-destaque);
+  border-top: 4px solid var(--pe-azul);
   border-radius: 14px;
   max-width: 540px;
   width: 100%;
   padding: 24px;
   max-height: 90vh;
   overflow-y: auto;
-  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.22);
+  box-shadow: 0 16px 36px rgba(0, 43, 127, 0.18);
 }
 
 .corridor-item {
@@ -1116,4 +1245,768 @@ body.sol-forte .btn-modo-mapa.ativo {
 .custom-frevo-marker:hover svg {
   transform: scale(1.15);
   transition: transform 0.18s ease;
+}
+
+/* ==========================================================================
+   PERFIL DE USUÁRIO E AUTENTICAÇÃO CÍVICA
+   ========================================================================== */
+
+/* Botão de Perfil no Header */
+.btn-header-perfil {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.btn-header-perfil-logged {
+  background: rgba(0, 43, 127, 0.45) !important;
+  border-color: #facc15 !important;
+  color: #ffffff !important;
+  padding: 4px 10px !important;
+  box-shadow: 0 0 0 1px rgba(250, 204, 21, 0.25);
+}
+
+.btn-header-perfil-logged:hover {
+  background: rgba(0, 43, 127, 0.65) !important;
+  border-color: #fde047 !important;
+}
+
+.header-avatar-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.header-avatar-img {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1.5px solid #ffffff;
+  display: block;
+}
+
+.header-avatar-initials {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--pe-azul);
+  color: #ffffff;
+  font-size: 0.75rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1.5px solid #facc15;
+}
+
+.header-user-firstname {
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: #ffffff;
+  max-width: 110px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Modal de Perfil */
+.user-profile-dialog {
+  max-width: 520px;
+  width: 100%;
+}
+
+.user-profile-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--linha-divisoria);
+}
+
+.user-profile-badge-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background: var(--pe-azul-suave);
+  color: var(--pe-azul);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* Alertas de Perfil */
+.profile-alert {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  margin-bottom: 14px;
+}
+.profile-alert-error {
+  background: var(--alerta-calor-light);
+  color: var(--alerta-calor);
+  border: 1px solid rgba(220, 38, 38, 0.25);
+}
+.profile-alert-success {
+  background: #f0fdf4;
+  color: #15803d;
+  border: 1px solid rgba(34, 197, 94, 0.3);
+}
+
+/* Abas de Autenticação */
+.auth-tab-group {
+  display: flex;
+  gap: 6px;
+  background: var(--bg-subtle);
+  padding: 4px;
+  border-radius: 8px;
+  margin-bottom: 18px;
+}
+
+.auth-tab-btn {
+  flex: 1;
+  background: transparent;
+  border: none;
+  padding: 8px 12px;
+  font-size: 0.86rem;
+  font-weight: 600;
+  color: var(--ink-secundario);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.auth-tab-btn.active {
+  background: var(--bg-card);
+  color: var(--ink-principal);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+/* Formulário de Perfil */
+.profile-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.form-group label {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--ink-principal);
+}
+
+.input-with-icon {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-with-icon .field-icon {
+  position: absolute;
+  left: 12px;
+  color: var(--ink-suave);
+  pointer-events: none;
+}
+
+.input-with-icon input {
+  width: 100%;
+  padding: 9px 12px 9px 36px;
+  border-radius: 6px;
+  border: 1px solid var(--linha-destaque);
+  background: var(--bg-card);
+  color: var(--ink-principal);
+  font-size: 0.9rem;
+  font-family: inherit;
+  outline: none;
+  transition: border-color 0.15s ease;
+}
+
+.input-with-icon input:focus,
+.select-custom:focus,
+.textarea-custom:focus,
+.input-custom:focus {
+  border-color: var(--pe-azul);
+  box-shadow: 0 0 0 2px rgba(0, 43, 127, 0.15);
+}
+
+.input-custom {
+  width: 100%;
+  padding: 9px 12px;
+  border-radius: 6px;
+  border: 1px solid var(--linha-destaque);
+  background: var(--bg-card);
+  color: var(--ink-principal);
+  font-size: 0.9rem;
+  font-family: inherit;
+  outline: none;
+}
+
+.select-custom {
+  width: 100%;
+  padding: 9px 12px;
+  border-radius: 6px;
+  border: 1px solid var(--linha-destaque);
+  background: var(--bg-card);
+  color: var(--ink-principal);
+  font-size: 0.9rem;
+  font-family: inherit;
+  outline: none;
+}
+
+.textarea-custom {
+  width: 100%;
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1px solid var(--linha-destaque);
+  background: var(--bg-card);
+  color: var(--ink-principal);
+  font-size: 0.88rem;
+  font-family: inherit;
+  resize: vertical;
+  outline: none;
+}
+
+/* Divisor Demo */
+.auth-demo-divider {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin: 10px 0;
+  color: var(--ink-suave);
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+.auth-demo-divider::before,
+.auth-demo-divider::after {
+  content: '';
+  flex: 1;
+  border-bottom: 1px solid var(--linha-divisoria);
+}
+.auth-demo-divider span {
+  padding: 0 10px;
+}
+
+.btn-demo-account {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 9px 14px;
+  background: var(--pe-azul-suave);
+  color: var(--pe-azul);
+  border: 1px dashed var(--pe-azul);
+  border-radius: 6px;
+  font-size: 0.84rem;
+  font-weight: 650;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+.btn-demo-account:hover {
+  background: #dbeafe;
+}
+
+/* Botão Primário Cívico */
+.btn-primary-cívico {
+  background: linear-gradient(135deg, var(--pe-azul) 0%, var(--pe-azul-medio) 100%);
+  color: #ffffff;
+  border: 1px solid var(--pe-azul-escuro);
+  border-radius: 6px;
+  padding: 10px 16px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: 0 2px 6px rgba(0, 43, 127, 0.22);
+}
+.btn-primary-cívico:hover {
+  background: var(--pe-azul-escuro);
+  box-shadow: 0 4px 12px rgba(0, 43, 127, 0.3);
+}
+.btn-primary-cívico:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+/* Upload de Avatar */
+.avatar-preview-box {
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+  background: var(--bg-subtle);
+  border: 2px solid var(--linha-destaque);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.avatar-img-circle {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.avatar-initials-circle {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--pe-azul);
+}
+
+.btn-upload-avatar {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--bg-subtle);
+  border: 1px solid var(--linha-destaque);
+  color: var(--ink-principal);
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.btn-upload-avatar:hover {
+  background: var(--linha-divisoria);
+}
+
+.btn-clear-photo {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: transparent;
+  border: none;
+  color: var(--alerta-calor);
+  font-size: 0.76rem;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 2px 4px;
+}
+.btn-clear-photo:hover {
+  text-decoration: underline;
+}
+
+.avatar-presets-wrap {
+  margin-top: 14px;
+  width: 100%;
+}
+
+.avatar-presets-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.avatar-presets-label {
+  font-size: 0.79rem;
+  color: var(--ink-principal);
+  font-weight: 750;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0;
+}
+
+.avatar-category-pills {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+
+.category-pill {
+  background: var(--bg-subtle);
+  border: 1px solid var(--linha-divisoria);
+  border-radius: 12px;
+  padding: 3px 8px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--ink-secundario);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.category-pill:hover {
+  background: var(--linha-destaque);
+  color: var(--ink-principal);
+}
+
+.category-pill.active {
+  background: var(--pe-azul);
+  color: #ffffff;
+  border-color: var(--pe-azul-escuro);
+}
+
+.avatar-presets-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  max-height: 250px;
+  overflow-y: auto;
+  padding: 2px 2px 8px 2px;
+}
+
+.preset-cultural-card {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 10px;
+  height: 60px;
+  min-height: 60px;
+  max-height: 60px;
+  box-sizing: border-box;
+  border-radius: 8px;
+  border: 1px solid var(--linha-divisoria);
+  background: var(--bg-card);
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.15s ease;
+  width: 100%;
+  overflow: hidden;
+}
+
+.preset-cultural-card:hover {
+  border-color: var(--pe-azul);
+  background: var(--pe-azul-suave);
+  transform: translateY(-1px);
+}
+
+.preset-cultural-card.active {
+  border-color: var(--pe-azul);
+  background: var(--pe-azul-suave);
+  box-shadow: 0 0 0 2px rgba(0, 43, 127, 0.25);
+}
+
+.preset-cultural-avatar-frame {
+  width: 42px;
+  height: 42px;
+  min-width: 42px;
+  max-width: 42px;
+  min-height: 42px;
+  max-height: 42px;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+  border: 1.5px solid var(--linha-destaque);
+  background: var(--bg-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.preset-cultural-avatar-frame img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center 20%;
+  display: block;
+}
+
+.preset-cultural-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 0;
+  flex: 1;
+  gap: 1px;
+}
+
+.preset-cultural-name {
+  font-size: 0.8rem;
+  font-weight: 750;
+  color: var(--ink-principal);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
+  line-height: 1.25;
+}
+
+.preset-cultural-sub {
+  font-size: 0.69rem;
+  color: var(--ink-secundario);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
+  line-height: 1.25;
+}
+
+.preset-cultural-check {
+  color: var(--pe-azul);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+}
+
+body.sol-forte .category-pill {
+  background: #18181b;
+  border-color: #facc15;
+  color: #facc15;
+}
+body.sol-forte .category-pill.active {
+  background: #facc15;
+  color: #000000;
+  border-color: #facc15;
+}
+
+body.sol-forte .preset-cultural-card {
+  background: #18181b;
+  border-color: #facc15;
+}
+body.sol-forte .preset-cultural-card.active,
+body.sol-forte .preset-cultural-card:hover {
+  background: #27272a;
+  border-color: #22c55e;
+}
+
+/* Perfil Logado - Exibição */
+.profile-view-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.profile-identity-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: var(--bg-terreno);
+  border: 1px solid var(--linha-divisoria);
+  border-radius: 10px;
+  padding: 16px;
+}
+
+.profile-avatar-wrapper {
+  position: relative;
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.profile-large-avatar {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #ffffff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.profile-large-initials {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: var(--mangue);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  font-weight: 800;
+  border: 3px solid #ffffff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.profile-status-dot {
+  position: absolute;
+  bottom: 2px;
+  right: 2px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #22c55e;
+  border: 2px solid #ffffff;
+}
+
+.profile-identity-details {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+
+.profile-identity-name {
+  font-size: 1.15rem;
+  font-weight: 800;
+  margin: 0;
+  color: var(--ink-principal);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.profile-identity-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.82rem;
+  color: var(--ink-secundario);
+}
+
+.profile-bio-box {
+  background: var(--pe-azul-suave);
+  border-left: 3px solid var(--pe-azul);
+  padding: 10px 14px;
+  border-radius: 4px;
+}
+
+.profile-badges-row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.profile-badge-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--bg-card);
+  border: 1px solid var(--linha-divisoria);
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 0.78rem;
+  font-weight: 650;
+  color: var(--ink-principal);
+}
+
+.profile-actions-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 8px;
+  border-top: 1px solid var(--linha-divisoria);
+  padding-top: 14px;
+}
+
+.btn-edit-profile {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: linear-gradient(135deg, var(--pe-azul) 0%, var(--pe-azul-medio) 100%);
+  color: #ffffff;
+  border: 1px solid var(--pe-azul-escuro);
+  border-radius: 6px;
+  padding: 10px 16px;
+  font-size: 0.88rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  box-shadow: 0 2px 6px rgba(0, 43, 127, 0.22);
+}
+.btn-edit-profile:hover {
+  background: var(--pe-azul-escuro);
+  box-shadow: 0 4px 10px rgba(0, 43, 127, 0.3);
+}
+
+.btn-logout-trigger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: transparent;
+  color: var(--alerta-calor);
+  border: 1px solid rgba(220, 38, 38, 0.35);
+  border-radius: 6px;
+  padding: 9px 16px;
+  font-size: 0.84rem;
+  font-weight: 650;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.btn-logout-trigger:hover {
+  background: var(--alerta-calor-light);
+  border-color: var(--alerta-calor);
+}
+
+.logout-confirm-box {
+  background: var(--alerta-calor-light);
+  border: 1px solid rgba(220, 38, 38, 0.3);
+  border-radius: 8px;
+  padding: 12px;
+}
+
+.btn-logout-confirm {
+  background: var(--alerta-calor);
+  color: #ffffff;
+  border: none;
+  padding: 7px 12px;
+  border-radius: 6px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+.btn-logout-confirm:hover {
+  background: #b91c1c;
+}
+
+.btn-logout-cancel {
+  background: var(--bg-card);
+  color: var(--ink-principal);
+  border: 1px solid var(--linha-destaque);
+  padding: 7px 12px;
+  border-radius: 6px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn-cancelar-edicao {
+  background: var(--bg-subtle);
+  color: var(--ink-principal);
+  border: 1px solid var(--linha-destaque);
+  border-radius: 6px;
+  padding: 10px 16px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+.btn-cancelar-edicao:hover {
+  background: var(--linha-divisoria);
+}
+
+/* Sol Forte Overrides */
+body.sol-forte .user-profile-dialog {
+  background: #09090b;
+  border-color: #facc15;
+}
+body.sol-forte .profile-identity-card {
+  background: #18181b;
+  border-color: #facc15;
+}
+body.sol-forte .input-with-icon input,
+body.sol-forte .select-custom,
+body.sol-forte .textarea-custom,
+body.sol-forte .input-custom {
+  background: #18181b;
+  border-color: #facc15;
+  color: #ffffff;
+}
+body.sol-forte .auth-tab-btn.active {
+  background: #27272a;
+  color: #facc15;
+}
+body.sol-forte .btn-header-perfil-logged {
+  background: #14532d !important;
+  border-color: #22c55e !important;
 }

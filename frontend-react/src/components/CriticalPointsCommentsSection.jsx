@@ -61,7 +61,7 @@ export default function CriticalPointsCommentsSection() {
   };
 
   return (
-    <section className="painel-secao" aria-labelledby="comments-heading">
+    <section className="painel-secao painel-comentarios-criticos" aria-labelledby="comments-heading">
       <div className="painel-header">
         <div>
           <h2 id="comments-heading" className="painel-titulo">

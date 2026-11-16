@@ -1,7 +1,21 @@
 import React, { useEffect, useRef, useState } from 'react';
 import L from 'leaflet';
-import { Compass, Layers, Droplet, TreePine, Flame, Recycle, MapPin, Maximize2, Minimize2 } from 'lucide-react';
+import { Compass, Layers, Droplet, TreePine, Flame, Recycle, MapPin, Maximize2, Minimize2, Bus } from 'lucide-react';
 import { api } from '../services/api';
+
+// Ícone de Parada de Ônibus / Estação BRT Climatizada com Ar e Proteção Solar
+const busAcIcon = L.divIcon({
+  className: 'custom-bus-ac-marker',
+  html: `
+    <div style="width: 32px; height: 32px; border-radius: 50%; background: #0284c7; border: 2.5px solid #ffffff; box-shadow: 0 3px 8px rgba(2, 132, 199, 0.45); display: flex; align-items: center; justify-content: center; color: #ffffff; font-size: 15px; cursor: pointer; position: relative;">
+      🚌
+      <span style="position: absolute; top: -3px; right: -3px; width: 15px; height: 15px; border-radius: 50%; background: #06b6d4; border: 1.5px solid #ffffff; display: flex; align-items: center; justify-content: center; font-size: 8px; color: #ffffff;">❄️</span>
+    </div>
+  `,
+  iconSize: [32, 32],
+  iconAnchor: [16, 16],
+  popupAnchor: [0, -18]
+});
 
 // Ícone Cultural Autêntico: Sombrinha de Frevo de Pernambuco (limpo e sem rótulo fixo)
 const frevoUmbrellaIcon = L.divIcon({
@@ -219,13 +233,17 @@ export default function MapSection({
         const isShade = pt.tipo === 'sombra';
         const isWater = pt.tipo === 'bebedouro';
         const isEco = pt.tipo === 'ecoponto';
+        const isBusAc = pt.subtipo === 'onibus_ar' || pt.ar_condicionado || pt.climatizado;
 
+        if (activeFilter === 'BUS_AC' && !isBusAc) return;
         if (activeFilter === 'SHADE' && !isShade) return;
         if (activeFilter === 'WATER' && !isWater) return;
-        if (activeFilter === 'HEAT' && (isShade || isWater || isEco)) return;
+        if (activeFilter === 'HEAT' && (isShade || isWater || isEco || isBusAc)) return;
 
         let marker;
-        if (isShade) {
+        if (isBusAc) {
+          marker = L.marker([pt.latitude, pt.longitude], { icon: busAcIcon });
+        } else if (isShade) {
           marker = L.marker([pt.latitude, pt.longitude], { icon: frevoUmbrellaIcon });
         } else {
           const corPino = isWater ? '#0284c7' : '#c2410c';
@@ -242,13 +260,39 @@ export default function MapSection({
           marker = L.marker([pt.latitude, pt.longitude], { icon: pinoIcon });
         }
 
-        const popupContent = `
-          <div style="font-family: -apple-system, sans-serif; font-size: 13px; min-width: 200px; line-height: 1.4;">
-            <h4 style="margin: 0 0 4px 0; color: #0f172a; font-size: 14px;">${pt.nome}</h4>
-            <div style="font-size: 12px; color: #64748b; margin-bottom: 6px;">${pt.bairro || 'Recife'} · ${pt.tipo_rotulo || pt.tipo}</div>
-            <p style="margin: 0; font-size: 12px; color: #334155;">${pt.descricao || 'Ponto verificado pela comunidade.'}</p>
-          </div>
-        `;
+        let popupContent;
+        if (isBusAc) {
+          popupContent = `
+            <div style="font-family: -apple-system, sans-serif; font-size: 13px; min-width: 230px; line-height: 1.4;">
+              <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
+                <span style="font-size: 11px; font-weight: 700; background: #e0f2fe; color: #0284c7; padding: 2px 7px; border-radius: 4px; display: inline-flex; align-items: center; gap: 4px;">
+                  🚌 Ponto c/ Ar
+                </span>
+                <span style="font-size: 11px; font-weight: 700; background: #ecfdf5; color: #059669; padding: 2px 7px; border-radius: 4px; display: inline-flex; align-items: center; gap: 3px;">
+                  ❄️ Climatizado
+                </span>
+              </div>
+              <h4 style="margin: 0 0 4px 0; color: #0f172a; font-size: 14px; font-weight: 700;">${pt.nome}</h4>
+              <div style="font-size: 12px; color: #64748b; margin-bottom: 6px;">
+                📍 ${pt.bairro || 'Recife'} ${pt.endereco ? `· ${pt.endereco}` : ''}
+              </div>
+              <p style="margin: 0 0 6px 0; font-size: 12px; color: #334155; line-height: 1.4;">
+                ${pt.descricao || 'Ponto de ônibus com cobertura protetora contra o sol e ar-condicionado.'}
+              </p>
+              <div style="background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 4px; padding: 4px 8px; font-size: 11px; color: #166534; font-weight: 600;">
+                ✨ Refúgio térmico urbano com sombra e climatização ativa
+              </div>
+            </div>
+          `;
+        } else {
+          popupContent = `
+            <div style="font-family: -apple-system, sans-serif; font-size: 13px; min-width: 200px; line-height: 1.4;">
+              <h4 style="margin: 0 0 4px 0; color: #0f172a; font-size: 14px;">${pt.nome}</h4>
+              <div style="font-size: 12px; color: #64748b; margin-bottom: 6px;">${pt.bairro || 'Recife'} · ${pt.tipo_rotulo || pt.tipo}</div>
+              <p style="margin: 0; font-size: 12px; color: #334155;">${pt.descricao || 'Ponto verificado pela comunidade.'}</p>
+            </div>
+          `;
+        }
         marker.bindPopup(popupContent);
         refLayer.addLayer(marker);
       });
@@ -276,6 +320,7 @@ export default function MapSection({
   }, [focusedPoint]);
 
   const sombrasTotalCount = referencePoints.filter((pt) => pt.tipo === 'sombra').length;
+  const busAcCount = referencePoints.filter((pt) => pt.subtipo === 'onibus_ar' || pt.ar_condicionado || pt.climatizado).length;
 
   return (
     <section className={`painel-secao painel-mapa-principal ${isFullscreen ? 'mapa-em-tela-cheia' : ''}`} aria-label="Mapa Territorial de Sombras e Frescor">
@@ -286,7 +331,7 @@ export default function MapSection({
             <span>Mapa de Sombras, Parques & Alívio Térmico</span>
           </h2>
           <p className="painel-subtitulo">
-            Cartografia territorial com sombrinhas de frevo nos parques, bebedouros e ecopontos no Recife e RMR.
+            Cartografia territorial com sombrinhas de frevo nos parques, paradas de ônibus climatizadas, bebedouros e ecopontos no Recife e RMR.
           </p>
         </div>
 
@@ -323,6 +368,13 @@ export default function MapSection({
           onClick={() => setActiveFilter('SHADE')}
         >
           <TreePine size={14} color="var(--mangue)" /> Sombras ({sombrasTotalCount})
+        </button>
+        <button
+          type="button"
+          className={`pilula-filtro ${activeFilter === 'BUS_AC' ? 'ativa' : ''}`}
+          onClick={() => setActiveFilter('BUS_AC')}
+        >
+          <Bus size={14} color="var(--capibaribe)" /> Paradas c/ Ar ({busAcCount})
         </button>
         <button
           type="button"
@@ -368,6 +420,10 @@ export default function MapSection({
         <span className="legenda-item">
           <span className="legenda-ponto" style={{ background: '#059669' }}></span>
           <span><strong>Sombras:</strong> Parques e Refúgios Naturais</span>
+        </span>
+        <span className="legenda-item">
+          <span className="legenda-ponto" style={{ background: '#0284c7' }}></span>
+          <span><strong>Paradas c/ Ar (🚌❄️):</strong> Abrigos Climatizados & BRT</span>
         </span>
         <span className="legenda-item">
           <span className="legenda-ponto" style={{ background: '#dc2626' }}></span>

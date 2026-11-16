@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { QrCode, X, Printer, Droplet, SunMedium, CreditCard } from 'lucide-react';
 
-export default function CitizenCardModal({ isOpen, onClose }) {
+export default function CitizenCardModal({ isOpen, onClose, currentUser }) {
   if (!isOpen) return null;
 
-  const [cpfOuMatricula, setCpfOuMatricula] = useState('');
-  const [nome, setNome] = useState('Cidadão do Recife');
+  const [cpfOuMatricula, setCpfOuMatricula] = useState(currentUser ? '123.456.789-00' : '');
+  const [nome, setNome] = useState(currentUser?.name || 'Cidadão do Recife');
   const [gerado, setGerado] = useState(false);
 
   const handleGerar = (e) => {
@@ -88,10 +88,11 @@ export default function CitizenCardModal({ isOpen, onClose }) {
             <button
               type="submit"
               style={{
-                background: 'var(--mangue)',
+                background: 'linear-gradient(135deg, var(--pe-azul) 0%, var(--pe-azul-medio) 100%)',
                 color: 'white',
                 marginTop: '6px',
-                width: '100%'
+                width: '100%',
+                boxShadow: '0 2px 6px rgba(0, 43, 127, 0.22)'
               }}
             >
               <QrCode size={18} />
@@ -100,15 +101,15 @@ export default function CitizenCardModal({ isOpen, onClose }) {
           </form>
         ) : (
           <div>
-            {/* Visual do Cartão Físico */}
+            {/* Visual do Cartão Físico com as Cores da Bandeira de Pernambuco */}
             <div
               style={{
-                border: '1px solid var(--mangue-dark)',
+                border: '1.5px solid #facc15',
                 borderRadius: '12px',
                 padding: '18px',
-                background: 'var(--mangue)',
+                background: 'linear-gradient(135deg, #001f5c 0%, #002b7f 55%, #15803d 100%)',
                 color: '#ffffff',
-                boxShadow: 'var(--sombra-card)',
+                boxShadow: '0 8px 24px rgba(0, 43, 127, 0.25)',
                 marginBottom: '16px',
                 position: 'relative'
               }}

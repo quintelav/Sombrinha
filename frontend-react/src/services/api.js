@@ -399,6 +399,177 @@ export const PARQUES_E_SOMBRAS_RECIFE_RMR = [
     latitude: -7.9890,
     longitude: -34.9810,
     descricao: 'Reserva florestal com clima de serra, altitude e mata densa proporcionando alívio térmico.'
+  },
+  // Paradas de Ônibus Climatizadas e Estações BRT com Proteção Solar no Recife
+  {
+    id: 'parada-climatizada-tacaruna',
+    nome: 'Parada Climatizada Shopping Tacaruna',
+    tipo: 'sombra',
+    subtipo: 'onibus_ar',
+    cidade: 'Recife',
+    regiao: 'Centro',
+    bairro: 'Santo Amaro',
+    rpa: '1',
+    endereco: 'Av. Cruz Cabugá (em frente ao Shopping Tacaruna)',
+    latitude: -8.0378,
+    longitude: -34.8724,
+    descricao: 'Abrigo de passageiros fechado com ar-condicionado contínuo (22°C), isolamento térmico e assentos, protegendo do calor extremo da Cruz Cabugá.',
+    climatizado: true,
+    ar_condicionado: true,
+    tipo_rotulo: 'Parada de Ônibus Climatizada com Ar'
+  },
+  {
+    id: 'parada-climatizada-riomar',
+    nome: 'Parada Climatizada RioMar Recife',
+    tipo: 'sombra',
+    subtipo: 'onibus_ar',
+    cidade: 'Recife',
+    regiao: 'Zona Sul',
+    bairro: 'Pina',
+    rpa: '6',
+    endereco: 'Av. República do Líbano (Entrada Principal do RioMar)',
+    latitude: -8.0864,
+    longitude: -34.8948,
+    descricao: 'Abrigo fechado de passageiros com ar-condicionado central, bancos, bebedouro e proteção térmica total para espera de ônibus na Zona Sul.',
+    climatizado: true,
+    ar_condicionado: true,
+    tipo_rotulo: 'Parada de Ônibus Climatizada com Ar'
+  },
+  {
+    id: 'parada-climatizada-shopping-recife',
+    nome: 'Parada com Ar-Condicionado Shopping Recife',
+    tipo: 'sombra',
+    subtipo: 'onibus_ar',
+    cidade: 'Recife',
+    regiao: 'Zona Sul',
+    bairro: 'Boa Viagem',
+    rpa: '6',
+    endereco: 'Rua Padre Carapuceiro, 777 - Boa Viagem',
+    latitude: -8.1192,
+    longitude: -34.9045,
+    descricao: 'Estação de parada fechada com cabine refrigerada por ar-condicionado, amortecendo a radiação solar e o calor do asfalto de Boa Viagem.',
+    climatizado: true,
+    ar_condicionado: true,
+    tipo_rotulo: 'Parada de Ônibus Climatizada com Ar'
+  },
+  {
+    id: 'estacao-brt-derby',
+    nome: 'Estação BRT Derby (Via Livre Climatizada)',
+    tipo: 'sombra',
+    subtipo: 'onibus_ar',
+    cidade: 'Recife',
+    regiao: 'Centro',
+    bairro: 'Derby',
+    rpa: '3',
+    endereco: 'Praça do Derby, canteiro central do BRT - Derby',
+    latitude: -8.0562,
+    longitude: -34.8994,
+    descricao: 'Estação BRT fechada com portas automáticas de vidro, teto duplo isotérmico com bloqueio solar e circulação refrigerada.',
+    climatizado: true,
+    ar_condicionado: true,
+    tipo_rotulo: 'Estação BRT com Proteção Térmica'
+  },
+  {
+    id: 'estacao-brt-soledade',
+    nome: 'Estação BRT Soledade & Névoa de Frescor',
+    tipo: 'sombra',
+    subtipo: 'onibus_ar',
+    cidade: 'Recife',
+    regiao: 'Centro',
+    bairro: 'Boa Vista',
+    rpa: '1',
+    endereco: 'Av. Conde da Boa Vista (altura da Rua da Soledade)',
+    latitude: -8.0588,
+    longitude: -34.8905,
+    descricao: 'Estação BRT com teto isotérmico duplo, aspersão de névoa refrescante e bebedouro público refrigerado na Conde da Boa Vista.',
+    climatizado: true,
+    ar_condicionado: true,
+    tipo_rotulo: 'Estação BRT Climatizada & Névoa'
+  },
+  {
+    id: 'estacao-brt-mauricio-de-nassau',
+    nome: 'Estação BRT Maurício de Nassau (Proteção Solar)',
+    tipo: 'sombra',
+    subtipo: 'onibus_ar',
+    cidade: 'Recife',
+    regiao: 'Centro',
+    bairro: 'Boa Vista',
+    rpa: '1',
+    endereco: 'Av. Conde da Boa Vista (próximo à Ponte Duarte Coelho)',
+    latitude: -8.0612,
+    longitude: -34.8842,
+    descricao: 'Estação BRT com cobertura metálica anti-UV, ventilação forçada e assentos sombreados no centro.',
+    climatizado: true,
+    ar_condicionado: true,
+    tipo_rotulo: 'Estação BRT com Proteção Térmica'
+  },
+  {
+    id: 'estacao-brt-parque-cordeiro',
+    nome: 'Estação BRT Parque do Cordeiro (Caxangá)',
+    tipo: 'sombra',
+    subtipo: 'onibus_ar',
+    cidade: 'Recife',
+    regiao: 'Zona Oeste',
+    bairro: 'Cordeiro',
+    rpa: '4',
+    endereco: 'Av. Caxangá, canteiro central do BRT - Cordeiro',
+    latitude: -8.0468,
+    longitude: -34.9224,
+    descricao: 'Estação BRT fechada no corredor Leste-Oeste com isolamento térmico de teto e redução do calor da Av. Caxangá.',
+    climatizado: true,
+    ar_condicionado: true,
+    tipo_rotulo: 'Estação BRT com Proteção Térmica'
+  },
+  {
+    id: 'estacao-brt-caiara',
+    nome: 'Estação BRT Caiara (Caxangá / Iputinga)',
+    tipo: 'sombra',
+    subtipo: 'onibus_ar',
+    cidade: 'Recife',
+    regiao: 'Zona Oeste',
+    bairro: 'Iputinga',
+    rpa: '4',
+    endereco: 'Av. Caxangá (em frente ao Parque Caiara)',
+    latitude: -8.0425,
+    longitude: -34.9312,
+    descricao: 'Estação elevada com cobertura de proteção solar e abrigo de sombra conectada à área verde do Parque do Caiara.',
+    climatizado: true,
+    ar_condicionado: true,
+    tipo_rotulo: 'Estação BRT com Proteção Térmica'
+  },
+  {
+    id: 'terminal-cais-santa-rita-coberto',
+    nome: 'Terminal Integrado Cais de Santa Rita (Abrigo Central)',
+    tipo: 'sombra',
+    subtipo: 'onibus_ar',
+    cidade: 'Recife',
+    regiao: 'Centro',
+    bairro: 'São José',
+    rpa: '1',
+    endereco: 'Av. Martins de Barros, s/n - Cais de Santa Rita',
+    latitude: -8.0697,
+    longitude: -34.8761,
+    descricao: 'Cobertura contínua com tratamento térmico e ampla sombra nas plataformas A e B, bebedouro e abrigo a passageiros.',
+    climatizado: true,
+    ar_condicionado: true,
+    tipo_rotulo: 'Terminal Coberto com Proteção Solar'
+  },
+  {
+    id: 'estacao-brt-br101-cdu',
+    nome: 'Estação BRT BR-101 / CDU (UFPE)',
+    tipo: 'sombra',
+    subtipo: 'onibus_ar',
+    cidade: 'Recife',
+    regiao: 'Zona Oeste',
+    bairro: 'Cidade Universitária',
+    rpa: '4',
+    endereco: 'Av. Caxangá (Viaduto da BR-101) - Cidade Universitária',
+    latitude: -8.0375,
+    longitude: -34.9490,
+    descricao: 'Estação BRT de integração universitária com teto térmico duplo e ventilação forçada para estudantes e trabalhadores.',
+    climatizado: true,
+    ar_condicionado: true,
+    tipo_rotulo: 'Estação BRT com Proteção Térmica'
   }
 ];
 
@@ -416,16 +587,74 @@ function haversineKm(lat1, lon1, lat2, lon2) {
   return R * c;
 }
 
+const AUTH_TOKEN_KEY = 'sombrinha_auth_token';
+const AUTH_USER_KEY = 'sombrinha_current_user';
+
+export function getStoredToken() {
+  try {
+    return localStorage.getItem(AUTH_TOKEN_KEY) || null;
+  } catch {
+    return null;
+  }
+}
+
+export function getStoredUser() {
+  try {
+    const raw = localStorage.getItem(AUTH_USER_KEY);
+    return raw ? JSON.parse(raw) : null;
+  } catch {
+    return null;
+  }
+}
+
+export function setStoredAuth(user, token) {
+  try {
+    if (token) localStorage.setItem(AUTH_TOKEN_KEY, token);
+    if (user) localStorage.setItem(AUTH_USER_KEY, JSON.stringify(user));
+  } catch (e) {
+    console.warn('Falha ao gravar autenticação local:', e);
+  }
+}
+
+export function clearStoredAuth() {
+  try {
+    localStorage.removeItem(AUTH_TOKEN_KEY);
+    localStorage.removeItem(AUTH_USER_KEY);
+  } catch (e) {
+    console.warn('Falha ao limpar autenticação local:', e);
+  }
+}
+
 async function fetchJson(endpoint, options = {}) {
   try {
+    const token = getStoredToken();
+    const headers = {
+      'Content-Type': 'application/json',
+      ...(token ? { Authorization: `Bearer ${token}` } : {}),
+      ...options.headers
+    };
+
     const res = await fetch(`${API_BASE}${endpoint}`, {
       ...options,
-      headers: { 'Content-Type': 'application/json', ...options.headers }
+      headers
     });
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+
+    if (!res.ok) {
+      let errorMessage = `HTTP ${res.status}`;
+      try {
+        const errorJson = await res.json();
+        if (errorJson?.erro || errorJson?.mensagem) {
+          errorMessage = errorJson.erro || errorJson.mensagem;
+        }
+      } catch {
+        // fallback to status
+      }
+      const error = new Error(errorMessage);
+      error.status = res.status;
+      throw error;
+    }
     return await res.json();
   } catch (err) {
-    // Falha silenciosa para ativar o modo de contingência local
     throw err;
   }
 }
@@ -825,5 +1054,170 @@ export const api = {
         recomendacao: 'Beba água em pequenos goles para evitar desidratação e procure calçadas com marquises.'
       };
     }
+  },
+
+  // 9. Perfil de Usuário e Autenticação Cívica
+  getStoredUser,
+  getStoredToken,
+  setStoredAuth,
+  clearStoredAuth,
+
+  login: async ({ email, password }) => {
+    try {
+      const res = await fetchJson('/api/auth/login', {
+        method: 'POST',
+        body: JSON.stringify({ email, password })
+      });
+      if (res && res.sucesso && res.token && res.user) {
+        setStoredAuth(res.user, res.token);
+      }
+      return res;
+    } catch (err) {
+      // Fallback offline caso o servidor esteja inacessível
+      if (email.toLowerCase().includes('maria') && password === 'recife123') {
+        const demoMaria = {
+          id: 'usr-demo-maria',
+          name: 'Maria Barreto',
+          email: 'maria.barreto@sombrinha.recife.br',
+          avatar: 'https://upload.wikimedia.org/wikipedia/commons/7/7c/%281920-1977%29_Clarice_Lispector_6zxkp_please_credit%28palette.fm%29_%28cropped%29.png',
+          bio: 'Desenvolvedora de software e pesquisadora cívica do projeto Sombrinha Recife no Hackathon Antena na Lama.',
+          bairro: 'Boa Vista',
+          cargo: 'Desenvolvedora',
+          created_at: '2026-11-12T09:00:00Z',
+          updated_at: '2026-11-12T09:00:00Z'
+        };
+        const token = 'offline-demo-token-maria';
+        setStoredAuth(demoMaria, token);
+        return { sucesso: true, user: demoMaria, token };
+      }
+      if (email.toLowerCase().includes('charles') && password === 'recife123') {
+        const demo = {
+          id: 'usr-demo-charles',
+          name: 'Charles Magno',
+          email: 'charles@sombrinha.recife.br',
+          avatar: 'https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d2/Chico_Science_%26_Na%C3%A7%C3%A3o_Zumbi_turn%C3%AA_nos_Estados_Unidos_%28cropped_2%29.jpg/330px-Chico_Science_%26_Na%C3%A7%C3%A3o_Zumbi_turn%C3%AA_nos_Estados_Unidos_%28cropped_2%29.jpg',
+          bio: 'Validador comunitário do Movimento Pró-Criança e ativista da mobilidade a pé no Recife.',
+          bairro: 'Boa Vista',
+          created_at: '2026-11-12T10:00:00Z',
+          updated_at: '2026-11-12T10:00:00Z'
+        };
+        const token = 'offline-demo-token';
+        setStoredAuth(demo, token);
+        return { sucesso: true, user: demo, token };
+      }
+      throw err;
+    }
+  },
+
+  register: async (userData) => {
+    try {
+      const res = await fetchJson('/api/auth/register', {
+        method: 'POST',
+        body: JSON.stringify(userData)
+      });
+      if (res && res.sucesso && res.token && res.user) {
+        setStoredAuth(res.user, res.token);
+      }
+      return res;
+    } catch (err) {
+      // Fallback offline
+      if (!userData.name || !userData.email) throw err;
+      const offlineUser = {
+        id: `usr-${Date.now()}`,
+        name: userData.name,
+        email: userData.email,
+        avatar: userData.avatar || '',
+        bio: userData.bio || '',
+        bairro: userData.bairro || 'Centro',
+        created_at: new Date().toISOString(),
+        updated_at: new Date().toISOString()
+      };
+      const token = `offline-token-${Date.now()}`;
+      setStoredAuth(offlineUser, token);
+      return { sucesso: true, user: offlineUser, token };
+    }
+  },
+
+  getProfile: async () => {
+    try {
+      const token = getStoredToken();
+      if (!token) return null;
+      const res = await fetchJson('/api/auth/me');
+      if (res && res.sucesso && res.user) {
+        setStoredAuth(res.user, token);
+        return res.user;
+      }
+      return getStoredUser();
+    } catch {
+      return getStoredUser();
+    }
+  },
+
+  updateProfile: async (updatedData) => {
+    try {
+      const res = await fetchJson('/api/auth/profile', {
+        method: 'PUT',
+        body: JSON.stringify(updatedData)
+      });
+      if (res && res.sucesso && res.user) {
+        const token = getStoredToken();
+        setStoredAuth(res.user, token);
+      }
+      return res;
+    } catch (err) {
+      // Atualiza localmente como fallback
+      const current = getStoredUser() || {};
+      const merged = { ...current, ...updatedData, updated_at: new Date().toISOString() };
+      const token = getStoredToken();
+      setStoredAuth(merged, token);
+      return { sucesso: true, user: merged, mensagem: 'Perfil atualizado localmente!' };
+    }
+  },
+
+  logout: async () => {
+    try {
+      await fetchJson('/api/auth/logout', { method: 'POST' });
+    } catch {
+      // logout mesmo se a rede falhar
+    } finally {
+      clearStoredAuth();
+    }
+    return { sucesso: true };
+  },
+
+  getDemoUsers: async () => {
+    try {
+      const res = await fetchJson('/api/auth/demo-users');
+      if (res && res.demo_users) return res.demo_users;
+    } catch {
+      // fallback
+    }
+    return [
+      {
+        id: 'usr-demo-maria',
+        name: 'Maria Barreto',
+        email: 'maria.barreto@sombrinha.recife.br',
+        avatar: 'https://upload.wikimedia.org/wikipedia/commons/7/7c/%281920-1977%29_Clarice_Lispector_6zxkp_please_credit%28palette.fm%29_%28cropped%29.png',
+        bio: 'Desenvolvedora de software e pesquisadora cívica do projeto Sombrinha Recife no Hackathon Antena na Lama.',
+        bairro: 'Boa Vista',
+        cargo: 'Desenvolvedora'
+      },
+      {
+        id: 'usr-demo-charles',
+        name: 'Charles Magno',
+        email: 'charles@sombrinha.recife.br',
+        avatar: 'https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d2/Chico_Science_%26_Na%C3%A7%C3%A3o_Zumbi_turn%C3%AA_nos_Estados_Unidos_%28cropped_2%29.jpg/330px-Chico_Science_%26_Na%C3%A7%C3%A3o_Zumbi_turn%C3%AA_nos_Estados_Unidos_%28cropped_2%29.jpg',
+        bio: 'Validador comunitário do Movimento Pró-Criança e ativista da mobilidade a pé no Recife.',
+        bairro: 'Boa Vista'
+      },
+      {
+        id: 'usr-demo-severino',
+        name: 'Severino Ramos',
+        email: 'severino@sombrinha.recife.br',
+        avatar: 'https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fd/Luiz_Gonzaga_1988.png/330px-Luiz_Gonzaga_1988.png',
+        bio: 'Vendedor ambulante no Centro do Recife e usuário ativo dos bebedouros públicos.',
+        bairro: 'São José'
+      }
+    ];
   }
 };

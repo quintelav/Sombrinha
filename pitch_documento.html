@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Sombrinha Recife — Pitch Executivo</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+    @page {
+      size: A4;
+      margin: 14mm 14mm 14mm 14mm;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      color: #0f172a;
+      background: #ffffff;
+      line-height: 1.5;
+      font-size: 13.5px;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    .container {
+      max-width: 100%;
+      margin: 0 auto;
+    }
+
+    /* Cabeçalho Oficial */
+    .header {
+      border-bottom: 2px solid #0f172a;
+      padding-bottom: 12px;
+      margin-bottom: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+
+    .brand-title {
+      font-size: 24px;
+      font-weight: 800;
+      color: #0f172a;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      letter-spacing: -0.5px;
+    }
+
+    .brand-subtitle {
+      font-size: 13px;
+      color: #475569;
+      font-weight: 500;
+      margin-top: 2px;
+    }
+
+    .meta-box {
+      text-align: right;
+      font-size: 11px;
+      color: #64748b;
+      line-height: 1.4;
+    }
+
+    .meta-tag {
+      display: inline-block;
+      background: #f1f5f9;
+      color: #0f172a;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 4px;
+      margin-bottom: 3px;
+    }
+
+    /* Blocos de Destaque */
+    .section-title {
+      font-size: 15px;
+      font-weight: 800;
+      color: #0f172a;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-top: 14px;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      border-left: 3px solid #0f766e;
+      padding-left: 8px;
+    }
+
+    .box-elevator {
+      background: #f8fafc;
+      border: 1px solid #cbd5e1;
+      border-left: 4px solid #0f766e;
+      border-radius: 6px;
+      padding: 12px 14px;
+      margin-bottom: 14px;
+      font-size: 13px;
+      line-height: 1.55;
+    }
+
+    .box-elevator strong {
+      color: #0f766e;
+    }
+
+    /* Grid de Métricas / Diagnóstico */
+    .metric-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .metric-card {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 6px;
+      padding: 10px 12px;
+      text-align: center;
+    }
+
+    .metric-card.danger {
+      border-top: 3px solid #dc2626;
+      background: #fff5f5;
+    }
+
+    .metric-card.success {
+      border-top: 3px solid #059669;
+      background: #f0fdf4;
+    }
+
+    .metric-card.primary {
+      border-top: 3px solid #0284c7;
+      background: #f0f9ff;
+    }
+
+    .metric-value {
+      font-size: 22px;
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: 2px;
+    }
+
+    .metric-value.danger { color: #dc2626; }
+    .metric-value.success { color: #059669; }
+    .metric-value.primary { color: #0284c7; }
+
+    .metric-label {
+      font-size: 11px;
+      font-weight: 600;
+      color: #475569;
+    }
+
+    /* Grid de 4 Pilares da Solução */
+    .pilares-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .pilar-card {
+      border: 1px solid #e2e8f0;
+      border-radius: 6px;
+      padding: 10px 12px;
+      background: #ffffff;
+      page-break-inside: avoid;
+    }
+
+    .pilar-header {
+      font-size: 13px;
+      font-weight: 700;
+      color: #0f172a;
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .pilar-text {
+      font-size: 11.5px;
+      color: #475569;
+      line-height: 1.45;
+    }
+
+    .pilar-text ul {
+      padding-left: 14px;
+      margin-top: 4px;
+    }
+
+    .pilar-text li {
+      margin-bottom: 2px;
+    }
+
+    /* Script do Pitch Falado (3 Minutos) */
+    .pitch-roteiro {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 6px;
+      padding: 12px 14px;
+      margin-bottom: 14px;
+    }
+
+    .fala-etapa {
+      margin-bottom: 8px;
+      padding-bottom: 8px;
+      border-bottom: 1px dashed #e2e8f0;
+    }
+
+    .fala-etapa:last-child {
+      margin-bottom: 0;
+      padding-bottom: 0;
+      border-bottom: none;
+    }
+
+    .fala-tempo {
+      font-size: 10px;
+      font-weight: 700;
+      color: #0f766e;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .fala-titulo {
+      font-size: 12.5px;
+      font-weight: 700;
+      color: #0f172a;
+      margin-bottom: 2px;
+    }
+
+    .fala-conteudo {
+      font-size: 11.5px;
+      color: #334155;
+      line-height: 1.45;
+    }
+
+    /* Frases de Efeito */
+    .frases-box {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+
+    .frase-item {
+      flex: 1;
+      background: #f1f5f9;
+      border-left: 2px solid #0284c7;
+      padding: 8px 10px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-style: italic;
+      color: #1e293b;
+    }
+
+    /* Rodapé */
+    .footer {
+      border-top: 1px solid #cbd5e1;
+      padding-top: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 10.5px;
+      color: #64748b;
+    }
+
+    .page-break {
+      page-break-before: always;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <!-- Cabeçalho Oficial -->
+    <header class="header">
+      <div>
+        <div class="brand-title">
+          <span>☂️ Sombrinha Recife</span>
+        </div>
+        <div class="brand-subtitle">
+          Inteligência climática comunitária e resiliência contra as ilhas de calor urbanas
+        </div>
+      </div>
+      <div class="meta-box">
+        <span class="meta-tag">HACKATHON ANTENA NA LAMA</span><br>
+        APONTI Academy & Movimento Pró-Criança<br>
+        Recife — PE · Novembro de 2026
+      </div>
+    </header>
+
+    <!-- Resumo do Pitch Executivo (Elevator Pitch) -->
+    <div class="section-title">⚡ 1. Elevator Pitch (30 a 60 Segundos)</div>
+    <div class="box-elevator">
+      "Você já tentou caminhar ao meio-dia na Avenida Conde da Boa Vista ou na Dantas Barreto? No Recife, o asfalto ultrapassa <strong>49°C</strong>, transformando o centro da cidade em uma verdadeira estufa a céu aberto para ambulantes, idosos e estudantes.<br><br>
+      Para combater isso, criamos o <strong>Sombrinha ☂️</strong>: uma plataforma cívica de inteligência e resiliência climática urbana. Conectamos dados meteorológicos e <strong>termografia de superfície</strong> para mapear ilhas de calor e indicar rotas com sombra, refúgios naturais e bebedouros públicos gratuitos.<br><br>
+      Mais que um mapa, o Sombrinha promove justiça climática: conta com acessibilidade por voz, modo Sol Forte de alto contraste e um modelo sustentável onde empresas locais podem <strong>adotar pontos de apoio</strong> e financiar melhorias urbanas. O Sombrinha transforma a cultura do frevo em um escudo comunitário contra o calor extremo."
+    </div>
+
+    <!-- O Abismo Térmico em Números -->
+    <div class="section-title">📊 2. Diagnóstico: O Calor Não é Democrático</div>
+    <div class="metric-grid">
+      <div class="metric-card danger">
+        <div class="metric-value danger">49.4°C</div>
+        <div class="metric-label">Asfalto na Conde da Boa Vista (Ilha Crítica Extrema)</div>
+      </div>
+      <div class="metric-card success">
+        <div class="metric-value success">30.8°C</div>
+        <div class="metric-label">Parque Treze de Maio (Refúgio Arbóreo Natural)</div>
+      </div>
+      <div class="metric-card primary">
+        <div class="metric-value primary">Δ 18.6°C</div>
+        <div class="metric-label">Diferença térmica gerada pela arborização urbana</div>
+      </div>
+    </div>
+
+    <!-- Os 4 Pilares da Solução -->
+    <div class="section-title">🏗️ 3. A Solução: 4 Pilares de Impacto</div>
+    <div class="pilares-grid">
+      <div class="pilar-card">
+        <div class="pilar-header">🗺️ Dois Mapas Integrados com Tela Cheia</div>
+        <div class="pilar-text">
+          <ul>
+            <li><strong>Mapa de Vias & Apoio:</strong> Sombrinhas de frevo nos parques, bebedouros públicos, ecopontos e rotas seguras.</li>
+            <li><strong>Mapa Térmico de Superfície:</strong> 15 sensores ao vivo medindo temperatura real no asfalto e refúgios vegetados.</li>
+            <li><strong>Modo Tela Cheia:</strong> Experiência imersiva instantânea em ambos os mapas com atalho ESC.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="pilar-card">
+        <div class="pilar-header">☀️ Acessibilidade para a Realidade da Rua</div>
+        <div class="pilar-text">
+          <ul>
+            <li><strong>Modo Sol Forte:</strong> Inversão de alto contraste projetada para legibilidade sob radiação solar equatorial direta (UV 10+).</li>
+            <li><strong>Orientação por Voz & Busca Rápida:</strong> O pedestre pergunta em linguagem natural sem precisar digitar enquanto anda.</li>
+            <li><strong>Identidade Autêntica:</strong> Sombrinha de Frevo pernambucana de 4 cores como símbolo de acolhimento.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="pilar-card">
+        <div class="pilar-header">🤝 Engajamento Cívico & Voz Popular</div>
+        <div class="pilar-text">
+          <ul>
+            <li><strong>Pedidos de Melhorias:</strong> População solicita plantio de mudas, conserto de bebedouros e coberturas de ponto de ônibus.</li>
+            <li><strong>Monitoramento de Ruas Críticas:</strong> Relatos colaborativos de trechos de asfalto degradado com sensação térmica extrema.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="pilar-card">
+        <div class="pilar-header">🏢 Sustentabilidade & Impacto ESG Local</div>
+        <div class="pilar-text">
+          <ul>
+            <li><strong>Adoção Cidadã por Empresas:</strong> Negócios locais patrocinam manutenção de bebedouros e ganham selo ESG.</li>
+            <li><strong>Economia Circular:</strong> Módulo de reciclagem e ecopontos com incentivo à correta gestão de resíduos.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="page-break"></div>
+
+    <!-- Roteiro da Apresentação de 3 Minutos -->
+    <div class="section-title">🎤 4. Roteiro Completo para Apresentação à Banca (3 Minutos)</div>
+    <div class="pitch-roteiro">
+      <div class="fala-etapa">
+        <div class="fala-tempo">0:00 - 0:40 · O Problema Real</div>
+        <div class="fala-titulo">1. O Asfalto do Recife Ferve e a População Sofre</div>
+        <div class="fala-conteudo">
+          "Recife é uma das cidades mais vulneráveis do mundo às mudanças climáticas. Mas o calor não afeta todo mundo por igual. Quem anda a pé, quem trabalha no comércio informal ou pega ônibus enfrenta temperaturas de quase 50°C no asfalto da Conde da Boa Vista e de Afogados. Ao mesmo tempo, áreas verdes centenárias como o Parque Treze de Maio registram 30°C. O cidadão sofre com desidratação e estresse térmico porque não tem acesso a dados simples: onde tem sombra? Onde tem água potável gratuita agora?"
+        </div>
+      </div>
+
+      <div class="fala-etapa">
+        <div class="fala-tempo">0:40 - 1:20 · A Solução</div>
+        <div class="fala-titulo">2. Sombrinha: Tecnologia Cívica na Palma da Mão</div>
+        <div class="fala-conteudo">
+          "O Sombrinha traduz dados de satélite e meteorologia em decisões práticas de rua. Desenvolvemos dois mapas sincronizados: o Mapa de Vias e Apoio Urbano, que mostra bebedouros, ecopontos e refúgios de sombra identificados pela icônica sombrinha de frevo; e o Mapa Térmico de Superfície, que monitora 15 sensores ao vivo no asfalto e o efeito regulador da bacia do Rio Capibaribe. Ambos contam com expansão em tela cheia para análise detalhada."
+        </div>
+      </div>
+
+      <div class="fala-etapa">
+        <div class="fala-tempo">1:20 - 2:00 · Inovação e Acessibilidade</div>
+        <div class="fala-titulo">3. Desenhado para Quem Está Sob o Sol do Meio-Dia</div>
+        <div class="fala-conteudo">
+          "Nenhum app de clima funciona se a tela for ilegível sob o sol equatorial. Por isso, criamos o Modo Sol Forte de alto contraste e um assistente de orientação por voz que responde diretamente a perguntas como: 'Onde tem água fresca perto de mim?'. A tecnologia é descomplicada, inclusiva e com identidade visual 100% pernambucana."
+        </div>
+      </div>
+
+      <div class="fala-etapa">
+        <div class="fala-tempo">2:00 - 2:40 · Modelo de Negócio e ESG</div>
+        <div class="fala-titulo">4. Sustentabilidade e Ecossistema Cívico-Empresarial</div>
+        <div class="fala-conteudo">
+          "Para garantir a perenidade do projeto, o Sombrinha não depende apenas do poder público. Criamos um ecossistema ESG de Adoção Cidadã: farmácias, padarias e empresas adotam bebedouros e áreas verdes, cobrindo os custos de manutenção e recebendo o Selo Sombrinha de Resiliência Urbana. Além disso, a população aponta ruas críticas e ecopontos incentivam a coleta seletiva."
+        </div>
+      </div>
+
+      <div class="fala-etapa">
+        <div class="fala-tempo">2:40 - 3:00 · Conclusão e Chamada à Ação</div>
+        <div class="fala-titulo">5. Fechamento de Impacto</div>
+        <div class="fala-conteudo">
+          "No Recife, a sombrinha que anima o frevo também salva vidas quando o sol aperta. O Sombrinha é saúde pública, dignidade urbana e inteligência climática a favor de quem mais precisa. Muito obrigado!"
+        </div>
+      </div>
+    </div>
+
+    <!-- Frases de Impacto -->
+    <div class="section-title">💡 5. Frases de Impacto para Slides e Encerramento</div>
+    <div class="frases-box">
+      <div class="frase-item">
+        "Justiça climática na palma da mão de quem anda a pé no Recife."
+      </div>
+      <div class="frase-item">
+        "A mesma sombrinha que faz o frevo agora protege a cidade do calor extremo."
+      </div>
+      <div class="frase-item">
+        "Quase 19°C de alívio entre o asfalto quente e a sombra de uma árvore: isso é o Sombrinha."
+      </div>
+    </div>
+
+    <!-- Rodapé -->
+    <footer class="footer">
+      <div>
+        <strong>Equipe Sombrinha ☂️</strong> · Desenvolvido por <strong>Maria Barreto</strong> & Equipe no Hackathon Antena na Lama 2026
+      </div>
+      <div>
+        APONTI Academy & Movimento Pró-Criança · Recife, Pernambuco
+      </div>
+    </footer>
+  </div>
+
+</body>
+</html>

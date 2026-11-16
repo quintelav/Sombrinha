@@ -2,16 +2,25 @@ import React, { useState, useEffect } from 'react';
 import { Wrench, PlusCircle, CheckCircle, Clock, MapPin, Send, HelpCircle } from 'lucide-react';
 import { api, PEDIDOS_SEMENTES } from '../services/api';
 
-export default function CommunityRequestsSection() {
+export default function CommunityRequestsSection({ currentUser }) {
   const [pedidos, setPedidos] = useState(PEDIDOS_SEMENTES);
   const [mostrarForm, setMostrarForm] = useState(false);
   const [tipo, setTipo] = useState('manutencao_bebedouro');
   const [localRef, setLocalRef] = useState('');
   const [bairro, setBairro] = useState('Boa Vista');
-  const [solicitante, setSolicitante] = useState('');
+  const [solicitante, setSolicitante] = useState(currentUser?.name || '');
   const [descricao, setDescricao] = useState('');
   const [enviando, setEnviando] = useState(false);
   const [sucesso, setSucesso] = useState('');
+
+  useEffect(() => {
+    if (currentUser?.name && !solicitante) {
+      setSolicitante(currentUser.name);
+    }
+    if (currentUser?.bairro) {
+      setBairro(currentUser.bairro);
+    }
+  }, [currentUser]);
 
   useEffect(() => {
     let montado = true;
@@ -62,7 +71,7 @@ export default function CommunityRequestsSection() {
   };
 
   return (
-    <section className="painel-secao" aria-labelledby="requests-heading">
+    <section className="painel-secao painel-pedidos-comunitarios" aria-labelledby="requests-heading">
       <div className="painel-header">
         <div>
           <h2 id="requests-heading" className="painel-titulo">

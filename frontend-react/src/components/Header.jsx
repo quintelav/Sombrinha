@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Sun, Flame, CreditCard } from 'lucide-react';
+import { Sun, Flame, CreditCard, User } from 'lucide-react';
 
 export default function Header({
   isSolForte,
@@ -9,12 +9,16 @@ export default function Header({
   onOpenCard,
   onOpenCitizenCard,
   onOpenStudy,
-  onOpenHeatStudy
+  onOpenHeatStudy,
+  currentUser,
+  onOpenProfile,
+  onOpenUserProfile
 }) {
   const activeSolForte = isSolForte ?? solForte;
   const handleToggle = onToggleSolForte ?? toggleSolForte;
   const handleOpenStudy = onOpenStudy ?? onOpenHeatStudy;
   const handleOpenCard = onOpenCard ?? onOpenCitizenCard;
+  const handleOpenProfile = onOpenProfile ?? onOpenUserProfile;
 
   const [hidden, setHidden] = useState(false);
 
@@ -96,6 +100,37 @@ export default function Header({
           >
             <CreditCard size={17} />
             <span>Cartão Cidadão</span>
+          </button>
+
+          <button
+            type="button"
+            className={`btn-header btn-header-perfil ${currentUser ? 'btn-header-perfil-logged' : ''}`}
+            onClick={handleOpenProfile}
+            title={currentUser ? `Conta de ${currentUser.name} (Ver / Editar Perfil)` : 'Entrar ou criar perfil no Sombrinha'}
+          >
+            {currentUser ? (
+              <div className="header-avatar-badge">
+                {currentUser.avatar ? (
+                  <img
+                    src={currentUser.avatar}
+                    alt={currentUser.name}
+                    className="header-avatar-img"
+                  />
+                ) : (
+                  <span className="header-avatar-initials">
+                    {currentUser.name ? currentUser.name.charAt(0).toUpperCase() : 'U'}
+                  </span>
+                )}
+                <span className="header-user-firstname">
+                  {currentUser.name ? currentUser.name.split(' ')[0] : 'Perfil'}
+                </span>
+              </div>
+            ) : (
+              <>
+                <User size={17} />
+                <span>Entrar / Perfil</span>
+              </>
+            )}
           </button>
         </div>
       </div>

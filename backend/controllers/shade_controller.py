@@ -12,6 +12,7 @@ shade_blueprint = Blueprint("shade_points", __name__)
 def list_reference_points():
     points = ShadePointsModel.list_all(
         kind=request.args.get("tipo"),
+        subtipo=request.args.get("subtipo"),
         neighborhood=request.args.get("bairro"),
         region=request.args.get("regiao"),
         city=request.args.get("cidade"),

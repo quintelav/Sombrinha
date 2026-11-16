@@ -64,7 +64,7 @@ export default function CompanyAdoptionSection() {
   };
 
   return (
-    <section className="painel-secao" aria-labelledby="adoption-heading">
+    <section className="painel-secao painel-adocao-empresas" aria-labelledby="adoption-heading">
       <div className="painel-header">
         <div>
           <h2 id="adoption-heading" className="painel-titulo">

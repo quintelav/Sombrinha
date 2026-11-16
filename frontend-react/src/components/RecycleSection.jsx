@@ -52,7 +52,7 @@ export default function RecycleSection() {
   };
 
   return (
-    <section className="painel-secao" aria-labelledby="recycle-heading">
+    <section className="painel-secao painel-reciclagem" aria-labelledby="recycle-heading">
       <div className="painel-header">
         <div>
           <h2 id="recycle-heading" className="painel-titulo">
